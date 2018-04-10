@@ -14,7 +14,7 @@
 ## Application
 
 
-![alt text](screenshots/filename.png "Description goes here")
+<img src="http://amexio.org/images/microservices_workshop.png" />
 
 
 
