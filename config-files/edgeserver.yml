@@ -1,0 +1,28 @@
+
+server:
+  port: 9581   
+
+spring:
+  application:
+    name: edgeserver  
+  
+eureka:
+  instance:
+    ip-address: false
+    lease-renewal-interval-in-seconds: 5
+    metadata-map:
+      instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${server.port}}}
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:7070/eureka/  
+      
+zuul:
+  prefix: /api
+  ignored-services: '*'
+  routes:
+    productclientservice:
+      path: /pd/**
+      serviceId: PRODUCTCLIENTSERVICE
+    shoppingcartclientservice:
+      path: /sc/**
+      serviceId: SHOPPINGCARTCLIENTSERVICE      

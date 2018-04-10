@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: productservice
+  cloud:
+    config:
+      uri: http://localhost:6061
+      
+      
