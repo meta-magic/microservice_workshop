@@ -20,9 +20,9 @@ zuul:
   prefix: /api
   ignored-services: '*'
   routes:
-    productclientservice:
+    productlobaservice:
       path: /pd/**
-      serviceId: PRODUCTCLIENTSERVICE
-    shoppingcartclientservice:
+      serviceId: PRODUCTLOBASERVICE
+    shoppingcartlobaservice:
       path: /sc/**
-      serviceId: SHOPPINGCARTCLIENTSERVICE      
+      serviceId: SHOPPINGCARTLOBASERVICE      

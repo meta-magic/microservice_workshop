@@ -1,6 +1,5 @@
 package com.metamagic.ms.events;
 
-import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 
 import java.io.Serializable;
 import java.util.List;
@@ -9,7 +8,6 @@ import java.util.Set;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.metamagic.ms.aggregate.Items;
 
-import net.minidev.json.JSONObject;
 
 public class OrderPlacedEvent implements Serializable {
 

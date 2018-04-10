@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.metamagic.ms</groupId>
-	<artifactId>shopping-cart-client-service</artifactId>
+	<artifactId>shopping-cart-loba</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>shopping-cart-client-service</name>
-	<description>shopping-cart-client-service</description>
+	<name>shopping-cart-loba</name>
+	<description>shopping-cart-loba</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>

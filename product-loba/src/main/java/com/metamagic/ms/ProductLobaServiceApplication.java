@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ProductClientServiceApplication {
+public class ProductLobaServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ProductClientServiceApplication.class, args);
+		SpringApplication.run(ProductLobaServiceApplication.class, args);
 	}
 }

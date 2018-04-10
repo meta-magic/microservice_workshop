@@ -1,10 +1,10 @@
 
 server:
-  port: 9081   
+  port: 9082   
 
 spring:
   application:
-    name: productclientservice  
+    name: shoppingcartlobaservice  
   
 eureka:
   instance:

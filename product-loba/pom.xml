@@ -8,7 +8,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>product-client-service</name>
+	<name>product-loba</name>
 	<description>product service</description>
 
 	<parent>
