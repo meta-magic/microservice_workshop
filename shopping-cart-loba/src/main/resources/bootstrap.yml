@@ -1,6 +1,6 @@
 spring:
   application:
-    name: shoppingcartclientservice
+    name: shoppingcartlobaservice
   cloud:
     config:
       uri: http://localhost:6061
