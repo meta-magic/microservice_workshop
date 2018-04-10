@@ -4,6 +4,8 @@ import java.util.concurrent.CountDownLatch;
 
 import org.springframework.kafka.annotation.KafkaListener;
 
+import com.metamagic.ms.events.OrderPlacedEvent;
+
 public class MessageReceiver {
 
 
@@ -14,7 +16,7 @@ public class MessageReceiver {
 	  }
 
 	  @KafkaListener(topics = "test_topic")
-	  public void receive(String msg) {
+	  public void receive(OrderPlacedEvent msg) {
 	    System.out.println(msg);
 	    latch.countDown();
 	  }
