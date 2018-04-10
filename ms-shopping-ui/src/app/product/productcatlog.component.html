@@ -1,0 +1,34 @@
+<amexio-row>
+    <amexio-column [size]=12>
+        {{msg}}
+    </amexio-column>
+</amexio-row>
+
+<amexio-notification [data]="servermsg"
+                     [vertical-position]="'top'"
+                     [horizontal-position]="'right'"
+                     [auto-dismiss-msg]="true"
+                     [auto-dismiss-msg-interval]="4000">
+</amexio-notification>
+
+<amexio-row *ngIf="showproducts">
+    <amexio-column [size]=3 *ngFor="let node of data">
+        <amexio-card [header]="true" [footer]="true">
+            <amexio-header>{{node.name}}</amexio-header>
+            <amexio-body>
+                Name: {{node.name}} <br/>
+                Price: {{node.price}} <br/>
+                Desc: {{node.desc}}
+            </amexio-body>
+            <amexio-action>
+                <amexio-button
+                     (onClick)="addToCart(node)"
+                     [icon]="'fa fa-cart-plus'"
+                     [label]="'Add To Cart'"
+                     [type]="'yellow'"
+                     [tooltip]="'Add to cart'" >
+                </amexio-button>
+            </amexio-action>
+        </amexio-card>
+    </amexio-column>
+</amexio-row>
