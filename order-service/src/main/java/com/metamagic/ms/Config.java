@@ -26,8 +26,8 @@ public class Config {
 	    Map<String, Object> props = new HashMap<>();
 	    props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
 	    props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-	    props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
-	    props.put(ConsumerConfig.GROUP_ID_CONFIG, "string1");
+	    props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+	    props.put(ConsumerConfig.GROUP_ID_CONFIG, "string");
 
 	    return props;
 	  }
