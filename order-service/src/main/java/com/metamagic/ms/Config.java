@@ -14,8 +14,6 @@ import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 
-import com.metamagic.ms.events.OrderPlacedEvent;
-
 @Configuration
 @EnableKafka
 public class Config {
@@ -35,14 +33,13 @@ public class Config {
 	  }
 
 	  @Bean
-	  public ConsumerFactory<String, OrderPlacedEvent> consumerFactory() {
-	    return new DefaultKafkaConsumerFactory<>(consumerConfigs(), new StringDeserializer(),
-	            new JsonDeserializer<>(OrderPlacedEvent.class));
+	  public ConsumerFactory<String, String> consumerFactory() {
+	    return new DefaultKafkaConsumerFactory<>(consumerConfigs());
 	  }
 
 	  @Bean
-	  public ConcurrentKafkaListenerContainerFactory<String, OrderPlacedEvent> kafkaListenerContainerFactory() {
-	    ConcurrentKafkaListenerContainerFactory<String, OrderPlacedEvent> factory =
+	  public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory() {
+	    ConcurrentKafkaListenerContainerFactory<String, String> factory =
 	        new ConcurrentKafkaListenerContainerFactory<>();
 	    factory.setConsumerFactory(consumerFactory());
 
