@@ -11,14 +11,15 @@
                      [auto-dismiss-msg-interval]="4000">
 </amexio-notification>
 
+
 <amexio-row *ngIf="showproducts">
     <amexio-column [size]=3 *ngFor="let node of data">
         <amexio-card [header]="true" [footer]="true">
             <amexio-header>{{node.name}}</amexio-header>
             <amexio-body>
-                Name: {{node.name}} <br/>
+                <amexio-image [path]="node.image" [height]="'330px'" [width]="'330px'"></amexio-image><br/>
                 Price: {{node.price}} <br/>
-                Desc: {{node.desc}}
+                
             </amexio-body>
             <amexio-action>
                 <amexio-button
