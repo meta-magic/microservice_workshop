@@ -68,16 +68,19 @@ Microservices Architecture Workshop focuses on helping the developers / architec
 5.	Design Patterns
 
 ### Design Styles
--	Domain Driven Design
+
+#### Domain Driven Design
 1.	Understanding Requirement Analysis
 2.	Bounded Context
 3.	Context Map
 4.	Aggregate Root
--	Event Sourcing & CQRS
+
+#### Event Sourcing & CQRS
 1.	CRUD
 2.	ES and CQRS
 3.	Event Sourcing Example
--	Functional Reactive Programming
+
+#### Functional Reactive Programming
 1.	4 Building Blocks of RxJava
 2.	Observable and Observer Design Pattern
 3.	Comparison: Iterable / Streams / Observable
