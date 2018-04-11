@@ -17,6 +17,7 @@ public class Product {
 	
 	private String desc;
 	
+	private String image;
 	
 	public Product() {
 		super();
@@ -61,6 +62,16 @@ public class Product {
 
 	public void setDesc(String desc) {
 		this.desc = desc;
+	}
+
+
+	public String getImage() {
+		return image;
+	}
+
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	
