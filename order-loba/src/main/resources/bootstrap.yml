@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: orderlobaservice
+  cloud:
+    config:
+      uri: http://localhost:6061
+      
