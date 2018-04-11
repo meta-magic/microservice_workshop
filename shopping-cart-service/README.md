@@ -1,5 +1,5 @@
 # Shopping Cart Service
-The shopping cart service is responsible for providing an API that manages the products that a user has chosen to add to their online shopping cart. Application is build using
+The shopping cart service is responsible for providing an API that manages the products that a user has chosen to add to their online shopping cart. Application focus on event sourcing and CQRS concept also. It is build using
 
 - Spring
 - AXON
