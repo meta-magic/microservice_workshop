@@ -16,10 +16,11 @@ export class OrderComponent implements OnInit{
     }
 
     ngOnInit(){
-        
+        this.fetchData();
     }
 
     fetchData() {
+        this.msg = "";
         const headers = new HttpHeaders().append('Content-Type', 'application/json;charset=UTF-8');
         let responsedata: any;
         this.http.get("api/od/order/query/orderhistory", { headers }).subscribe(
@@ -27,6 +28,7 @@ export class OrderComponent implements OnInit{
                 responsedata = response;
             },
             error => {
+                this.msg = "Enabled to connect";
             },
             () => {
                 this.setData(responsedata);
