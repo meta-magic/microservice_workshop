@@ -1,3 +1,5 @@
+# Config Server
+
 For single standalone application we can keep all required configuration bundle with application itself.  However, when we have more than one application, say in a microservice architecture, a better alternative would be to manage the configurations centrally.
 
 With the Config Server we have a central place to manage external properties for applications with support for different environments. Configuration files in several formats like YAML or properties are added to a Git repository.
