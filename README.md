@@ -27,6 +27,8 @@ Microservices Architecture Workshop focuses on helping the developers / architec
 9.	Security
 10.	Hands on Workshop – Architecture
 11.	Hands on Workshop – Deployment
+12.	Hands on Workshop – Case Study
+
 
 ## Objectives
 
@@ -109,7 +111,7 @@ Microservices Architecture Workshop focuses on helping the developers / architec
 3.	Use Case : Travel Booking – Rollback 
 4.	Use Case : Restaurant – Forward Recovery
 5.	Use Case : Shopping Site – ES / CQRS
-6.	Use Case : Movie Booking – ES / CQRS
+6.	Use Case : Movie Streaming – ES / CQRS
  
 ### Messaging: Service Mesh
 1.	Eight fallacies of Distributed Computing
@@ -147,6 +149,21 @@ Microservices Architecture Workshop focuses on helping the developers / architec
 3.	Microservice Load Balancing (Spring Cloud Ribbon)
 4.	Microservice Circuit Breaker (Spring Cloud Hysterix)
 5.	Microservice API Gateway (Spring Cloud Zuul)
+
+### Hands on Workshop – Case Study: Ecommerce Site
+
+Following Microservices are built based on 
+
+- Spring Boot with design examples on 
+- Domain Driven Design, 
+- Event Sourcing and CQRS, 
+- Circuit Breaker Design Pattern
+- Asynchronous messaging using Kafka.
+
+<img src="https://image.ibb.co/nsUORc/Microservice_Case_Study.jpg" alt="Microservices Case Study: Shopping Site" />
+
+All the source code and detailed course materials for the above mentioned Microservices will be shared after the workshop.
+
 
 ## Infrastructure Requirement
 
