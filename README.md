@@ -81,7 +81,7 @@ Microservices Architecture Workshop focuses on helping the developers / architec
 3.	Event Sourcing Example
 
 #### Functional Reactive Programming
-1.	4 Building Blocks of RxJava
+1.	Building Blocks of RxJava
 2.	Observable and Observer Design Pattern
 3.	Comparison: Iterable / Streams / Observable
 4.	Design Patterns: Let it Crash / SAGA
