@@ -98,6 +98,7 @@ export class CartComponent implements OnInit{
             },
             () => {
                 this.servermsg.push("Order placed successfully!");
+                this.router.navigate(['order']);
             }
         );
     }

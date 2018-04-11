@@ -7,11 +7,9 @@ spring:
   
   data:
     mongodb:
-      database: ecommdb
+      database: orderdb
       port: 27017
       host: localhost
-      username: ecomuser
-      password: ecomuser123
       
 server:
   port: 8583   

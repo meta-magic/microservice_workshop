@@ -38,7 +38,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<amexio-nav [enable-side-nav-position]=\"false\" \n            [title]=\"'Shopping cart'\"\n            [logo]=\"'assets/product.png'\">\n  <amexio-nav-item position-right [type]=\"'link'\" [title]=\"'Product'\" [icon]=\"'fa fa-plus fa-lg'\"\n    (onNavItemClick)=\"addProduct()\">\n  </amexio-nav-item>\n  <amexio-nav-item position-right [type]=\"'link'\" [title]=\"'Catlog'\" [icon]=\"'fa fa fa-tasks fa-lg'\"\n    (onNavItemClick)=\"productCatlog()\">\n  </amexio-nav-item>\n  <amexio-nav-item position-right [type]=\"'link'\" [title]=\"'My Cart'\" [icon]=\"'fa fa-shopping-cart fa-lg'\"\n    (onNavItemClick)=\"myCart()\">\n  </amexio-nav-item>\n</amexio-nav>\n<br/><br/><br/><br/>    \n\n<amexio-row>\n  <amexio-column [size] =12 >\n      <router-outlet></router-outlet>    \n  </amexio-column>\n</amexio-row>\n\n\n\n"
+module.exports = "<amexio-nav [enable-side-nav-position]=\"false\" \n            [title]=\"'Shopping cart'\"\n            [logo]=\"'assets/product.png'\">\n  <amexio-nav-item position-right [type]=\"'link'\" [title]=\"'Add Product'\" [icon]=\"'fa fa-plus fa-lg'\"\n    (onNavItemClick)=\"addProduct()\">\n  </amexio-nav-item>\n  <amexio-nav-item position-right [type]=\"'link'\" [title]=\"'Catlog'\" [icon]=\"'fa fa fa-tasks fa-lg'\"\n    (onNavItemClick)=\"productCatlog()\">\n  </amexio-nav-item>\n  <amexio-nav-item position-right [type]=\"'link'\" [title]=\"'My Cart'\" [icon]=\"'fa fa-shopping-cart fa-lg'\"\n    (onNavItemClick)=\"myCart()\">\n  </amexio-nav-item>\n  <amexio-nav-item position-right [type]=\"'link'\" [title]=\"'My Order'\" [icon]=\"'fa fa-first-order fa-lg'\"\n    (onNavItemClick)=\"myOrder()\">\n  </amexio-nav-item>\n</amexio-nav>\n<br/><br/><br/><br/>    \n\n<amexio-row>\n  <amexio-column [size] =12 >\n      <router-outlet></router-outlet>    \n  </amexio-column>\n</amexio-row>\n\n\n\n"
 
 /***/ }),
 
@@ -74,6 +74,9 @@ var AppComponent = (function () {
     };
     AppComponent.prototype.myCart = function () {
         this.router.navigate(['cart']);
+    };
+    AppComponent.prototype.myOrder = function () {
+        this.router.navigate(['order']);
     };
     AppComponent = __decorate([
         core_1.Component({
@@ -114,6 +117,7 @@ var product_component_1 = __webpack_require__("../../../../../src/app/product/pr
 var forms_1 = __webpack_require__("../../../forms/esm5/forms.js");
 var common_1 = __webpack_require__("../../../common/esm5/common.js");
 var cart_component_1 = __webpack_require__("../../../../../src/app/cart/cart.component.ts");
+var order_component_1 = __webpack_require__("../../../../../src/app/order/order.component.ts");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -123,7 +127,8 @@ var AppModule = (function () {
                 app_component_1.AppComponent,
                 productcatlog_component_1.ProductCatlogComponent,
                 product_component_1.ProductComponent,
-                cart_component_1.CartComponent
+                cart_component_1.CartComponent,
+                order_component_1.OrderComponent
             ],
             imports: [
                 platform_browser_1.BrowserModule,
@@ -153,6 +158,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var productcatlog_component_1 = __webpack_require__("../../../../../src/app/product/productcatlog.component.ts");
 var product_component_1 = __webpack_require__("../../../../../src/app/product/product.component.ts");
 var cart_component_1 = __webpack_require__("../../../../../src/app/cart/cart.component.ts");
+var order_component_1 = __webpack_require__("../../../../../src/app/order/order.component.ts");
 exports.APP_ROUTE = [
     {
         path: '', redirectTo: 'productcatlog', pathMatch: 'full'
@@ -165,6 +171,9 @@ exports.APP_ROUTE = [
     },
     {
         path: 'cart', component: cart_component_1.CartComponent
+    },
+    {
+        path: 'order', component: order_component_1.OrderComponent
     }
 ];
 
@@ -265,6 +274,7 @@ var CartComponent = (function () {
             _this.servermsg.push("Not able to place order!");
         }, function () {
             _this.servermsg.push("Order placed successfully!");
+            _this.router.navigate(['order']);
         });
     };
     CartComponent = __decorate([
@@ -277,6 +287,77 @@ var CartComponent = (function () {
     return CartComponent;
 }());
 exports.CartComponent = CartComponent;
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/order/order.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "{{msg}}\n<br/>\n\n<amexio-card [header]=\"true\">\n    <amexio-header>\n        Orders\n    </amexio-header>\n    <amexio-body>\n        <amexio-row>\n            <amexio-column [size] =3 >\n                Order Ref     \n            </amexio-column>\n            <amexio-column [size] =3 >\n                Order Date\n            </amexio-column>\n            <amexio-column [size] =3 >\n                Total\n            </amexio-column>\n            <amexio-column [size] =3 >\n                Status\n            </amexio-column>\n        </amexio-row>\n        <amexio-row *ngFor=\"let node of data\">\n            <amexio-column [size] =3 >\n                {{node.id}}\n            </amexio-column>\n            <amexio-column [size] =3 >\n                {{node.date}}\n            </amexio-column>\n            <amexio-column [size] =3 >\n                {{node.total}}\n            </amexio-column>\n            <amexio-column [size] =3 >\n                {{node.status}}\n            </amexio-column>\n        </amexio-row>\n    </amexio-body>\n    <amexio-action>\n        footer\n    </amexio-action>\n</amexio-card>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/order/order.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var http_1 = __webpack_require__("../../../common/esm5/http.js");
+var router_1 = __webpack_require__("../../../router/esm5/router.js");
+var OrderComponent = (function () {
+    function OrderComponent(http, router) {
+        this.http = http;
+        this.router = router;
+    }
+    OrderComponent.prototype.ngOnInit = function () {
+        this.fetchData();
+    };
+    OrderComponent.prototype.fetchData = function () {
+        var _this = this;
+        this.msg = "";
+        var headers = new http_1.HttpHeaders().append('Content-Type', 'application/json;charset=UTF-8');
+        var responsedata;
+        this.http.get("api/od/order/query/orderhistory", { headers: headers }).subscribe(function (response) {
+            responsedata = response;
+        }, function (error) {
+            _this.msg = "Enabled to connect";
+        }, function () {
+            _this.setData(responsedata);
+        });
+    };
+    OrderComponent.prototype.setData = function (responsedata) {
+        debugger;
+        if (responsedata && responsedata.success) {
+            this.showorders = true;
+            this.data = responsedata.response;
+        }
+        else {
+            this.showorders = false;
+            this.msg = responsedata.message;
+        }
+    };
+    OrderComponent = __decorate([
+        core_1.Component({
+            selector: "order",
+            template: __webpack_require__("../../../../../src/app/order/order.component.html")
+        }),
+        __metadata("design:paramtypes", [http_1.HttpClient, router_1.Router])
+    ], OrderComponent);
+    return OrderComponent;
+}());
+exports.OrderComponent = OrderComponent;
 
 
 /***/ }),
@@ -363,7 +444,7 @@ exports.ProductModel = ProductModel;
 /***/ "../../../../../src/app/product/productcatlog.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<amexio-row>\n    <amexio-column [size]=12>\n        {{msg}}\n    </amexio-column>\n</amexio-row>\n\n<amexio-notification [data]=\"servermsg\"\n                     [vertical-position]=\"'top'\"\n                     [horizontal-position]=\"'right'\"\n                     [auto-dismiss-msg]=\"true\"\n                     [auto-dismiss-msg-interval]=\"4000\">\n</amexio-notification>\n\n<amexio-row *ngIf=\"showproducts\">\n    <amexio-column [size]=3 *ngFor=\"let node of data\">\n        <amexio-card [header]=\"true\" [footer]=\"true\">\n            <amexio-header>{{node.name}}</amexio-header>\n            <amexio-body>\n                Name: {{node.name}} <br/>\n                Price: {{node.price}} <br/>\n                Desc: {{node.desc}}\n            </amexio-body>\n            <amexio-action>\n                <amexio-button\n                     (onClick)=\"addToCart(node)\"\n                     [icon]=\"'fa fa-cart-plus'\"\n                     [label]=\"'Add To Cart'\"\n                     [type]=\"'yellow'\"\n                     [tooltip]=\"'Add to cart'\" >\n                </amexio-button>\n            </amexio-action>\n        </amexio-card>\n    </amexio-column>\n</amexio-row>"
+module.exports = "<amexio-row>\n    <amexio-column [size]=12>\n        {{msg}}\n    </amexio-column>\n</amexio-row>\n\n<amexio-notification [data]=\"servermsg\"\n                     [vertical-position]=\"'top'\"\n                     [horizontal-position]=\"'right'\"\n                     [auto-dismiss-msg]=\"true\"\n                     [auto-dismiss-msg-interval]=\"4000\">\n</amexio-notification>\n\n\n<amexio-row *ngIf=\"showproducts\">\n    <amexio-column [size]=3 *ngFor=\"let node of data\">\n        <amexio-card [header]=\"true\" [footer]=\"true\">\n            <amexio-header>{{node.name}}</amexio-header>\n            <amexio-body>\n                <amexio-image [path]=\"node.image\" [height]=\"'330px'\" [width]=\"'330px'\"></amexio-image><br/>\n                Price: {{node.price}} <br/>\n                \n            </amexio-body>\n            <amexio-action>\n                <amexio-button\n                     (onClick)=\"addToCart(node)\"\n                     [icon]=\"'fa fa-cart-plus'\"\n                     [label]=\"'Add To Cart'\"\n                     [type]=\"'yellow'\"\n                     [tooltip]=\"'Add to cart'\" >\n                </amexio-button>\n            </amexio-action>\n        </amexio-card>\n    </amexio-column>\n</amexio-row>\n"
 
 /***/ }),
 
@@ -384,9 +465,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var http_1 = __webpack_require__("../../../common/esm5/http.js");
+var router_1 = __webpack_require__("../../../router/esm5/router.js");
 var ProductCatlogComponent = (function () {
-    function ProductCatlogComponent(http) {
+    function ProductCatlogComponent(http, router) {
         this.http = http;
+        this.router = router;
         debugger;
         this.servermsg = [];
     }
@@ -441,6 +524,7 @@ var ProductCatlogComponent = (function () {
         }
         else {
             this.servermsg.push('Product added to cart');
+            //this.router.navigate(['order']);
         }
     };
     ProductCatlogComponent = __decorate([
@@ -448,7 +532,7 @@ var ProductCatlogComponent = (function () {
             selector: "product-catlog",
             template: __webpack_require__("../../../../../src/app/product/productcatlog.component.html")
         }),
-        __metadata("design:paramtypes", [http_1.HttpClient])
+        __metadata("design:paramtypes", [http_1.HttpClient, router_1.Router])
     ], ProductCatlogComponent);
     return ProductCatlogComponent;
 }());

@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Router } from "@angular/router";
 
 @Component({
     selector : "order",
@@ -11,7 +12,7 @@ export class OrderComponent implements OnInit{
     showorders: boolean;
     msg : string;
     
-    constructor(private http : HttpClient){
+    constructor(private http : HttpClient, private router: Router){
 
     }
 
@@ -37,6 +38,7 @@ export class OrderComponent implements OnInit{
     }
 
     setData(responsedata: any) {
+        debugger;
         if (responsedata && responsedata.success) {
             this.showorders = true;
             this.data = responsedata.response;
@@ -44,6 +46,8 @@ export class OrderComponent implements OnInit{
         } else {
             this.showorders = false;
             this.msg = responsedata.message;
+
+            
         }
     }
 }

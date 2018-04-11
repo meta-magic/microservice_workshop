@@ -1,5 +1,6 @@
 import { OnInit, Component } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Router } from "@angular/router";
 
 
 @Component({
@@ -12,7 +13,7 @@ export class ProductCatlogComponent implements OnInit {
     showproducts: boolean;
     msg : string;
     servermsg : any[];
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private router: Router) {
         debugger;
         this.servermsg = [];
     }
@@ -79,6 +80,10 @@ export class ProductCatlogComponent implements OnInit {
             this.msg = responsedata.message;
         }else {
             this.servermsg.push('Product added to cart');
+
+            
+            //this.router.navigate(['order']);
+            
         } 
     }
 }

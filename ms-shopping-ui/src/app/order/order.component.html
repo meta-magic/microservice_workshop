@@ -1,12 +1,41 @@
 {{msg}}
-<amexio-datagrid
-            [enable-column-fiter]="true"
-            title="Orders"
-            [data-reader]="'.'"
-            [data] = "data"
-            [page-size] = "10">
-            <amexio-data-table-column [data-index]="'id'" [data-type]="'string'" [hidden]="false" [text]="'Ref no'"> </amexio-data-table-column>
-            <amexio-data-table-column [data-index]="'date'" [data-type]="'string'" [hidden]="false" [text]="'Date'"> </amexio-data-table-column>
-            <amexio-data-table-column [data-index]="'total'" [data-type]="'string'" [hidden]="false" [text]="'Total'"> </amexio-data-table-column>
-            <amexio-data-table-column [data-index]="'status'" [data-type]="'string'" [hidden]="false" [text]="'Status'"> </amexio-data-table-column>
-</amexio-datagrid>
+<br/>
+
+<amexio-card [header]="true">
+    <amexio-header>
+        Orders
+    </amexio-header>
+    <amexio-body>
+        <amexio-row>
+            <amexio-column [size] =3 >
+                Order Ref     
+            </amexio-column>
+            <amexio-column [size] =3 >
+                Order Date
+            </amexio-column>
+            <amexio-column [size] =3 >
+                Total
+            </amexio-column>
+            <amexio-column [size] =3 >
+                Status
+            </amexio-column>
+        </amexio-row>
+        <amexio-row *ngFor="let node of data">
+            <amexio-column [size] =3 >
+                {{node.id}}
+            </amexio-column>
+            <amexio-column [size] =3 >
+                {{node.date}}
+            </amexio-column>
+            <amexio-column [size] =3 >
+                {{node.total}}
+            </amexio-column>
+            <amexio-column [size] =3 >
+                {{node.status}}
+            </amexio-column>
+        </amexio-row>
+    </amexio-body>
+    <amexio-action>
+        footer
+    </amexio-action>
+</amexio-card>

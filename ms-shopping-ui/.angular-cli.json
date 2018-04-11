@@ -6,7 +6,7 @@
   "apps": [
     {
       "root": "src",
-      "outDir": "/Users/ketangote/workspace_microservice_workshop/edge-server/public",
+      "outDir": "/Users/ketangote/microservice_workshop/microservice_workshop/edge-server/public",
       "assets": [
         "assets",
         "favicon.ico"
