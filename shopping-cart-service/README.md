@@ -3,7 +3,7 @@ The shopping cart service is responsible for providing an API that manages the p
 
 - Spring
 - AXON
-- Mondodb
+- Mongodb
 - Kafka
 
 # Event Sourcing
