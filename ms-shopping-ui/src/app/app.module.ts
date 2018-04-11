@@ -14,6 +14,7 @@ import { ProductComponent } from './product/product.component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CartComponent } from './cart/cart.component';
+import { OrderComponent } from './order/order.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { CartComponent } from './cart/cart.component';
     AppComponent,
     ProductCatlogComponent,
     ProductComponent,
-    CartComponent
+    CartComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,

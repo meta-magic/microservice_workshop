@@ -32,4 +32,7 @@ export class AppComponent implements OnInit{
     this.router.navigate(['cart']);
   }
 
+  myOrder(){
+    this.router.navigate(['order']);
+  }
 }

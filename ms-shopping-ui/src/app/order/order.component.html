@@ -1,0 +1,11 @@
+<amexio-datagrid
+            [enable-column-fiter]="true"
+            title="Orders"
+            [data-reader]="'.'"
+            [data] = "data"
+            [page-size] = "10">
+            <amexio-data-table-column [data-index]="'id'" [data-type]="'string'" [hidden]="false" [text]="'Ref no'"> </amexio-data-table-column>
+            <amexio-data-table-column [data-index]="'date'" [data-type]="'string'" [hidden]="false" [text]="'Date'"> </amexio-data-table-column>
+            <amexio-data-table-column [data-index]="'total'" [data-type]="'string'" [hidden]="false" [text]="'Total'"> </amexio-data-table-column>
+            <amexio-data-table-column [data-index]="'status'" [data-type]="'string'" [hidden]="false" [text]="'Status'"> </amexio-data-table-column>
+</amexio-datagrid>
