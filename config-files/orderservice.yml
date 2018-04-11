@@ -5,6 +5,14 @@ spring:
   kafka:
     bootstrap-servers: localhost:9095
   
+  data:
+    mongodb:
+      database: ecommdb
+      port: 27017
+      host: localhost
+      username: ecomuser
+      password: ecomuser123
+      
 server:
   port: 8583   
       

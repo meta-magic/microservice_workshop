@@ -25,4 +25,8 @@ zuul:
       serviceId: PRODUCTLOBASERVICE
     shoppingcartlobaservice:
       path: /sc/**
-      serviceId: SHOPPINGCARTLOBASERVICE      
+      serviceId: SHOPPINGCARTLOBASERVICE
+    orderlobaservice:
+      path: /od/**
+      serviceId: ORDERLOBASERVICE  
+            

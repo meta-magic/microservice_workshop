@@ -1,13 +1,13 @@
 package com.metamagic.ms.events;
 
+
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.metamagic.ms.aggregate.Items;
 
-import atg.taglib.json.util.JSONArray;
-import atg.taglib.json.util.JSONException;
-import atg.taglib.json.util.JSONObject;
 
 public class OrderPlacedEvent implements Serializable {
 
@@ -17,13 +17,13 @@ public class OrderPlacedEvent implements Serializable {
 	private static final long serialVersionUID = -7885046483586380537L;
 
 	private String cartId;
-
+	
 	private String customerId;
-
+	
 	private Set<Items> items;
-
-	public OrderPlacedEvent() {
-
+	
+	public OrderPlacedEvent(){
+		
 	}
 
 	public OrderPlacedEvent(String cartId, String customerId, Set<Items> items) {
@@ -48,7 +48,7 @@ public class OrderPlacedEvent implements Serializable {
 	public void setCustomerId(String customerId) {
 		this.customerId = customerId;
 	}
-
+	
 	public Set<Items> getItems() {
 		return items;
 	}
@@ -59,20 +59,7 @@ public class OrderPlacedEvent implements Serializable {
 
 	@Override
 	public String toString() {
-		JSONObject jsonObject = new JSONObject();
-		try {
-			jsonObject.put("cartId", cartId);
-			jsonObject.put("customerId", customerId);
-			if (items != null) {
-				JSONArray array = new JSONArray();
-				items.stream().forEach(o -> array.add(o.toJSON()));
-				jsonObject.put("items", array);
-			}
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-
-		return jsonObject.toString();
+		return "OrderPlacedEvent [cartId=" + cartId + ", customerId=" + customerId + ", items=" + items + "]";
 	}
-
+	
 }

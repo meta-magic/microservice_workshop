@@ -1,8 +1,5 @@
 package com.metamagic.ms.aggregate;
 
-import atg.taglib.json.util.JSONException;
-import atg.taglib.json.util.JSONObject;
-
 public class Items {
 
 	private String itemId;
@@ -59,23 +56,11 @@ public class Items {
 		return this.itemId.hashCode();
 	}
 
-	public JSONObject toJSON() {
-		JSONObject jsonObject = new JSONObject();
-		try {
-			jsonObject.put("itemId", itemId);
-			jsonObject.put("name", name);
-			jsonObject.put("quantity", quantity);	
-			jsonObject.put("price", price);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		return jsonObject;
-	}
-
 
 	@Override
 	public String toString() {
 		return "Items [itemId=" + itemId + ", name=" + name + ", quantity=" + quantity + ", price=" + price + "]";
 	}
+	
 	
 }
