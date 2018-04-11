@@ -145,7 +145,23 @@ Microservices Architecture Workshop focuses on helping the developers / architec
 4.	Microservice Circuit Breaker (Spring Cloud Hysterix)
 5.	Microservice API Gateway (Spring Cloud Zuul)
 
+## Infrastructure Requirement
 
+- Linux Workstation (Ubuntu)
+- Java - http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+- Eclipse / Maven - https://maven.apache.org/install.html
+- Spring Tool Suite - https://spring.io/tools/sts/all
+- Kafka / PostgreSQL / Netflix (Ribbon, Hysterix, Eureka, Zuul) / Rx Java v2.0
+- Spring Boot / Docker Containers
+- NPM/Node - https://nodejs.org/en/
+- Angular CLI - https://cli.angular.io
+- Hardware – 16 GB RAM (Preferred) & 256 GB HDD, Intel  i5 or i7 CPU
+- Internet Connection 
 
+ ## License
 
+Copyright © [MetaMagic Global Inc](http://www.metamagicglobal.com/), 2017-18.  All rights reserved.
 
+Licensed under the [Apache 2.0](http://www.amexio.org/metamagic-showcase/license.html)  License.
+
+**Enjoy!**
