@@ -67,24 +67,85 @@ Microservices Architecture Workshop focuses on helping the developers / architec
 4.	Scalability Lessons from EBay
 5.	Design Patterns
 
+### Design Styles
+-	Domain Driven Design
+1.	Understanding Requirement Analysis
+2.	Bounded Context
+3.	Context Map
+4.	Aggregate Root
+-	Event Sourcing & CQRS
+1.	CRUD
+2.	ES and CQRS
+3.	Event Sourcing Example
+-	Functional Reactive Programming
+1.	4 Building Blocks of RxJava
+2.	Observable and Observer Design Pattern
+3.	Comparison: Iterable / Streams / Observable
+4.	Design Patterns: Let it Crash / SAGA
 
-## Microservice example 
+### Design: Event Storming
+1.	Event Sourcing Intro
+2.	Domain and Integration Events
+3.	Event Sourcing & CQRS Implementations
+4.	Mind Shift
+5.	Event Storming
+6.	Event Storming Restaurant Example
+7.	Event Storming Process map – Concept
+8.	ESP Example
+
+### Distributed Transaction Management
+1.	SAGA Design Pattern
+2.	SAGA Features
+3.	Local SAGA Features
+4.	SAGA Execution Container (SEC)
+5.	Let-it-Crash Design Pattern
+
+### Transaction Case Studies
+1.	Handling Invariants
+2.	Use Case : Travel Booking – SEC 
+3.	Use Case : Travel Booking – Rollback 
+4.	Use Case : Restaurant – Forward Recovery
+5.	Use Case : Shopping Site – ES / CQRS
+6.	Use Case : Movie Booking – ES / CQRS
+ 
+### Messaging: Service Mesh
+1.	Eight fallacies of Distributed Computing
+2.	Service Mesh
+3.	Sidecar Design Pattern
+4.	Service Mesh – Sidecar Design Pattern
+5.	Service Mesh – Per Host Design Pattern
+6.	Service Mesh Software Features
+7.	Service Mesh – Traffic Control
+8.	Service Mesh Open Source Infrastructures
+
+### Messaging: Apache Kafka 
+1.	Kafka Features
+2.	Kafka Topic & Durability
+3.	Kafka Data Structure
+4.	Kafka Performance
+5.	Kafka Case Study
+
+### Security
+1.	Understanding JSON Web Token
+2.	Anatomy of JSON Web Token
+3.	Benefits of JSON Web Token
+
+### Hands on Workshop – Microservices Architecture
+1.	Domain Driven Design 
+2.	Event Sourcing and CQRS (Using Axon Framework)
+3.	Microservice Messaging using Kafka 
+4.	Functional Reactive Programming
+5.	Security of REST Services (using JWT – JSON Web Token)
+6.	Declarative REST Clients (Spring)
+
+### Hands on Workshop – Microservices Deployment Architecture
+1.	Microservices Cloud Configuration (Spring Cloud)
+2.	Microservice Service Discovery (Spring Cloud Eureka)
+3.	Microservice Load Balancing (Spring Cloud Ribbon)
+4.	Microservice Circuit Breaker (Spring Cloud Hysterix)
+5.	Microservice API Gateway (Spring Cloud Zuul)
 
 
-- Spring Cloud Configuration 
-- Spring Cloud Eureka - Service Discovery 
-- Spring Cloud Ribbon:  Client-Side Load Balancing 
-- Spring Cloud Hystrix - Circuit Breaker
-- API Gateway - Purpose, and Spring Cloud Zuul 
-- Spring-Declarative-REST-Clients
-- Spring Kafka - Kafka Message communication 
-- Event Sourcing and CQRS using AXON framework
-
-
-## Application
-
-
-<img src="http://amexio.org/images/microservices_workshop.png" />
 
 
 
