@@ -20,3 +20,9 @@ Strategies offered by ribbon are listed below:
 # Circuit Breaker pattern
 
 Netflix’s Hystrix library provides an implementation of the Circuit Breaker pattern: when we apply a circuit breaker to a method, Hystrix watches for failing calls to that method, and if failures build up to a threshold, Hystrix opens the circuit so that subsequent calls automatically fail. While the circuit is open, Hystrix redirects calls to the method, and they’re passed on to our specified fallback method. 
+
+# Configuration
+Shopping Cart service load balancer and Cricuit Breakr is configured on on port 9082, for more information regarding configuration please check [shoppingcartlobaservice.yml](https://github.com/meta-magic/microservice_workshop/blob/master/config-files/shoppingcartlobaservice.yml).
+
+# Run
+Execute "mvn spring-boot:run" command from shopping-cart-loba folder.
