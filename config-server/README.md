@@ -19,7 +19,7 @@ Encrypt and decrypt property values (symmetric or asymmetric)
 
 
 # Installation changes  
-Current config server is configured with local file system, its configuration are defined in [application.properties](https://github.com/meta-magic/microservice_workshop/blob/master/config-server/src/main/resources/application.properties). Change the path to folder where you have put all config files.
+Current config server is configured with local file system, its configuration are defined in [application.properties](https://github.com/meta-magic/microservice_workshop/blob/master/config-server/src/main/resources/application.properties). Change the path to folder where you have put all [config files](https://github.com/meta-magic/microservice_workshop/tree/master/config-files).
 
 # Run
 Execute "mvn spring-boot:run" command from config-server folder , This will start config server at port 6061 which is configured in [application.properties](https://github.com/meta-magic/microservice_workshop/blob/master/config-server/src/main/resources/application.properties). 
