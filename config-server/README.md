@@ -18,6 +18,6 @@ Bind to the Config Server and initialize Spring Environment with remote property
 Encrypt and decrypt property values (symmetric or asymmetric)
 
 
-# Configuration changes  
+# Installation changes  
 Current config server is configured with local file system, its configuration are defined in [application.properties](https://github.com/meta-magic/microservice_workshop/blob/master/config-server/src/main/resources/application.properties).
 
