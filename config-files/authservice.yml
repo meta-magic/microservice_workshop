@@ -1,0 +1,26 @@
+
+server:
+  port: 8585 
+
+spring:
+  application:
+    name: authservice  
+  
+eureka:
+  instance:
+    ip-address: false
+    lease-renewal-interval-in-seconds: 5
+    metadata-map:
+      instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${server.port}}}
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:7070/eureka/  
+      
+      
+productservice:
+  ribbon: 
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RoundRobinRule
+    # NFLoadBalancerRuleClassName: com.netflix.loadbalancer.WeightedResponseTimeRule
+    # NFLoadBalancerRuleClassName: com.netflix.loadbalancer.AvailabilityFilteringRule
+    ServerListRefreshInterval : 5000
+            

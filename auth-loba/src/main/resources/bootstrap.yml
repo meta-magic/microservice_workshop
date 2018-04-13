@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: authlobaservice
+  cloud:
+    config:
+      uri: http://localhost:6061
