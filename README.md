@@ -170,7 +170,7 @@ Following Microservices are built based on
 - Circuit Breaker Design Pattern
 - Asynchronous messaging using Kafka.
 
-<img src="https://image.ibb.co/nsUORc/Microservice_Case_Study.jpg" alt="Microservices Case Study: Shopping Site" />
+<img src="https://image.ibb.co/h4KXSS/Microservice_Workshop_Setup.jpg" alt="Microservices Case Study: Shopping Site" />
 
 All the source code and detailed course materials for the above mentioned Microservices will be shared after the workshop.
 
