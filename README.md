@@ -181,7 +181,7 @@ All the source code and detailed course materials for the above mentioned Micros
 - Java - http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
 - Eclipse / Maven - https://maven.apache.org/install.html
 - Spring Tool Suite - https://spring.io/tools/sts/all
-- Kafka / PostgreSQL / Netflix (Ribbon, Hysterix, Eureka, Zuul) / Rx Java v2.0
+- Kafka / PostgreSQL / Netflix (Ribbon, Hystrix, Eureka, Zuul) / Rx Java v2.0
 - Spring Boot / Docker Containers
 - NPM/Node - https://nodejs.org/en/
 - Angular CLI - https://cli.angular.io
