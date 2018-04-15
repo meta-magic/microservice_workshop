@@ -11,7 +11,7 @@ Microservices Architecture Workshop focuses on helping the developers / architec
 
 ## Schedule
 
-<img src="https://image.ibb.co/hDrZP7/Microservice_2_Day_Workshop.jpg" alt="Schedule" />
+<img src="https://image.ibb.co/dHkaE7/Micro_Service_2_Day_Workshop_2.jpg" alt="Schedule" />
 
 ## Contact for Corporate Training
 
