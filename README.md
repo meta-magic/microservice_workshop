@@ -9,6 +9,14 @@ Microservices Architecture Workshop focuses on helping the developers / architec
 
 <img src="https://image.ibb.co/ndMSKx/Microservice_Characterists.jpg" alt="Microservice Characteristics" />
 
+## Schedule
+
+<img src="https://image.ibb.co/hDrZP7/Microservice_2_Day_Workshop.jpg" alt="Schedule" />
+
+## Contact 
+
+<B>Ms. Amruta Abhyankar </B>: Eco System Evangelist. mailto:amruta.abhyankar@metamagic.in
+
 ## Target Audience
 
 - Developers / Sr. Developers
@@ -179,6 +187,10 @@ All the source code and detailed course materials for the above mentioned Micros
 - Angular CLI - https://cli.angular.io
 - Hardware – 16 GB RAM (Preferred) & 256 GB HDD, Intel  i5 or i7 CPU
 - Internet Connection 
+
+## Contact 
+
+<B>Ms. Amruta Abhyankar </B>: Eco System Evangelist. mailto:amruta.abhyankar@metamagic.in
 
  ## License
 
