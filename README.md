@@ -190,7 +190,12 @@ All the source code and detailed course materials for the above mentioned Micros
 
 ## Training Presentations (Theory)
 
-<iframe src="//www.slideshare.net/slideshow/embed_code/key/uv9paX3W3nX0IR" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/arafkarsh/functional-reactive-programming-part-4-of-4" title="Functional Reactive Programming - Part 4 of 4" target="_blank">Functional Reactive Programming - Part 4 of 4</a> </strong> from <strong><a href="https://www.slideshare.net/arafkarsh" target="_blank">Araf Karsh Hamid</a></strong> </div>
+<ol>
+<li>Microservices Architecture Part 1 - [Infrastructure and Design Styles](https://www.slideshare.net/arafkarsh/microservices-architecture-workshop-part-14)</li>
+<li>Microservices Architecture Part 2 - [Event Storming and Distributed Transactions](https://www.slideshare.net/arafkarsh/microservices-architecture-part-2-event-sourcing-and-saga)</li>
+<li>Microservices Architecture Part 3 - [Service Mesh and Kafka](https://www.slideshare.net/arafkarsh/microservices-part-3-service-mesh-and-kafka)</li>	
+<li> Microservices Architecture Part 4 - [Functional Reactive Programming](https://www.slideshare.net/arafkarsh/functional-reactive-programming-part-4-of-4)</li>
+</ol>
 
 ## Contact for Corporate Training
 
