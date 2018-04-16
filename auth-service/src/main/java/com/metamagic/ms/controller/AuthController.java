@@ -31,10 +31,10 @@ public class AuthController {
 	public @ResponseBody ResponseEntity<ResponseBean> authenticate(@RequestBody LoginCredentials loginCredentials) {
 
 		ResponseBean response = null;
-		if (loginCredentials.getLoginId() != null && loginCredentials.getPassword() != null) {
-			User login = loginRepository.findByUserId(loginCredentials.getLoginId());
+		if (loginCredentials.getUserId() != null && loginCredentials.getPassword() != null) {
+			User login = loginRepository.findByUserId(loginCredentials.getUserId());
 			if (login != null) {
-				if (loginCredentials.getLoginId().equals(login.getUserId())
+				if (loginCredentials.getUserId().equals(login.getUserId())
 						&& loginCredentials.getPassword().equals(login.getPassword())) {
 					LoginResponse loginResponse = new LoginResponse(tokenService.generateToken(login.getId()));
 					response = new ResponseBean(true, "User authenticated successfully.", "success", loginResponse);
