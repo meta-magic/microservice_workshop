@@ -27,9 +27,8 @@ export class CartComponent implements OnInit{
     fetchData() {
         let req = {
         };
-        const headers = new HttpHeaders().append('Content-Type', 'application/json;charset=UTF-8');
-        let responsedata: any;
-        headers.set('tokenid',this.cookieService.get('tokenid'));
+           let responsedata: any;
+           const headers = new HttpHeaders().append('Content-Type', 'application/json;charset=UTF-8').append('tokenid',this.cookieService.get('tokenid'));
         this.http.post("api/sc/shoppingcart/read/fecthcart",req, { headers }).subscribe(
             response => {
                 responsedata = response;
@@ -63,9 +62,8 @@ export class CartComponent implements OnInit{
             "price" : node.price
         };
 
-        const headers = new HttpHeaders().append('Content-Type', 'application/json;charset=UTF-8');
+        const headers = new HttpHeaders().append('Content-Type', 'application/json;charset=UTF-8').append('tokenid',this.cookieService.get('tokenid'));
         let responsedata: any;
-        headers.set('tokenid',this.cookieService.get('tokenid'));
         this.http.post("api/sc/shoppingcart/write/removeitem",req, { headers }).subscribe(
             response => {
                 responsedata = response;
@@ -79,9 +77,8 @@ export class CartComponent implements OnInit{
     }
 
     checkout(){
-        const headers = new HttpHeaders().append('Content-Type', 'application/json;charset=UTF-8');
+      const headers = new HttpHeaders().append('Content-Type', 'application/json;charset=UTF-8').append('tokenid',this.cookieService.get('tokenid'));
         let responsedata: any;
-        headers.set('tokenid',this.cookieService.get('tokenid'));
         this.http.post("api/sc/shoppingcart/write/placeorder",{}, { headers }).subscribe(
             response => {
                 responsedata = response;

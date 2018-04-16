@@ -1,0 +1,52 @@
+<amexio-row>
+    <amexio-column [size]="3">
+    </amexio-column>
+    <amexio-column [size]="6">
+        <div style="padding-top:12%">
+            <amexio-card header="true" footer="true">
+                <amexio-header>Create New User</amexio-header>
+                <amexio-body>
+                    <amexio-row>
+                        <amexio-column size="6">
+                            <amexio-text-input field-label="First Name" name="userModel.firstName" place-holder="Enter First Name" [(ngModel)]="userModel.firstName" icon-feedback="true">
+                            </amexio-text-input>
+                        </amexio-column>
+                        <amexio-column size="6">
+                            <amexio-text-input field-label="Last Name" name="userModel.lastName" place-holder="Enter Last Name" [(ngModel)]="userModel.lastName" icon-feedback="true">
+                            </amexio-text-input>
+                        </amexio-column>
+                        <amexio-column size="6">
+                            <amexio-text-input field-label="User Id" name="userModel.userId" place-holder="Enter User ID" [(ngModel)]="userModel.userId" icon-feedback="true">
+                            </amexio-text-input>
+                        </amexio-column>
+                        <amexio-column size="6">
+                            <amexio-password-input [enable-popover]="true" [field-label]="'Password'" name="userModel.password" [place-holder]="'Enter Password'" [allow-blank]="false" [error-msg]="' Please Enter Password'" [min-length]="6" [min-error-msg]="'Minimum 6 char required'"
+                                [max-length]="32" [max-error-msg]="'Maximum 32 char allowed'" [icon-feedback]="true" [(ngModel)]="userModel.password">
+                            </amexio-password-input>
+                        </amexio-column>
+                    </amexio-row>
+                </amexio-body>
+                <amexio-action>
+                    <amexio-button [label]="'Create User'" [type]="'green'" [tooltip]="'Create user'" [block]="true" (onClick)="onUserSaveClick()">
+                    </amexio-button>
+                </amexio-action>
+            </amexio-card>
+        </div>
+
+    </amexio-column>
+    <amexio-column [size]="3">
+    </amexio-column>
+</amexio-row>
+
+
+<amexio-dialogue [show-dialogue]="showErrorDialog" (close)="close()" [custom]="true" [title]="'Error'" [type]="'error'">
+    <amexio-body>
+        <li style="text-align: left" *ngFor="let msg of msgData">
+            {{msg}}
+        </li>
+    </amexio-body>
+    <amexio-action>
+        <amexio-button type="primary" (onClick)="close()" [label]="'Ok'">
+        </amexio-button>
+    </amexio-action>
+</amexio-dialogue>
