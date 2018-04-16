@@ -1,3 +1,4 @@
+import { CookieService } from 'ngx-cookie-service';
 import { OnInit, Component } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Router } from "@angular/router";
@@ -12,7 +13,7 @@ export class ProductComponent implements OnInit{
     productModel : ProductModel;
     error : boolean;
     msg : string;
-    constructor(private http: HttpClient, private router:Router){
+    constructor(private http: HttpClient, private router:Router,private cookieService:CookieService){
         this.productModel = new ProductModel();
     }
 
@@ -21,7 +22,7 @@ export class ProductComponent implements OnInit{
     }
 
     save(){
-        const headers = new HttpHeaders().append('Content-Type', 'application/json;charset=UTF-8');
+        const headers = new HttpHeaders().append('Content-Type', 'application/json;charset=UTF-8').append('tokenid',this.cookieService.get('tokenid'));
         let rsp : any;
         this.http.post("api/pd/product/write/save",this.productModel.toJson(),{headers}).subscribe(
             response =>{
