@@ -6,6 +6,7 @@ import { CartComponent } from './cart/cart.component';
 import { OrderComponent } from './order/order.component';
 import { LoginComponent } from './login/login.comonent';
 import { RouteGaurd } from './route-gaurd/route.gaurd';
+import { UserCreation } from './usercreation/usercreation';
 
 export const APP_ROUTE: Routes = [
     {
@@ -16,5 +17,8 @@ export const APP_ROUTE: Routes = [
     },
     {
       path:'login',component:LoginComponent
+    },
+    {
+      path:'create_user',component:UserCreation
     }
 ]

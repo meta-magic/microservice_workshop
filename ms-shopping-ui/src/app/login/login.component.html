@@ -11,7 +11,7 @@
                     <amexio-column size="1">
                     </amexio-column>
                     <amexio-column size="10">
-                        <amexio-text-input [field-label]="'Login Id'" [allow-blank]="false" [error-msg]="'Please Enter Login Id'" [(ngModel)]="loginModel.loginId" name="loginModel.loginId" [icon-feedback]="true" [place-holder]="'Login Id'">
+                        <amexio-text-input [field-label]="'User Id'" [allow-blank]="false" [error-msg]="'Please Enter User Id'" [(ngModel)]="loginModel.userId" name="loginModel.userId" [icon-feedback]="true" [place-holder]="'User Id'">
                         </amexio-text-input>
                         <amexio-password-input [field-label]="'Password'" [allow-blank]="false" [error-msg]="'Please Enter Password'" [(ngModel)]="loginModel.password" name="loginModel.password" [place-holder]="'Password'" [icon-feedback]="true">
                         </amexio-password-input>
@@ -25,10 +25,11 @@
                     <amexio-column size="4">
                         <amexio-button [label]="'Login'" [type]="'green'" [tooltip]="'Login'" [block]="true" (onClick)="onLoginClick()">
                         </amexio-button>
+
                     </amexio-column>
                     <amexio-column size="4">
+                        <a style="color:blue;cursor:pointer" (click)="onCreateClick()">Create One</a>
                     </amexio-column>
-
                 </amexio-row>
             </amexio-body>
         </amexio-card>

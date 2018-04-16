@@ -49,7 +49,7 @@ export class LoginComponent{
 
  //THIS METHOD IS USED FOR VALIDATE MODEL FIELDS
  validateForm(){
-  if(this.loginModel.loginId==null || this.loginModel.loginId==''){
+  if(this.loginModel.userId==null || this.loginModel.userId==''){
     this.msgData.push("Please enter login id");
     this.showErrorDialog=true;
   }
@@ -63,11 +63,15 @@ close(){
   this.showErrorDialog=false;
   this.msgData=[];
  }
+
+ onCreateClick(){
+   this.router.navigate(['create_user']);
+ }
 }
 
 // THIS MODEL IS USED FOR LOGIN
 export class LoginModel{
-  loginId:string;
+  userId:string;
   password:string;
   constructor(){
   }

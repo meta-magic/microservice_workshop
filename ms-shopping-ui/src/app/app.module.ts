@@ -17,10 +17,12 @@ import { CartComponent } from './cart/cart.component';
 import { OrderComponent } from './order/order.component';
 import { LoginComponent } from './login/login.comonent';
 import { RouteGaurd } from './route-gaurd/route.gaurd';
+import { UserCreation } from './usercreation/usercreation';
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    UserCreation
   ],
   imports: [
     BrowserModule,
