@@ -1,0 +1,50 @@
+<amexio-row>
+    <amexio-column size="4">
+    </amexio-column>
+    <amexio-column size="4" style="padding-top:8%;">
+        <amexio-card [header]="true" [footer]="false">
+            <amexio-header>
+                Login
+            </amexio-header>
+            <amexio-body>
+                <amexio-row>
+                    <amexio-column size="1">
+                    </amexio-column>
+                    <amexio-column size="10">
+                        <amexio-text-input [field-label]="'Login Id'" [allow-blank]="false" [error-msg]="'Please Enter Login Id'" [(ngModel)]="loginModel.loginId" name="loginModel.loginId" [icon-feedback]="true" [place-holder]="'Login Id'">
+                        </amexio-text-input>
+                        <amexio-password-input [field-label]="'Password'" [allow-blank]="false" [error-msg]="'Please Enter Password'" [(ngModel)]="loginModel.password" name="loginModel.password" [place-holder]="'Password'" [icon-feedback]="true">
+                        </amexio-password-input>
+                    </amexio-column>
+                    <amexio-column size="1">
+                    </amexio-column>
+                </amexio-row>
+                <amexio-row>
+                    <amexio-column size="4">
+                    </amexio-column>
+                    <amexio-column size="4">
+                        <amexio-button [label]="'Login'" [type]="'green'" [tooltip]="'Login'" [block]="true" (onClick)="onLoginClick()">
+                        </amexio-button>
+                    </amexio-column>
+                    <amexio-column size="4">
+                    </amexio-column>
+
+                </amexio-row>
+            </amexio-body>
+        </amexio-card>
+
+    </amexio-column>
+    <amexio-column size="4">
+    </amexio-column>
+</amexio-row>
+<amexio-dialogue [show-dialogue]="showErrorDialog" (close)="close()" [custom]="true" [title]="'Error'" [type]="'error'">
+    <amexio-body>
+        <li style="text-align: left" *ngFor="let msg of msgData">
+            {{msg}}
+        </li>
+    </amexio-body>
+    <amexio-action>
+        <amexio-button type="primary" (onClick)="close()" [label]="'Ok'">
+        </amexio-button>
+    </amexio-action>
+</amexio-dialogue>

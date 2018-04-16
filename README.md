@@ -1,11 +1,21 @@
 
-# Microservices Architecture Training 
+# Microservices Architecture 2+1 Day Training Program
+
+<img src="https://image.ibb.co/mVGR47/Micrservices_Training.jpg" alt="Karsh& Ketan" />
 
 ## Executive Summary
 
 Microservices Architecture Workshop focuses on helping the developers / architects to understand the key Architecture paradigms with hands on section. The course helps the developers from Monolithic App mindset to a Microservices based App development. It also helps the developers with hands on development experience with key Microservices infrastructure technologies like Eureka, Ribbon, Zuul, Kafka etc., and key Architecture styles likes Domain Driven Design, Event Sourcing and CQRS, Functional Reactive Programming, Microservice messaging.
 
 <img src="https://image.ibb.co/ndMSKx/Microservice_Characterists.jpg" alt="Microservice Characteristics" />
+
+## Schedule
+
+<img src="https://image.ibb.co/dHkaE7/Micro_Service_2_Day_Workshop_2.jpg" alt="Schedule" />
+
+## Contact for Corporate Training
+
+<B>Ms. Amruta Abhyankar </B>: Eco System Evangelist. mailto:amruta.abhyankar@metamagic.in
 
 ## Target Audience
 
@@ -160,7 +170,7 @@ Following Microservices are built based on
 - Circuit Breaker Design Pattern
 - Asynchronous messaging using Kafka.
 
-<img src="https://image.ibb.co/nsUORc/Microservice_Case_Study.jpg" alt="Microservices Case Study: Shopping Site" />
+<img src="https://image.ibb.co/h4KXSS/Microservice_Workshop_Setup.jpg" alt="Microservices Case Study: Shopping Site" />
 
 All the source code and detailed course materials for the above mentioned Microservices will be shared after the workshop.
 
@@ -171,12 +181,25 @@ All the source code and detailed course materials for the above mentioned Micros
 - Java - http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
 - Eclipse / Maven - https://maven.apache.org/install.html
 - Spring Tool Suite - https://spring.io/tools/sts/all
-- Kafka / PostgreSQL / Netflix (Ribbon, Hysterix, Eureka, Zuul) / Rx Java v2.0
+- Kafka / PostgreSQL / Netflix (Ribbon, Hystrix, Eureka, Zuul) / Rx Java v2.0
 - Spring Boot / Docker Containers
 - NPM/Node - https://nodejs.org/en/
 - Angular CLI - https://cli.angular.io
 - Hardware – 16 GB RAM (Preferred) & 256 GB HDD, Intel  i5 or i7 CPU
 - Internet Connection 
+
+## Training Presentations (Theory)
+
+
+- Microservices Architecture Part 1 - [Infrastructure and Design Styles](https://www.slideshare.net/arafkarsh/microservices-architecture-workshop-part-14)
+- Microservices Architecture Part 2 - [Event Storming and Distributed Transactions](https://www.slideshare.net/arafkarsh/microservices-architecture-part-2-event-sourcing-and-saga)</li>
+- Microservices Architecture Part 3 - [Service Mesh and Kafka](https://www.slideshare.net/arafkarsh/microservices-part-3-service-mesh-and-kafka)
+- Microservices Architecture Part 4 - [Functional Reactive Programming](https://www.slideshare.net/arafkarsh/functional-reactive-programming-part-4-of-4)
+
+
+## Contact for Corporate Training
+
+<B>Ms. Amruta Abhyankar </B>: Eco System Evangelist. mailto:amruta.abhyankar@metamagic.in
 
  ## License
 

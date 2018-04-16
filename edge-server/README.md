@@ -22,3 +22,9 @@ Zuul has different types of filters that enables us to quickly apply functionali
 - Static Response handling.
 
 In our example we have defined routing rules (based of URL it forwards request to service), filter for logging request url, method and time of request.
+
+# Configuration 
+For more info on configuration regarding edge server click [edgeserver.yml](https://github.com/meta-magic/microservice_workshop/blob/master/config-files/edgeserver.yml)
+
+# Run
+Execute "mvn spring-boot:run" command from edge-server folder. 

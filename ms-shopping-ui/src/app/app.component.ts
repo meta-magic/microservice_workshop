@@ -8,31 +8,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  title = 'app';
 
-  constructor(private router:Router)
-  {
-      
+  constructor(private router:Router){
+
   }
 
   ngOnInit(){
-    
-  }
-  
- 
-  addProduct(){
-    this.router.navigate(['product']);
+
   }
 
-  productCatlog(){
-    this.router.navigate(['productcatlog']);
-  }
-
-  myCart(){
-    this.router.navigate(['cart']);
-  }
-
-  myOrder(){
-    this.router.navigate(['order']);
-  }
 }
