@@ -1,3 +1,4 @@
+import { CookieService } from 'ngx-cookie-service';
 import { OnInit, Component } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Router } from "@angular/router";
@@ -13,8 +14,7 @@ export class ProductCatlogComponent implements OnInit {
     showproducts: boolean;
     msg : string;
     servermsg : any[];
-    constructor(private http: HttpClient, private router: Router) {
-        debugger;
+    constructor(private http: HttpClient, private router: Router,private cookieService:CookieService) {
         this.servermsg = [];
     }
 
@@ -50,8 +50,6 @@ export class ProductCatlogComponent implements OnInit {
 
     addToCart(node:any){
         let req = {
-            "customerId" : "0123456789",
-            "cartId" : "0987654321",
             "itemId" : node.id,
             "itemName" : node.name,
             "quantity" : 1,
@@ -60,6 +58,7 @@ export class ProductCatlogComponent implements OnInit {
 
         const headers = new HttpHeaders().append('Content-Type', 'application/json;charset=UTF-8');
         let responsedata: any;
+        headers.set('tokenid',this.cookieService.get('tokenid'));
         this.http.post("api/sc/shoppingcart/write/additem",req, { headers }).subscribe(
             response => {
                 responsedata = response;
@@ -70,7 +69,7 @@ export class ProductCatlogComponent implements OnInit {
               this.validateCart(responsedata);
             }
         );
-        
+
     }
 
     validateCart(responsedata:any){
@@ -81,9 +80,9 @@ export class ProductCatlogComponent implements OnInit {
         }else {
             this.servermsg.push('Product added to cart');
 
-            
+
             //this.router.navigate(['order']);
-            
-        } 
+
+        }
     }
 }

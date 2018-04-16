@@ -17,11 +17,10 @@ export class ProductComponent implements OnInit{
     }
 
     ngOnInit(){
-        
+
     }
 
     save(){
-        debugger;
         const headers = new HttpHeaders().append('Content-Type', 'application/json;charset=UTF-8');
         let rsp : any;
         this.http.post("api/pd/product/write/save",this.productModel.toJson(),{headers}).subscribe(
@@ -38,7 +37,7 @@ export class ProductComponent implements OnInit{
     }
 
     afterSave(response : any){
-        
+
         if(response.success){
             this.error = false;
             this.router.navigate(['productcatlog']);

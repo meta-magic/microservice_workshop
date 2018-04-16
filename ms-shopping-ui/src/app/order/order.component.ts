@@ -1,3 +1,4 @@
+import { CookieService } from 'ngx-cookie-service';
 import { Component, OnInit } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Router } from "@angular/router";
@@ -11,8 +12,8 @@ export class OrderComponent implements OnInit{
     data: any;
     showorders: boolean;
     msg : string;
-    
-    constructor(private http : HttpClient, private router: Router){
+
+    constructor(private http : HttpClient, private router: Router,private cookieService:CookieService){
 
     }
 
@@ -24,6 +25,7 @@ export class OrderComponent implements OnInit{
         this.msg = "";
         const headers = new HttpHeaders().append('Content-Type', 'application/json;charset=UTF-8');
         let responsedata: any;
+        headers.set('tokenid',this.cookieService.get('tokenid'));
         this.http.get("api/od/order/query/orderhistory", { headers }).subscribe(
             response => {
                 responsedata = response;
@@ -47,7 +49,7 @@ export class OrderComponent implements OnInit{
             this.showorders = false;
             this.msg = responsedata.message;
 
-            
+
         }
     }
 }
