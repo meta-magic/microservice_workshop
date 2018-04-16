@@ -8,7 +8,7 @@
 		<properties>
 			<property name="javax.jdo.option.ConnectionURL" value="jdbc:postgresql:postgres" />
 			<property name="javax.jdo.option.Mapping" value="postgres"></property>
-			<!-- <property name="datanucleus.schema.autoCreateAll" value="true" /> -->
+			<property name="datanucleus.schema.autoCreateAll" value="true" />
 			<property name="javax.jdo.option.ConnectionDriverName"
 				value="org.postgresql.Driver" />
 			<property name="javax.jdo.option.ConnectionUserName" value="postgres" />

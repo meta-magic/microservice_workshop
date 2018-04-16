@@ -1,0 +1,33 @@
+2018-04-16 11:54:04,765 [myid:] - INFO  [main:QuorumPeerConfig@103] - Reading configuration from: /usr/local/zookeeper/bin/../conf/zoo.cfg
+2018-04-16 11:54:04,768 [myid:] - INFO  [main:DatadirCleanupManager@78] - autopurge.snapRetainCount set to 3
+2018-04-16 11:54:04,768 [myid:] - INFO  [main:DatadirCleanupManager@79] - autopurge.purgeInterval set to 0
+2018-04-16 11:54:04,768 [myid:] - INFO  [main:DatadirCleanupManager@101] - Purge task is not scheduled.
+2018-04-16 11:54:04,769 [myid:] - WARN  [main:QuorumPeerMain@113] - Either no config or no quorum defined in config, running  in standalone mode
+2018-04-16 11:54:04,776 [myid:] - INFO  [main:QuorumPeerConfig@103] - Reading configuration from: /usr/local/zookeeper/bin/../conf/zoo.cfg
+2018-04-16 11:54:04,777 [myid:] - INFO  [main:ZooKeeperServerMain@95] - Starting server
+2018-04-16 11:54:04,782 [myid:] - INFO  [main:Environment@100] - Server environment:zookeeper.version=3.4.6-1569965, built on 02/20/2014 09:09 GMT
+2018-04-16 11:54:04,782 [myid:] - INFO  [main:Environment@100] - Server environment:host.name=ashutosh-ThinkPad-L570
+2018-04-16 11:54:04,782 [myid:] - INFO  [main:Environment@100] - Server environment:java.version=1.8.0_162
+2018-04-16 11:54:04,782 [myid:] - INFO  [main:Environment@100] - Server environment:java.vendor=Oracle Corporation
+2018-04-16 11:54:04,782 [myid:] - INFO  [main:Environment@100] - Server environment:java.home=/usr/lib/jvm/java-8-openjdk-amd64/jre
+2018-04-16 11:54:04,782 [myid:] - INFO  [main:Environment@100] - Server environment:java.class.path=/usr/local/zookeeper/bin/../build/classes:/usr/local/zookeeper/bin/../build/lib/*.jar:/usr/local/zookeeper/bin/../lib/slf4j-log4j12-1.6.1.jar:/usr/local/zookeeper/bin/../lib/slf4j-api-1.6.1.jar:/usr/local/zookeeper/bin/../lib/netty-3.7.0.Final.jar:/usr/local/zookeeper/bin/../lib/log4j-1.2.16.jar:/usr/local/zookeeper/bin/../lib/jline-0.9.94.jar:/usr/local/zookeeper/bin/../zookeeper-3.4.6.jar:/usr/local/zookeeper/bin/../src/java/lib/*.jar:/usr/local/zookeeper/bin/../conf:
+2018-04-16 11:54:04,782 [myid:] - INFO  [main:Environment@100] - Server environment:java.library.path=/usr/java/packages/lib/amd64:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib
+2018-04-16 11:54:04,782 [myid:] - INFO  [main:Environment@100] - Server environment:java.io.tmpdir=/tmp
+2018-04-16 11:54:04,782 [myid:] - INFO  [main:Environment@100] - Server environment:java.compiler=<NA>
+2018-04-16 11:54:04,783 [myid:] - INFO  [main:Environment@100] - Server environment:os.name=Linux
+2018-04-16 11:54:04,783 [myid:] - INFO  [main:Environment@100] - Server environment:os.arch=amd64
+2018-04-16 11:54:04,783 [myid:] - INFO  [main:Environment@100] - Server environment:os.version=4.13.0-38-generic
+2018-04-16 11:54:04,783 [myid:] - INFO  [main:Environment@100] - Server environment:user.name=root
+2018-04-16 11:54:04,783 [myid:] - INFO  [main:Environment@100] - Server environment:user.home=/root
+2018-04-16 11:54:04,783 [myid:] - INFO  [main:Environment@100] - Server environment:user.dir=/home/ashutosh/git/microservice_workshop/auth-service
+2018-04-16 11:54:04,787 [myid:] - INFO  [main:ZooKeeperServer@755] - tickTime set to 2000
+2018-04-16 11:54:04,788 [myid:] - INFO  [main:ZooKeeperServer@764] - minSessionTimeout set to -1
+2018-04-16 11:54:04,788 [myid:] - INFO  [main:ZooKeeperServer@773] - maxSessionTimeout set to -1
+2018-04-16 11:54:04,795 [myid:] - INFO  [main:NIOServerCnxnFactory@94] - binding to port 0.0.0.0/0.0.0.0:2181
+2018-04-16 11:54:10,477 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /127.0.0.1:60728
+2018-04-16 11:54:10,481 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@868] - Client attempting to establish new session at /127.0.0.1:60728
+2018-04-16 11:54:10,481 [myid:] - INFO  [SyncThread:0:FileTxnLog@199] - Creating new log file: log.6e15
+2018-04-16 11:54:10,510 [myid:] - INFO  [SyncThread:0:ZooKeeperServer@617] - Established session 0x162cd1fef8c0000 with negotiated timeout 6000 for client /127.0.0.1:60728
+2018-04-16 11:54:11,328 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@645] - Got user-level KeeperException when processing sessionid:0x162cd1fef8c0000 type:create cxid:0xcc zxid:0x6e19 txntype:-1 reqpath:n/a Error Path:/brokers Error:KeeperErrorCode = NodeExists for /brokers
+2018-04-16 11:54:11,328 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@645] - Got user-level KeeperException when processing sessionid:0x162cd1fef8c0000 type:create cxid:0xcd zxid:0x6e1a txntype:-1 reqpath:n/a Error Path:/brokers/ids Error:KeeperErrorCode = NodeExists for /brokers/ids
+2018-04-16 11:54:11,696 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@645] - Got user-level KeeperException when processing sessionid:0x162cd1fef8c0000 type:delete cxid:0x1be zxid:0x6e1c txntype:-1 reqpath:n/a Error Path:/admin/preferred_replica_election Error:KeeperErrorCode = NoNode for /admin/preferred_replica_election

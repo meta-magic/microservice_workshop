@@ -4,7 +4,11 @@ server:
 
 spring:
   application:
-    name: authservice  
+    name: authservice
+    
+token:
+  key: abcd0987654321qwertyuio
+  validity: 86400000      
   
 eureka:
   instance:

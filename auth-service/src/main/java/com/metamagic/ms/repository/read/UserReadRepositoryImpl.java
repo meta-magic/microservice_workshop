@@ -1,4 +1,4 @@
-package com.metamagic.ms.repository;
+package com.metamagic.ms.repository.read;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
@@ -7,10 +7,10 @@ import javax.jdo.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.metamagic.ms.bean.Login;
+import com.metamagic.ms.bean.User;
 
 @Repository
-public class LoginRepositoryImpl implements LoginRepository {
+public class UserReadRepositoryImpl implements UserReadRepository {
 
 	@Autowired
 	PersistenceManagerFactory pmf;
@@ -20,20 +20,20 @@ public class LoginRepositoryImpl implements LoginRepository {
 	}
 	
 	@Override
-	public Login findByLoginId(String loginId) {
+	public User findByUserId(String userId) {
 		PersistenceManager pm = pm();
-		Login login = null;
+		User user = null;
 		try {
-			Query query = pm.newQuery(Login.class);
-			query.setFilter("loginId == :loginId");
+			Query query = pm.newQuery(User.class);
+			query.setFilter("userId == :userId");
 			query.setUnique(true);
-			login = (Login) query.execute(loginId);
+			user = (User) query.execute(userId);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			pm.close();
 		}
-		return login;
+		return user;
 	}
 
 }

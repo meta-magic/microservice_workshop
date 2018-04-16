@@ -10,28 +10,34 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.metamagic.ms.bean.Login;
+import com.metamagic.ms.bean.User;
 import com.metamagic.ms.bean.LoginCredentials;
+import com.metamagic.ms.bean.LoginResponse;
 import com.metamagic.ms.bean.ResponseBean;
-import com.metamagic.ms.repository.LoginRepository;
+import com.metamagic.ms.repository.read.UserReadRepository;
+import com.metamagic.ms.service.TokenService;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
 
 	@Autowired
-	private LoginRepository loginRepository;
+	private UserReadRepository loginRepository;
+	
+	@Autowired
+	private TokenService tokenService;
 
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity<ResponseBean> authenticate(@RequestBody LoginCredentials loginCredentials) {
 
 		ResponseBean response = null;
 		if (loginCredentials.getLoginId() != null && loginCredentials.getPassword() != null) {
-			Login login = loginRepository.findByLoginId(loginCredentials.getLoginId());
+			User login = loginRepository.findByUserId(loginCredentials.getLoginId());
 			if (login != null) {
-				if (loginCredentials.getLoginId().equals(login.getLoginId())
+				if (loginCredentials.getLoginId().equals(login.getUserId())
 						&& loginCredentials.getPassword().equals(login.getPassword())) {
-					response = new ResponseBean(true, "User authenticated successfully.", "success", null);
+					LoginResponse loginResponse = new LoginResponse(tokenService.generateToken(login.getId()));
+					response = new ResponseBean(true, "User authenticated successfully.", "success", loginResponse);
 				} else {
 					response = new ResponseBean(false, "User authentication failed.", "failure", null);
 				}
