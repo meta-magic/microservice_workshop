@@ -190,12 +190,12 @@ All the source code and detailed course materials for the above mentioned Micros
 
 ## Training Presentations (Theory)
 
-<ol>
-<li>Microservices Architecture Part 1 - [Infrastructure and Design Styles](https://www.slideshare.net/arafkarsh/microservices-architecture-workshop-part-14)</li>
-<li>Microservices Architecture Part 2 - [Event Storming and Distributed Transactions](https://www.slideshare.net/arafkarsh/microservices-architecture-part-2-event-sourcing-and-saga)</li>
-<li>Microservices Architecture Part 3 - [Service Mesh and Kafka](https://www.slideshare.net/arafkarsh/microservices-part-3-service-mesh-and-kafka)</li>	
-<li> Microservices Architecture Part 4 - [Functional Reactive Programming](https://www.slideshare.net/arafkarsh/functional-reactive-programming-part-4-of-4)</li>
-</ol>
+
+- Microservices Architecture Part 1 - [Infrastructure and Design Styles](https://www.slideshare.net/arafkarsh/microservices-architecture-workshop-part-14)
+- Microservices Architecture Part 2 - [Event Storming and Distributed Transactions](https://www.slideshare.net/arafkarsh/microservices-architecture-part-2-event-sourcing-and-saga)</li>
+- Microservices Architecture Part 3 - [Service Mesh and Kafka](https://www.slideshare.net/arafkarsh/microservices-part-3-service-mesh-and-kafka)
+- Microservices Architecture Part 4 - [Functional Reactive Programming](https://www.slideshare.net/arafkarsh/functional-reactive-programming-part-4-of-4)
+
 
 ## Contact for Corporate Training
 
