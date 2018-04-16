@@ -29,9 +29,7 @@ export class UserCreation{
      },
      ()=>{
       if(responeData.success){
-        if(responeData.response && responeData.response.tokenId){
-          this.router.navigate(['login']);
-        }
+        this.router.navigate(['login']);
       }else{
         this.msgData.push(responeData.message);
         this.showErrorDialog=true;
@@ -59,7 +57,11 @@ export class UserCreation{
   if(this.userModel.password==null || this.userModel.password==''){
     this.msgData.push("Please enter password");
     this.showErrorDialog=true;
+  }else if(this.userModel.password && this.userModel.password.length>=6 && this.userModel.password.length<=32){
+    this.msgData.push("Please enter valida password length");
+    this.showErrorDialog=true;
   }
+
 }
 
 close(){
