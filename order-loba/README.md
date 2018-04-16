@@ -1,6 +1,6 @@
 
-# Product Load Balancer & Cricuit Breaker
-This application acts as Load Balancer and Cricuit breaker for [Product Microservice](https://github.com/meta-magic/microservice_workshop/tree/master/product-service)
+# Order service Load Balancer & Cricuit Breaker
+This application acts as Load Balancer and Cricuit breaker for [Order Service  Microservice](https://github.com/meta-magic/microservice_workshop/tree/master/order-service)
 
 
 
@@ -25,7 +25,7 @@ Netflix’s Hystrix library provides an implementation of the Circuit Breaker pa
 
 
 # Configuration
-Order service load balancer and Cricuit Breakr is configured on on port 9081, for more information regarding configuration please check [productlobaservice.yml](https://github.com/meta-magic/microservice_workshop/blob/master/config-files/productlobaservice.yml).
+Order service load balancer and Cricuit Breakr is configured on on port 9083, for more information regarding configuration please check [orderlobaservice.yml](https://github.com/meta-magic/microservice_workshop/blob/master/config-files/orderlobaservice.yml).
 
 # Run
-Execute "mvn spring-boot:run" command from product-loba folder.
+Execute "mvn spring-boot:run" command from order-loba folder.
