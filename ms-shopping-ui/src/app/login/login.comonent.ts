@@ -34,7 +34,7 @@ export class LoginComponent{
      ()=>{
       if(responeData.success){
         if(responeData.response && responeData.response.tokenId){
-          this.cookieService.set('tokenid',responeData.tokenId);
+          this.cookieService.set('tokenid',responeData.response.tokenId);
           this.router.navigate(['home']);
         }
       }else{
