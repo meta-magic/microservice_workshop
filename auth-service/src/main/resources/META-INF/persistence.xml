@@ -12,7 +12,7 @@
 			<property name="javax.jdo.option.ConnectionDriverName"
 				value="org.postgresql.Driver" />
 			<property name="javax.jdo.option.ConnectionUserName" value="postgres" />
-			<property name="javax.jdo.option.ConnectionPassword" value="root" />
+			<property name="javax.jdo.option.ConnectionPassword" value="postgres" />
 			<property name="javax.jdo.option.DetachAllOnCommit" value="true"/>
 		</properties>
 	</persistence-unit>

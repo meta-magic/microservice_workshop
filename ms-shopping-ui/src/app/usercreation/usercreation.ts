@@ -25,8 +25,9 @@ export class UserCreation{
       responeData=resposne;
      },
      error=>{
-      console.log('Error occured.');
-     },
+      this.msgData.push('Enable to connect to server.');
+      this.showErrorDialog=true;
+    },
      ()=>{
       if(responeData.success){
         this.router.navigate(['login']);
@@ -57,8 +58,9 @@ export class UserCreation{
   if(this.userModel.password==null || this.userModel.password==''){
     this.msgData.push("Please enter password");
     this.showErrorDialog=true;
-  }else if(this.userModel.password && this.userModel.password.length>=6 && this.userModel.password.length<=32){
-    this.msgData.push("Please enter valida password length");
+  }
+  if(this.userModel.password && this.userModel.password.length<6 || this.userModel.password.length>32){
+    this.msgData.push("Please enter valid password length");
     this.showErrorDialog=true;
   }
 

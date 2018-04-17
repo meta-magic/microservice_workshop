@@ -14,6 +14,8 @@ export class ProductCatlogComponent implements OnInit {
     showproducts: boolean;
     msg : string;
     servermsg : any[];
+    msgData:any=[];
+    showErrorDialog:boolean;
     constructor(private http: HttpClient, private router: Router,private cookieService:CookieService) {
         this.servermsg = [];
     }
@@ -21,6 +23,10 @@ export class ProductCatlogComponent implements OnInit {
     ngOnInit() {
         this.fetchData();
     }
+    close(){
+      this.showErrorDialog=false;
+      this.msgData=[];
+     }
 
     fetchData() {
         const headers = new HttpHeaders().append('Content-Type', 'application/json;charset=UTF-8');
@@ -30,6 +36,8 @@ export class ProductCatlogComponent implements OnInit {
                 responsedata = response;
             },
             error => {
+              this.msgData.push('Enable to connect to server.');
+              this.showErrorDialog=true;
             },
             () => {
                 this.setData(responsedata);
@@ -63,6 +71,8 @@ export class ProductCatlogComponent implements OnInit {
                 responsedata = response;
             },
             error => {
+              this.msgData.push('Enable to connect to server.');
+              this.showErrorDialog=true;
             },
             () => {
               this.validateCart(responsedata);
@@ -72,16 +82,10 @@ export class ProductCatlogComponent implements OnInit {
     }
 
     validateCart(responsedata:any){
-        debugger;
         if(responsedata && responsedata.message){
-            //this.showproducts = false;
             this.msg = responsedata.message;
         }else {
             this.servermsg.push('Product added to cart');
-
-
-            //this.router.navigate(['order']);
-
         }
     }
 }

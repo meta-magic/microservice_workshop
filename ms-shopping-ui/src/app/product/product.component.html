@@ -1,54 +1,34 @@
 <amexio-row>
     <amexio-column [size]=2>
-        
+
     </amexio-column>
     <amexio-column [size]=8>
         <amexio-card [header]="true" [footer]="true" [footer-align]="'right'">
             <amexio-header>
-                Add Product  {{msg}}
+                Add Product {{msg}}
             </amexio-header>
             <amexio-body>
                 <amexio-row>
                     <amexio-column [size]=12>
-                        <amexio-text-input
-                             [(ngModel)]="productModel.pname" 
-                             name="pname" 
-                             field-label="Name"
-                             place-holder="Please enter product name"
-                             icon-feedback="true">
+                        <amexio-text-input [(ngModel)]="productModel.pname" name="pname" field-label="Name" place-holder="Please enter product name" icon-feedback="true">
                         </amexio-text-input>
-                    </amexio-column>    
+                    </amexio-column>
                 </amexio-row>
                 <amexio-row>
                     <amexio-column [size]=12>
-                        <amexio-textarea-input
-                                [field-label]="'Description'"
-                                [(ngModel)]="productModel.pdesc" 
-                                name="pdesc" 
-                                [place-holder]="'Please enter product description'"
-                                [allow-blank]="true"
-                                [rows]="'2'"
-                                [columns]="'2'">
+                        <amexio-textarea-input [field-label]="'Description'" [(ngModel)]="productModel.pdesc" name="pdesc" [place-holder]="'Please enter product description'" [allow-blank]="true" [rows]="'2'" [columns]="'2'">
                         </amexio-textarea-input>
-                    </amexio-column>    
+                    </amexio-column>
                 </amexio-row>
                 <amexio-row>
                     <amexio-column [size]=12>
-                       <amexio-number-input
-                            [field-label]="'Price'"
-                            [(ngModel)]="productModel.pprice" 
-                            name="pdesc"                             
-                            [place-holder]="'Please enter price'">
-                       </amexio-number-input>
-                    </amexio-column>    
+                        <amexio-number-input [field-label]="'Price'" [(ngModel)]="productModel.pprice" name="pdesc" [place-holder]="'Please enter price'">
+                        </amexio-number-input>
+                    </amexio-column>
                 </amexio-row>
-                </amexio-body>
+            </amexio-body>
             <amexio-action>
-                <amexio-button
-                     [label]="'Save'"
-                     [type]="'theme-color'"
-                     [tooltip]="'Save'"
-                     (click)="save()" >
+                <amexio-button [label]="'Save'" [type]="'theme-color'" [tooltip]="'Save'" (click)="save()">
                 </amexio-button>
             </amexio-action>
         </amexio-card>
@@ -57,3 +37,14 @@
     </amexio-column>
 </amexio-row>
 
+<amexio-dialogue [show-dialogue]="showErrorDialog" (close)="close()" [custom]="true" [title]="'Error'" [type]="'error'">
+    <amexio-body>
+        <li style="text-align: left" *ngFor="let msg of msgData">
+            {{msg}}
+        </li>
+    </amexio-body>
+    <amexio-action>
+        <amexio-button type="primary" (onClick)="close()" [label]="'Ok'">
+        </amexio-button>
+    </amexio-action>
+</amexio-dialogue>
