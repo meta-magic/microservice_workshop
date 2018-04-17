@@ -2,6 +2,8 @@ package com.metamagic.ms.controller.read;
 
 import java.util.Arrays;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -14,28 +16,29 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.metamagic.ms.bean.ResponseBean;
+import com.metamagic.ms.controller.BaseComponent;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 @RestController
 @RequestMapping("/order/query")
-public class OrderReadController {
+public class OrderReadController extends BaseComponent {
 
 	@Autowired
 	private RestTemplate restTemplate;
 
 	@HystrixCommand(fallbackMethod = "findAllFallBack")
-	@RequestMapping(value = "/orderhistory", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseBean> findAll(){
-		org.springframework.http.HttpHeaders headers = new org.springframework.http.HttpHeaders();
-		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-		headers.setContentType(MediaType.APPLICATION_JSON);
-		HttpEntity request = new HttpEntity(headers);
-		ResponseEntity response = this.restTemplate.exchange("http://orderservice/order/query/orderhistory", HttpMethod.GET,request,ResponseBean.class);
+	@RequestMapping(value = "/orderhistory", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseBean> findAll(HttpServletRequest request) {
+		org.springframework.http.HttpHeaders headers = this.createHeaders(request);
+		HttpEntity<?> httpEntity = new HttpEntity<>(headers);
+		ResponseEntity<ResponseBean> response = this.restTemplate.exchange("http://orderservice/order/query/orderhistory",
+				HttpMethod.GET, httpEntity, ResponseBean.class);
 		return response;
 	}
-	
-	public ResponseEntity<ResponseBean> findAllFallBack(){
-		ResponseBean response = new ResponseBean(false, "Enable to connect to requested Product Service, please try after some time", "error", null);
+
+	public ResponseEntity<ResponseBean> findAllFallBack(HttpServletRequest request) {
+		ResponseBean response = new ResponseBean(false,
+				"Enable to connect to requested Product Service, please try after some time", "error", null);
 		return new ResponseEntity<ResponseBean>(response, HttpStatus.OK);
 	}
 }

@@ -122,10 +122,19 @@ public class ShoppingCart {
 		System.out.println(this.getClass()+" PlaceOrderCommand End "+command);
 	}
 	
+	@EventSourcingHandler
+	public void handle(OrderPlacedEvent orderPlacedEvent) {
+		System.out.println(this.getClass()+" OrderPlacedEvent Start "+orderPlacedEvent);
+		this.cartId = orderPlacedEvent.getCartId();
+		this.customerId = orderPlacedEvent.getCustomerId();
+		this.items = new HashSet<Items>();
+		System.out.println(this.getClass()+" OrderPlacedEvent End "+orderPlacedEvent);
+	}
+	
 	@CommandHandler
 	public void handle(EmptyCartCommand emptyCartCommand){
 		System.out.println(" +++++++++++++>  cart emptied ");
-		markDeleted();
+//		markDeleted();
 	}
 	
 	

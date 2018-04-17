@@ -21,9 +21,10 @@ public class UserWriteRepositoryImpl implements UserWriteRepository {
 	@Override
 	public User save(User user) {
 		PersistenceManager pm = pm();
-		User login2 = pm.makePersistent(user);
+		User userStored = pm.makePersistent(user);
+		User userDetached = pm.detachCopy(userStored);
 		pm.close();
-		return login2;
+		return userDetached;
 	}
 
 }
