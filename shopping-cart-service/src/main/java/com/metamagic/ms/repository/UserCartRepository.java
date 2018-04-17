@@ -8,5 +8,5 @@ import com.metamagic.ms.documents.UserCart;
 @Repository
 public interface UserCartRepository extends MongoRepository<UserCart, String>{
 
-	public UserCart findByUserId(String userId);
+	public UserCart findByUserIdAndActive(String userId, boolean active);
 }
