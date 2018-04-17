@@ -25,13 +25,12 @@ export class UserCreation{
       responeData=resposne;
      },
      error=>{
-      console.log('Error occured.');
-     },
+      this.msgData.push('Enable to connect to server.');
+      this.showErrorDialog=true;
+    },
      ()=>{
       if(responeData.success){
-        if(responeData.response && responeData.response.tokenId){
-          this.router.navigate(['login']);
-        }
+        this.router.navigate(['login']);
       }else{
         this.msgData.push(responeData.message);
         this.showErrorDialog=true;
@@ -60,6 +59,11 @@ export class UserCreation{
     this.msgData.push("Please enter password");
     this.showErrorDialog=true;
   }
+  if(this.userModel.password && this.userModel.password.length<6 || this.userModel.password.length>32){
+    this.msgData.push("Please enter valid password length");
+    this.showErrorDialog=true;
+  }
+
 }
 
 close(){

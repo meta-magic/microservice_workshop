@@ -15,10 +15,16 @@ export class CartComponent implements OnInit{
     showcart: boolean;
     msg : string;
     servermsg : any[];
-
+    msgData:any=[];
+    showErrorDialog:boolean;
     constructor(private http: HttpClient, private router:Router,private cookieService:CookieService){
         this.servermsg = [];
     }
+
+    close(){
+      this.showErrorDialog=false;
+      this.msgData=[];
+     }
 
     ngOnInit() {
         this.fetchData();
@@ -34,6 +40,8 @@ export class CartComponent implements OnInit{
                 responsedata = response;
             },
             error => {
+              this.msgData.push('Enable to connect to server.');
+              this.showErrorDialog=true;
             },
             () => {
                 this.setData(responsedata);
@@ -42,7 +50,6 @@ export class CartComponent implements OnInit{
     }
 
     setData(responsedata: any) {
-        debugger;
         if (responsedata && responsedata.success) {
             this.showcart = true;
             this.data = responsedata.response.products;
@@ -69,6 +76,8 @@ export class CartComponent implements OnInit{
                 responsedata = response;
             },
             error => {
+              this.msgData.push('Enable to connect to server.');
+              this.showErrorDialog=true;
             },
             () => {
                 this.fetchData();
@@ -84,7 +93,8 @@ export class CartComponent implements OnInit{
                 responsedata = response;
             },
             error => {
-                this.servermsg.push("Not able to place order!");
+              this.msgData.push('Enable to connect to server.');
+              this.showErrorDialog=true;
             },
             () => {
                 this.servermsg.push("Order placed successfully!");
