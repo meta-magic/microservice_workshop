@@ -17,6 +17,7 @@ export class CartComponent implements OnInit{
     servermsg : any[];
     msgData:any=[];
     showErrorDialog:boolean;
+    total:number;
     constructor(private http: HttpClient, private router:Router,private cookieService:CookieService){
         this.servermsg = [];
     }
@@ -52,7 +53,14 @@ export class CartComponent implements OnInit{
     setData(responsedata: any) {
         if (responsedata && responsedata.success) {
             this.showcart = true;
-            this.data = responsedata.response.products;
+            if(responsedata.response.total){
+              this.total=responsedata.response.total;
+            }
+
+            if(responsedata.response.products){
+              this.data = responsedata.response.products;
+
+            }
 
         } else {
             this.showcart = false;
