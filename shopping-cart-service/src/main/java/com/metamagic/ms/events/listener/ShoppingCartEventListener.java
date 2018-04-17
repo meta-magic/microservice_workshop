@@ -55,16 +55,14 @@ public class ShoppingCartEventListener {
 		System.out.println("--kafkaTemplate--");
 	}
 	
-	private void updateUserCart(String userId, String itemId, String name, Integer quantity, Double price){
-		UserCart userCart = userRepository.findByUserId(userId);
-		
-		if(userCart == null){
+	private void updateUserCart(String userId, String itemId, String name, Integer quantity, Double price) {
+		UserCart userCart = userRepository.findByUserIdAndActive(userId, false);
+		if (userCart == null) {
 			userCart = new UserCart();
 			userCart.setUserId(userId);
 		}
-		
 		userCart.addOrUpdateProduct(itemId, name, quantity, price);
-		
+
 		userRepository.save(userCart);
 	}
 	

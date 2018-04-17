@@ -14,7 +14,7 @@ public class ShoppingCartReadService {
 	
 	public UserCart fetchcart(String id){
 		
-		UserCart userCart = userCartRepository.findByUserId(id);
+		UserCart userCart = userCartRepository.findByUserIdAndActive(id, false);
 		
 		return userCart;
 	}

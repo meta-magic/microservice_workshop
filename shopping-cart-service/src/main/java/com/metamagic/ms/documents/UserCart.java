@@ -16,7 +16,11 @@ public class UserCart {
 	private String userId;
 	
 	private List<UserProduct> products;
+	
+	private double total;
 
+	private boolean active;
+	
 	public UserCart() {
 		super();
 	}
@@ -64,7 +68,7 @@ public class UserCart {
 		}
 		
 		boolean add = true;
-		for (Iterator iterator = products.iterator(); iterator.hasNext();) {
+		for (Iterator<UserProduct> iterator = products.iterator(); iterator.hasNext();) {
 			UserProduct userProduct = (UserProduct) iterator.next();
 			if(userProduct.getId().equals(id)){
 //				userProduct.setName(name);
@@ -75,15 +79,40 @@ public class UserCart {
 			}
 		}
 		
-		if(add)
-			this.products.add(new UserProduct(id, name, quantity, price));
+		if(add) {
+			UserProduct userProduct = new UserProduct(id, name, quantity, price);
+			this.products.add(userProduct);
+			this.addToTotal(userProduct);
+		}
+	}
+
+	private void addToTotal(UserProduct userProduct) {
+		this.total = total + userProduct.getPrice();
 	}
 	
+	public double getTotal() {
+		return total;
+	}
+
+	public void setTotal(double total) {
+		this.total = total;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
 	public void addProduct(String id, String name, Integer quantity, Double price){
 		if(this.products == null){
 			this.products = new ArrayList<UserProduct>();
 		}
-		this.products.add(new UserProduct(id, name, quantity, price));
+		UserProduct userProduct = new UserProduct(id, name, quantity, price);
+		this.products.add(userProduct);
+		this.addToTotal(userProduct);
 	}
 
 	@Override
