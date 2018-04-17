@@ -56,9 +56,8 @@ export class ProductCatlogComponent implements OnInit {
             "price" : node.price
         }
 
-        const headers = new HttpHeaders().append('Content-Type', 'application/json;charset=UTF-8');
+        const headers = new HttpHeaders().append('Content-Type', 'application/json;charset=UTF-8').append('tokenid',this.cookieService.get('tokenid'));
         let responsedata: any;
-        headers.set('tokenid',this.cookieService.get('tokenid'));
         this.http.post("api/sc/shoppingcart/write/additem",req, { headers }).subscribe(
             response => {
                 responsedata = response;
