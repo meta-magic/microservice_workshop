@@ -2,6 +2,7 @@ package com.metamagic.ms.service.write;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -13,6 +14,7 @@ import com.metamagic.ms.commands.PlaceOrderCommand;
 import com.metamagic.ms.commands.RemoveItemCommand;
 
 @Service
+@Scope("request")
 public class ShoppingCartWriteService {
 
 	@Autowired

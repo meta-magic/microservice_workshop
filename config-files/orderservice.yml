@@ -3,13 +3,20 @@ spring:
     name: orderservice
     
   kafka:
-    bootstrap-servers: localhost:9095
+    bootstrap-servers: localhost:9092
   
   data:
     mongodb:
-      database: orderdb
+      database: ecommdb
       port: 27017
       host: localhost
+      username: ecomuser
+      password: ecomuser123
+      
+
+token:
+  key: abcd0987654321qwertyuio
+  validity: 86400000
       
 server:
   port: 8583   

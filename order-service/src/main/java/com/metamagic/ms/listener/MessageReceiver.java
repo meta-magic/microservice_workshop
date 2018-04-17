@@ -1,4 +1,4 @@
-package com.metamagic.ms;
+package com.metamagic.ms.listener;
 
 import java.io.IOException;
 import java.util.Date;
@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.metamagic.ms.bean.Order;
 import com.metamagic.ms.events.OrderPlacedEvent;
 import com.metamagic.ms.service.write.OrderWriteService;
@@ -28,12 +27,12 @@ public class MessageReceiver {
 	  }
 
 	  @KafkaListener(topics = "test_topic")
-	  public void receive(String msg) throws JsonParseException, JsonMappingException, IOException {
-	    System.out.println(msg);
+	  public void receive(OrderPlacedEvent orderPlacedEvent) throws JsonParseException, JsonMappingException, IOException {
+	    System.out.println(orderPlacedEvent);
 	    latch.countDown();
 	    
-	    ObjectMapper mapper = new ObjectMapper();
-	    OrderPlacedEvent orderPlacedEvent = mapper.readValue(msg, OrderPlacedEvent.class);
+	   /* ObjectMapper mapper = new ObjectMapper();
+	    OrderPlacedEvent orderPlacedEvent = mapper.readValue(msg, OrderPlacedEvent.class);*/
 	    double total = 0.0;
 	    if(orderPlacedEvent.getItems()!=null) {
 	    	total = orderPlacedEvent.getItems().stream().mapToDouble(o -> o.getPrice()).sum();

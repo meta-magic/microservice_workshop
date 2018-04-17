@@ -5,6 +5,8 @@ server:
 spring:
   application:
     name: authservice
+  kafka:
+    bootstrap-servers: localhost:9092
     
 token:
   key: abcd0987654321qwertyuio

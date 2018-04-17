@@ -5,6 +5,10 @@ server:
 spring:
   application:
     name: edgeserver  
+
+token:
+  key: abcd0987654321qwertyuio
+  validity: 86400000
   
 eureka:
   instance:
@@ -28,5 +32,8 @@ zuul:
       serviceId: SHOPPINGCARTLOBASERVICE
     orderlobaservice:
       path: /od/**
-      serviceId: ORDERLOBASERVICE  
+      serviceId: ORDERLOBASERVICE
+    authlobaservice:
+      path: /as/**
+      serviceId: AUTHLOBASERVICE    
             

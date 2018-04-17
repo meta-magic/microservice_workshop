@@ -86,7 +86,16 @@
 			<artifactId>datanucleus-rdbms</artifactId>
 			<version>5.1.1</version>
 		</dependency>
-						
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.7.0</version>
+		</dependency>
+		<dependency>
+			<groupId>atg.taglib.json</groupId>
+			<artifactId>json-taglib</artifactId>
+			<version>0.4.1</version>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
@@ -136,6 +145,10 @@
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
+		</repository>
+		<repository>
+			<id>public</id>
+			<url>http://maven.nuxeo.org/nexus/content/repositories/public/</url>
 		</repository>
 	</repositories>
 
