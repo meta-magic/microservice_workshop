@@ -50,7 +50,7 @@ public class ShoppingCartEventListener {
 		System.out.println(this.getClass()+" OrderPlacedEvent");
 		System.out.println(orderPlacedEvent.getItems());
 		
-		kafkaTemplate.send("test_topic",orderPlacedEvent.toString());
+		kafkaTemplate.send("test_topic",orderPlacedEvent);
 		
 		System.out.println("--kafkaTemplate--");
 	}

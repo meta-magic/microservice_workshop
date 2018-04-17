@@ -3,7 +3,7 @@ spring:
     name: shoppingcartservice
 
   kafka:
-    bootstrap-servers: localhost:9095
+    bootstrap-servers: localhost:9092
     
     
   data:
@@ -11,9 +11,15 @@ spring:
       database: ecommdb
       port: 27017
       host: localhost
+      username: ecomuser
+      password: ecomuser123
   
 server:
-  port: 8582   
+  port: 8582
+  
+token:
+  key: abcd0987654321qwertyuio
+  validity: 86400000   
       
 eureka:
   instance:

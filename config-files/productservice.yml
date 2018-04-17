@@ -5,6 +5,10 @@ server:
 spring:
   application:
     name: productservice  
+
+token:
+  key: abcd0987654321qwertyuio
+  validity: 86400000
   
 eureka:
   instance:
