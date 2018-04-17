@@ -12,7 +12,8 @@ export class OrderComponent implements OnInit{
     data: any;
     showorders: boolean;
     msg : string;
-
+    msgData:any[]=[];
+    showErrorDialog:boolean;
     constructor(private http : HttpClient, private router: Router,private cookieService:CookieService){
 
     }
@@ -30,7 +31,8 @@ export class OrderComponent implements OnInit{
                 responsedata = response;
             },
             error => {
-                this.msg = "Enabled to connect";
+              this.msgData.push('Enable to connect to server.');
+              this.showErrorDialog=true;
             },
             () => {
                 this.setData(responsedata);
@@ -47,8 +49,11 @@ export class OrderComponent implements OnInit{
         } else {
             this.showorders = false;
             this.msg = responsedata.message;
-
-
         }
+    }
+
+    close(){
+      this.showErrorDialog=false;
+      this.msgData=[];
     }
 }

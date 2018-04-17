@@ -13,6 +13,8 @@ export class ProductComponent implements OnInit{
     productModel : ProductModel;
     error : boolean;
     msg : string;
+    msgData:any=[];
+    showErrorDialog:boolean;
     constructor(private http: HttpClient, private router:Router,private cookieService:CookieService){
         this.productModel = new ProductModel();
     }
@@ -29,25 +31,27 @@ export class ProductComponent implements OnInit{
                 rsp = response;
             },
             error =>{
-
+              this.msgData.push('Enable to connect to server.');
+              this.showErrorDialog=true;
             },
             ()=>{
-                this.afterSave(rsp);
+              if(rsp.success){
+                this.error = false;
+                this.router.navigate(['home/productcatlog']);
+            }else{
+                this.error = true;
+                this.msgData.push(rsp.message);
+                this.showErrorDialog=true;
+                this.productModel=new ProductModel();
+             }
             }
         );
     }
 
-    afterSave(response : any){
-
-        if(response.success){
-            this.error = false;
-            this.router.navigate(['productcatlog']);
-        }else{
-            this.error = true;
-            this.msg = response.message;
-        }
-        debugger;
-    }
+    close(){
+      this.showErrorDialog=false;
+      this.msgData=[];
+     }
 }
 
 export class ProductModel {

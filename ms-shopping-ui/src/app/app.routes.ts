@@ -10,13 +10,13 @@ import { UserCreation } from './usercreation/usercreation';
 
 export const APP_ROUTE: Routes = [
     {
-        path: '', redirectTo: 'home', pathMatch: 'full'
-    },
-    {
-        path: 'home',loadChildren:'./home/home.module#HomeModule'
+        path: '', redirectTo: 'login', pathMatch: 'full'
     },
     {
       path:'login',component:LoginComponent
+    },
+    {
+        path: 'home',canActivate:[RouteGaurd],loadChildren:'./home/home.module#HomeModule'
     },
     {
       path:'create_user',component:UserCreation

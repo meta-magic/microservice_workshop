@@ -29,7 +29,8 @@ export class LoginComponent{
       responeData=resposne;
      },
      error=>{
-      console.log('Error occured.');
+      this.msgData.push('Enable to connect to server.');
+      this.showErrorDialog=true;
      },
      ()=>{
       if(responeData.success){

@@ -6,4 +6,3 @@ spring:
       uri: http://localhost:6061
       username: config
       password: config
-      
