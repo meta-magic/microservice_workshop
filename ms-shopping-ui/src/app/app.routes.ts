@@ -19,6 +19,6 @@ export const APP_ROUTE: Routes = [
         path: 'home',canActivate:[RouteGaurd],loadChildren:'./home/home.module#HomeModule'
     },
     {
-      path:'create_user',canActivate:[RouteGaurd],component:UserCreation
+      path:'create_user',component:UserCreation
     }
 ]

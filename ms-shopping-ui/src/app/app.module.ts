@@ -32,7 +32,7 @@ import { UserCreation } from './usercreation/usercreation';
     HttpClientModule,
     RouterModule.forRoot(APP_ROUTE,{useHash:true})
   ],
-  providers: [CookieService],
+  providers: [CookieService,RouteGaurd],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,14 +1,4 @@
-<amexio-row>
-    <amexio-column [size]=12>
-        {{msg}}
-    </amexio-column>
-</amexio-row>
-
-<amexio-notification [data]="servermsg"
-                     [vertical-position]="'top'"
-                     [horizontal-position]="'right'"
-                     [auto-dismiss-msg]="true"
-                     [auto-dismiss-msg-interval]="4000">
+<amexio-notification [data]="servermsg" [vertical-position]="'top'" [horizontal-position]="'right'" [auto-dismiss-msg]="true" [auto-dismiss-msg-interval]="4000">
 </amexio-notification>
 
 
@@ -17,19 +7,25 @@
         <amexio-card [header]="true" [footer]="true">
             <amexio-header>{{node.name}}</amexio-header>
             <amexio-body>
-                <amexio-image [path]="node.image" [height]="'330px'" [width]="'330px'"></amexio-image><br/>
-                Price: {{node.price}} <br/>
-                
+                <amexio-image [path]="node.image" [height]="'330px'" [width]="'330px'"></amexio-image><br/> Price: {{node.price}} <br/>
+
             </amexio-body>
             <amexio-action>
-                <amexio-button
-                     (onClick)="addToCart(node)"
-                     [icon]="'fa fa-cart-plus'"
-                     [label]="'Add To Cart'"
-                     [type]="'yellow'"
-                     [tooltip]="'Add to cart'" >
+                <amexio-button (onClick)="addToCart(node)" [icon]="'fa fa-cart-plus'" [label]="'Add To Cart'" [type]="'yellow'" [tooltip]="'Add to cart'">
                 </amexio-button>
             </amexio-action>
         </amexio-card>
     </amexio-column>
 </amexio-row>
+
+<amexio-dialogue [show-dialogue]="showErrorDialog" (close)="close()" [custom]="true" [title]="'Error'" [type]="'error'">
+    <amexio-body>
+        <li style="text-align: left" *ngFor="let msg of msgData">
+            {{msg}}
+        </li>
+    </amexio-body>
+    <amexio-action>
+        <amexio-button type="primary" (onClick)="close()" [label]="'Ok'">
+        </amexio-button>
+    </amexio-action>
+</amexio-dialogue>

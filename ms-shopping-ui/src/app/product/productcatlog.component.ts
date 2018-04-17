@@ -40,20 +40,16 @@ export class ProductCatlogComponent implements OnInit {
               this.showErrorDialog=true;
             },
             () => {
-                this.setData(responsedata);
+              if (responsedata && responsedata.success) {
+                this.showproducts = true;
+                this.data = responsedata.response;
+
+            } else {
+              this.msgData.push(responsedata.message);
+              this.showErrorDialog=true;
+             }
             }
         );
-    }
-
-    setData(responsedata: any) {
-        if (responsedata && responsedata.success) {
-            this.showproducts = true;
-            this.data = responsedata.response;
-
-        } else {
-            this.showproducts = false;
-            this.msg = responsedata.message;
-        }
     }
 
     addToCart(node:any){
@@ -80,12 +76,12 @@ export class ProductCatlogComponent implements OnInit {
         );
 
     }
-
     validateCart(responsedata:any){
-        if(responsedata && responsedata.message){
-            this.msg = responsedata.message;
+        if(responsedata.success && responsedata.message){
+          this.servermsg.push(responsedata.message);
         }else {
-            this.servermsg.push('Product added to cart');
+          this.msgData.push(responsedata.message);
+          this.showErrorDialog=true;
         }
     }
 }
