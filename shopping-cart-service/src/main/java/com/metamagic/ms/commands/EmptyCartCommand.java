@@ -2,10 +2,10 @@ package com.metamagic.ms.commands;
 
 import org.axonframework.commandhandling.TargetAggregateIdentifier;
 
-public class EmptyCartCommand {
+public final class EmptyCartCommand {
 
 	@TargetAggregateIdentifier
-	private String cartId;
+	private final String cartId;
 	
 	public EmptyCartCommand(String cartId){
 		this.cartId = cartId;

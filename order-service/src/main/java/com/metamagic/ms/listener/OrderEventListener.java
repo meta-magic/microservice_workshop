@@ -17,7 +17,7 @@ import com.metamagic.ms.events.OrderPlacedEvent;
 import com.metamagic.ms.service.write.OrderWriteService;
 
 @Component
-public class MessageReceiver {
+public class OrderEventListener {
 
 	  @Autowired
 	  private OrderWriteService orderWriteService;

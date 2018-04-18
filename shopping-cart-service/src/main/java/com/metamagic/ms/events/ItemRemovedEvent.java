@@ -5,24 +5,20 @@ import java.util.Date;
 
 import com.metamagic.ms.aggregate.Items;
 
-public class ItemRemovedEvent implements Serializable {
+public final class ItemRemovedEvent implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 5057743903662251460L;
 
-	private String cartId;
-	
-	private String customerId;
-	
-	private Items items;
-	
-	private Date time;
-	
-	public ItemRemovedEvent(){
-		this.time = new Date();
-	}
+	private final String cartId;
+
+	private final String customerId;
+
+	private final Items items;
+
+	private final Date time;
 
 	public ItemRemovedEvent(String cartId, String customerId, Items items) {
 		super();
@@ -43,25 +39,9 @@ public class ItemRemovedEvent implements Serializable {
 	public Items getItems() {
 		return items;
 	}
-	
-	public void setCartId(String cartId) {
-		this.cartId = cartId;
-	}
-
-	public void setCustomerId(String customerId) {
-		this.customerId = customerId;
-	}
-
-	public void setItems(Items items) {
-		this.items = items;
-	}
 
 	public Date getTime() {
 		return time;
-	}
-
-	public void setTime(Date time) {
-		this.time = time;
 	}
 
 	@Override
@@ -70,6 +50,4 @@ public class ItemRemovedEvent implements Serializable {
 				+ "]";
 	}
 
-	 
-	
 }

@@ -2,21 +2,18 @@ package com.metamagic.ms.commands;
 
 import org.axonframework.commandhandling.TargetAggregateIdentifier;
 
-public class RemoveItemCommand {
+public final class RemoveItemCommand {
 	
 	@TargetAggregateIdentifier
-	private String cartId;
+	private final String cartId;
 	
-	private String itemId;
+	private final String itemId;
 
-	private String name;
+	private final String name;
 	
-	private int quantity;
+	private final int quantity;
 	
-	private Double price;
-	
-	public RemoveItemCommand(){
-	}
+	private final Double price;
 
 	public RemoveItemCommand(String cartId, String itemId, String name, int quantity, Double price) {
 		super();
@@ -31,40 +28,20 @@ public class RemoveItemCommand {
 		return cartId;
 	}
 
-	public void setCartId(String cartId) {
-		this.cartId = cartId;
-	}
-
 	public String getItemId() {
 		return itemId;
-	}
-
-	public void setItemId(String itemId) {
-		this.itemId = itemId;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public int getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
-
 	public Double getPrice() {
 		return price;
-	}
-
-	public void setPrice(Double price) {
-		this.price = price;
 	}
 
 	@Override
@@ -72,7 +49,5 @@ public class RemoveItemCommand {
 		return "RemoveItemCommand [cartId=" + cartId + ", itemId=" + itemId + ", name=" + name + ", quantity="
 				+ quantity + ", price=" + price + "]";
 	}
-
-	 
 	
 }
