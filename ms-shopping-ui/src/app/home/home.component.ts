@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
 
 export class HomeComponent{
   constructor(private router:Router,private cookieService :CookieService){
-    this.router.navigate(['home/productcatlog']);
+    // this.router.navigate(['home/productcatlog']);
   }
   addProduct(){
     this.router.navigate(['home/product']);

@@ -1,58 +1,48 @@
-<amexio-notification [data]="servermsg"
-                     [vertical-position]="'top'"
-                     [horizontal-position]="'right'"
-                     [auto-dismiss-msg]="true"
-                     [auto-dismiss-msg-interval]="4000">
+<amexio-notification [data]="servermsg" [vertical-position]="'top'" [horizontal-position]="'right'" [auto-dismiss-msg]="true" [auto-dismiss-msg-interval]="4000">
 </amexio-notification>
 
 
-<amexio-card [header]="true"
-             [footer]="true"
-             [footer-align]="'right'">
+<amexio-card [header]="true" [footer]="true" [footer-align]="'right'">
     <amexio-header>
-        Cart {{msg}} 
+        Cart {{msg}}
     </amexio-header>
     <amexio-body>
-        
+
         <amexio-row>
-            <amexio-column [size] =3 >
+            <amexio-column [size]=3>
                 <b>Name</b>
             </amexio-column>
-            <amexio-column [size] =3 >
+            <amexio-column [size]=3>
                 <b>Quantity</b>
             </amexio-column>
-            <amexio-column [size] =3 >
+            <amexio-column [size]=3>
                 <b>Price</b>
             </amexio-column>
         </amexio-row>
         <br/>
         <amexio-row *ngFor="let node of data">
-            <amexio-column [size] =3 >
+            <amexio-column [size]=3>
                 {{node.name}}
             </amexio-column>
-            <amexio-column [size] =3 >
+            <amexio-column [size]=3>
                 {{node.quantity}}
             </amexio-column>
-            <amexio-column [size] =3 >
+            <amexio-column [size]=3>
                 {{node.price}}
             </amexio-column>
-            <amexio-column [size] =3 >
-                <amexio-button
-                     (onClick)="removeItem(node)"    
-                     [label]="'Remove'"
-                     [type]="'red'"
-                     [tooltip]="'Remove'" >
-                </amexio-button>    
+            <amexio-column [size]=3>
+                <amexio-button (onClick)="removeItem(node)" [label]="'Remove'" [type]="'red'" [tooltip]="'Remove'">
+                </amexio-button>
             </amexio-column>
+        </amexio-row>
+        <amexio-row>
+            <amexio-column size=6></amexio-column>
+            <amexio-column size=3 *ngIf="total">Total :{{total}}</amexio-column>
+            <amexio-column size=3></amexio-column>
         </amexio-row>
     </amexio-body>
     <amexio-action>
-        <amexio-button
-             (onClick)="checkout()"
-             [icon]="'fa fa-money'"
-             [label]="'Checkout'"
-             [type]="'theme-color'"
-             [tooltip]="'Checkout'" >
+        <amexio-button (onClick)="checkout()" [icon]="'fa fa-money'" [label]="'Checkout'" [type]="'theme-color'" [tooltip]="'Checkout'">
         </amexio-button>
     </amexio-action>
 </amexio-card>
