@@ -1,6 +1,6 @@
 package com.metamagic.ms.repository.read;
 
-import com.metamagic.ms.bean.User;
+import com.metamagic.ms.entity.User;
 
 /**
  * @author sagar

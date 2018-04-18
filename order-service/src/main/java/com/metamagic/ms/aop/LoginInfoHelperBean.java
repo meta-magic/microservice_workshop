@@ -3,6 +3,11 @@ package com.metamagic.ms.aop;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author sagar
+ * 
+ * THIS BEAN ADDED USERID
+ */
 @Component
 @Scope(value = "request")
 public class LoginInfoHelperBean {

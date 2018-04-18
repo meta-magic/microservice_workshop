@@ -1,10 +1,9 @@
-package com.metamagic.ms.repository.write.impl;
+package com.metamagic.ms.repository.write;
 
 import org.springframework.stereotype.Repository;
 
-import com.metamagic.ms.bean.User;
-import com.metamagic.ms.repository.common.GenericRepository;
-import com.metamagic.ms.repository.write.UserWriteRepository;
+import com.metamagic.ms.entity.User;
+import com.metamagic.ms.repository.GenericRepository;
 
 /**
  * @author sagar 

@@ -8,8 +8,15 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 
+/**
+ * @author sagar
+ * THIS CLASS USED FOR COMMON METHODS OF REST CONTROLLER
+ */
 public abstract class BaseComponent {
 
+	/**
+	 * HERE HTTPHEADERS SET CONTENT TYPE
+	 * */
 	protected final HttpHeaders createHeaders(HttpServletRequest request) {
 
 		HttpHeaders headers = new HttpHeaders();

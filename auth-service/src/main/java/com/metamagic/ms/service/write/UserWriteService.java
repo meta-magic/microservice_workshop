@@ -1,6 +1,6 @@
 package com.metamagic.ms.service.write;
 
-import com.metamagic.ms.bean.UserDTO;
+import com.metamagic.ms.dto.UserDTO;
 import com.metamagic.ms.exception.CustomException;
 
 /**

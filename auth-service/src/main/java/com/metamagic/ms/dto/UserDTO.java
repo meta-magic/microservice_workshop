@@ -1,4 +1,4 @@
-package com.metamagic.ms.bean;
+package com.metamagic.ms.dto;
 
 public class UserDTO {
 

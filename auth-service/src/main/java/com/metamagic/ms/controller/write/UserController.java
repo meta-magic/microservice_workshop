@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.metamagic.ms.bean.ResponseBean;
-import com.metamagic.ms.bean.UserDTO;
+import com.metamagic.ms.dto.UserDTO;
 import com.metamagic.ms.exception.CustomException;
 import com.metamagic.ms.service.write.UserWriteService;
 

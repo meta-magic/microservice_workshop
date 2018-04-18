@@ -1,4 +1,4 @@
-package com.metamagic.ms.repository.common;
+package com.metamagic.ms.repository;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;

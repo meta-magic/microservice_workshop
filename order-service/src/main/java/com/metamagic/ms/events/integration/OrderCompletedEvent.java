@@ -1,12 +1,14 @@
-package com.metamagic.ms.events;
+package com.metamagic.ms.events.integration;
 
 import java.io.Serializable;
 
+/**
+ * @author sagar
+ * 
+ * THIS ORDER COMPLETED EVENT SEND TO ORDER SERVICE
+ */
 public class OrderCompletedEvent implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 5726021038987464389L;
 
 	private String userId;

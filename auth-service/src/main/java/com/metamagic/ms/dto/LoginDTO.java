@@ -1,12 +1,12 @@
-package com.metamagic.ms.bean;
+package com.metamagic.ms.dto;
 
-public class LoginCredentials {
+public class LoginDTO {
 
 	private String userId;
 
 	private String password;
 
-	public LoginCredentials() {
+	public LoginDTO() {
 	}
 
 	public String getUserId() {

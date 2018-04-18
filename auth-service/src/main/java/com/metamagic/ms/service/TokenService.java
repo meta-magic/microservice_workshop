@@ -1,4 +1,4 @@
-package com.metamagic.ms.service.common;
+package com.metamagic.ms.service;
 
 import java.util.Date;
 

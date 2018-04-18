@@ -2,6 +2,10 @@ package com.metamagic.ms.bean;
 
 import java.io.Serializable;
 
+/**
+ * @author sagar
+ * 
+ */
 public class ResponseBean implements Serializable
 {
 

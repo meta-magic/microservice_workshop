@@ -3,6 +3,9 @@ package com.metamagic.ms;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.jdo.JDOHelper;
+import javax.jdo.PersistenceManagerFactory;
+
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -20,58 +23,67 @@ import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 
-import com.metamagic.ms.events.OrderCompletedEvent;
-import com.metamagic.ms.events.OrderPlacedEvent;
+import com.metamagic.ms.events.integration.OrderCompletedEvent;
+import com.metamagic.ms.events.integration.OrderPlacedEvent;
 
+/**
+ * @author sagar
+ * 
+ * THIS CONFIG CLASS USED FOR CONFIG KAFKA ,CREATE PERSISTENCEMANAGERFACTORY
+ */
 @Configuration
 @EnableKafka
 public class Config {
 
 	@Value("${spring.kafka.bootstrap-servers}")
-	  private String bootstrapServers;
+	private String bootstrapServers;
 
-	  @Bean
-	  public Map<String, Object> consumerConfigs() {
-	    Map<String, Object> props = new HashMap<>();
-	    props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
-	    props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-	    props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
-	    props.put(ConsumerConfig.GROUP_ID_CONFIG, "string");
+	@Bean
+	public PersistenceManagerFactory persistenceManagerFactory() {
+		return JDOHelper.getPersistenceManagerFactory("PersistenceUnit");
+	}
 
-	    return props;
-	  }
+	@Bean
+	public Map<String, Object> consumerConfigs() {
+		Map<String, Object> props = new HashMap<>();
+		props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+		props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+		props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
+		props.put(ConsumerConfig.GROUP_ID_CONFIG, "string");
 
-	  @Bean
-	  public ConsumerFactory<String, OrderPlacedEvent> consumerFactory() {
-	    return new DefaultKafkaConsumerFactory<>(consumerConfigs(), new StringDeserializer(),
-	            new JsonDeserializer<>(OrderPlacedEvent.class));
-	  }
+		return props;
+	}
 
-	  @Bean
-	  public ConcurrentKafkaListenerContainerFactory<String, OrderPlacedEvent> kafkaListenerContainerFactory() {
-	    ConcurrentKafkaListenerContainerFactory<String, OrderPlacedEvent> factory =
-	        new ConcurrentKafkaListenerContainerFactory<>();
-	    factory.setConsumerFactory(consumerFactory());
+	@Bean
+	public ConsumerFactory<String, OrderPlacedEvent> consumerFactory() {
+		return new DefaultKafkaConsumerFactory<>(consumerConfigs(), new StringDeserializer(),
+				new JsonDeserializer<>(OrderPlacedEvent.class));
+	}
 
-	    return factory;
-	  }
+	@Bean
+	public ConcurrentKafkaListenerContainerFactory<String, OrderPlacedEvent> kafkaListenerContainerFactory() {
+		ConcurrentKafkaListenerContainerFactory<String, OrderPlacedEvent> factory = new ConcurrentKafkaListenerContainerFactory<>();
+		factory.setConsumerFactory(consumerFactory());
 
-	  @Bean
-	    public Map<String, Object> producerConfigs() {
-	        Map<String, Object> props = new HashMap<>();
-	        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
-	        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-	        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
-	        return props;
-	    }
+		return factory;
+	}
 
-	    @Bean
-	    public ProducerFactory<String, OrderCompletedEvent> producerFactory() {
-	        return new DefaultKafkaProducerFactory<>(producerConfigs());
-	    }
+	@Bean
+	public Map<String, Object> producerConfigs() {
+		Map<String, Object> props = new HashMap<>();
+		props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+		props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+		props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
+		return props;
+	}
 
-	    @Bean
-	    public KafkaTemplate<String, OrderCompletedEvent> kafkaTemplate() {
-	        return new KafkaTemplate<>(producerFactory());
-	    }
+	@Bean
+	public ProducerFactory<String, OrderCompletedEvent> producerFactory() {
+		return new DefaultKafkaProducerFactory<>(producerConfigs());
+	}
+
+	@Bean
+	public KafkaTemplate<String, OrderCompletedEvent> kafkaTemplate() {
+		return new KafkaTemplate<>(producerFactory());
+	}
 }

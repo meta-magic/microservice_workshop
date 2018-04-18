@@ -1,5 +1,9 @@
 package com.metamagic.ms.aggregate;
 
+/**
+ * @author sagar
+ * THIS CLASS IS AN AGGREGATE
+ */
 public class Items {
 
 	private String itemId;

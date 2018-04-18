@@ -1,14 +1,16 @@
-package com.metamagic.ms.events;
+package com.metamagic.ms.events.integration;
 
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.metamagic.ms.aggregate.Items;
 
 
+/**
+ * @author sagar
+ * THIS IS ORDER PLACE EVENT USED TO SEND TO ORDER SERVICE
+ */
 public class OrderPlacedEvent implements Serializable {
 
 	/**

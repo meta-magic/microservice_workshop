@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.metamagic.ms.bean.User;
-import com.metamagic.ms.bean.LoginCredentials;
 import com.metamagic.ms.bean.LoginResponse;
 import com.metamagic.ms.bean.ResponseBean;
+import com.metamagic.ms.dto.LoginDTO;
+import com.metamagic.ms.entity.User;
 import com.metamagic.ms.repository.read.UserReadRepository;
-import com.metamagic.ms.service.common.TokenService;
+import com.metamagic.ms.service.TokenService;
 
 @RestController
 @RequestMapping("/auth")
@@ -28,7 +28,7 @@ public class AuthController {
 	private TokenService tokenService;
 
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseEntity<ResponseBean> authenticate(@RequestBody LoginCredentials loginCredentials) {
+	public @ResponseBody ResponseEntity<ResponseBean> authenticate(@RequestBody LoginDTO loginCredentials) {
 
 		ResponseBean response = null;
 		if (loginCredentials.getUserId() != null && loginCredentials.getPassword() != null) {

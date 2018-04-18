@@ -1,7 +1,5 @@
 package com.metamagic.ms.controller.read;
 
-import java.util.Arrays;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +17,13 @@ import com.metamagic.ms.bean.ResponseBean;
 import com.metamagic.ms.controller.BaseComponent;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
+/**
+ * @author sagar
+ * THIS CONTROLLER HANDLE REQUEST FROM UI
+ * 1.HANDLE REQUEST AND SEND TO SERVICE 
+ * 2.FALLBACK MECHANISM 
+ * 
+ */
 @RestController
 @RequestMapping("/order/query")
 public class OrderReadController extends BaseComponent {

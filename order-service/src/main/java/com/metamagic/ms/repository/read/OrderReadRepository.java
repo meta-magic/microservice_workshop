@@ -1,11 +1,10 @@
 package com.metamagic.ms.repository.read;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.stereotype.Repository;
+import java.util.List;
 
-import com.metamagic.ms.bean.Order;
+import com.metamagic.ms.entity.OrderDocument;
 
-@Repository
-public interface OrderReadRepository extends MongoRepository<Order, String>{
-
+public interface OrderReadRepository {
+	
+	public List<OrderDocument> findAll(String userId);
 }

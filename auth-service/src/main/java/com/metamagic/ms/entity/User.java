@@ -1,4 +1,4 @@
-package com.metamagic.ms.bean;
+package com.metamagic.ms.entity;
 
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
