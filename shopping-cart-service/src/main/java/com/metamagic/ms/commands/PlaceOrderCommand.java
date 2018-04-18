@@ -2,12 +2,12 @@ package com.metamagic.ms.commands;
 
 import org.axonframework.commandhandling.TargetAggregateIdentifier;
 
-public class PlaceOrderCommand {
+public final class PlaceOrderCommand {
 	
 	@TargetAggregateIdentifier
-	private String cartId;
+	private final String cartId;
 	
-	private String customerId;
+	private final String customerId;
 
 	public PlaceOrderCommand(String cartId, String customerId) {
 		super();
@@ -19,16 +19,8 @@ public class PlaceOrderCommand {
 		return cartId;
 	}
 
-	public void setCartId(String cartId) {
-		this.cartId = cartId;
-	}
-
 	public String getCustomerId() {
 		return customerId;
-	}
-
-	public void setCustomerId(String customerId) {
-		this.customerId = customerId;
 	}
 
 	@Override

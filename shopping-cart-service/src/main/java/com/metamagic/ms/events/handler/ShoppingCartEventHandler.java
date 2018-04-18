@@ -1,4 +1,4 @@
-package com.metamagic.ms.events.listener;
+package com.metamagic.ms.events.handler;
 
 
 import org.axonframework.eventhandling.EventHandler;
@@ -14,7 +14,7 @@ import com.metamagic.ms.events.OrderPlacedEvent;
 import com.metamagic.ms.repository.UserCartRepository;
 
 @Component
-public class ShoppingCartEventListener {
+public class ShoppingCartEventHandler {
 
 	@Autowired
 	private UserCartRepository userRepository;

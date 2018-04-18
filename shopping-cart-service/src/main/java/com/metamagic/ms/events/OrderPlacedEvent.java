@@ -9,22 +9,18 @@ import atg.taglib.json.util.JSONArray;
 import atg.taglib.json.util.JSONException;
 import atg.taglib.json.util.JSONObject;
 
-public class OrderPlacedEvent implements Serializable {
+public final class OrderPlacedEvent implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -7885046483586380537L;
 
-	private String cartId;
+	private final String cartId;
 
-	private String customerId;
+	private final String customerId;
 
-	private Set<Items> items;
-
-	public OrderPlacedEvent() {
-
-	}
+	private final Set<Items> items;
 
 	public OrderPlacedEvent(String cartId, String customerId, Set<Items> items) {
 		super();
@@ -41,20 +37,8 @@ public class OrderPlacedEvent implements Serializable {
 		return customerId;
 	}
 
-	public void setCartId(String cartId) {
-		this.cartId = cartId;
-	}
-
-	public void setCustomerId(String customerId) {
-		this.customerId = customerId;
-	}
-
 	public Set<Items> getItems() {
 		return items;
-	}
-
-	public void setItems(Set<Items> items) {
-		this.items = items;
 	}
 
 	@Override

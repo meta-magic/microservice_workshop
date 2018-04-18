@@ -2,23 +2,19 @@ package com.metamagic.ms.commands;
 
 import org.axonframework.commandhandling.TargetAggregateIdentifier;
 
-public class AddItemCommand {
+public final class AddItemCommand {
 	
 
 	@TargetAggregateIdentifier
-	private String cartId;
+	private final String cartId;
 	
-	private String itemId;
+	private final String itemId;
 
-	private String name;
+	private final String name;
 	
-	private int quantity;
+	private final int quantity;
 	
-	private Double price;
-	
-	public AddItemCommand(){
-		
-	}
+	private final Double price;
 
 	public AddItemCommand(String cartId, String itemId, String name, int quantity, Double price) {
 		super();
@@ -33,42 +29,21 @@ public class AddItemCommand {
 		return cartId;
 	}
 
-	public void setCartId(String cartId) {
-		this.cartId = cartId;
-	}
-
 	public String getItemId() {
 		return itemId;
-	}
-
-	public void setItemId(String itemId) {
-		this.itemId = itemId;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public int getQuantity() {
 		return quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
 	}
 
 	public Double getPrice() {
 		return price;
 	}
-
-	public void setPrice(Double price) {
-		this.price = price;
-	}
-
 	
 	@Override
 	public String toString() {
