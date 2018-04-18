@@ -5,7 +5,7 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
 import com.metamagic.ms.documents.UserCart;
-import com.metamagic.ms.events.OrderCompletedEvent;
+import com.metamagic.ms.events.integration.OrderCompletedEvent;
 import com.metamagic.ms.repository.UserCartRepository;
 
 @Component

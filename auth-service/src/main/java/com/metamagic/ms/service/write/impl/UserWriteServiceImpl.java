@@ -2,6 +2,9 @@ package com.metamagic.ms.service.write.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
 import com.metamagic.ms.dto.UserDTO;
@@ -15,11 +18,11 @@ import com.metamagic.ms.service.write.UserWriteService;
 /**
  * @author sagar
  *
- * THIS SERVICE IS USED FOR WRITE OPERATION OF USERS
+ *         THIS SERVICE IS USED FOR WRITE OPERATION OF USERS
  */
 @Service
 public class UserWriteServiceImpl implements UserWriteService {
-	
+
 	@Autowired
 	private UserWriteRepository userWriteRepository;
 
@@ -32,7 +35,7 @@ public class UserWriteServiceImpl implements UserWriteService {
 	/**
 	 * THIS METHOD IS USED TO CREATE USER
 	 * 
-	 * */
+	 */
 	public void createUser(UserDTO userDTO) throws CustomException {
 
 		User userStored = userReadRepository.findByUserId(userDTO.getUserId());
@@ -40,9 +43,11 @@ public class UserWriteServiceImpl implements UserWriteService {
 			User user = new User(userDTO.getFirstName(), userDTO.getLastName(), userDTO.getUserId(),
 					userDTO.getPassword());
 			userWriteRepository.save(user);
-			kafkaTemplate.send("user_topic", new UserCreatedEvent(user.getId()));
+			Message<UserCreatedEvent> message = MessageBuilder.withPayload(new UserCreatedEvent(user.getId()))
+					.setHeader(KafkaHeaders.TOPIC, "user_topic").setHeader("custom-header", "My custom header.").build();
+			kafkaTemplate.send(message);
 		} else {
-			throw new CustomException("User with same userId present, please choose other");
+			throw new CustomException("User with same userId is present, please choose other");
 		}
 	}
 }

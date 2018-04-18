@@ -24,7 +24,7 @@ import com.metamagic.ms.commands.RemoveItemCommand;
 import com.metamagic.ms.events.CartCreatedEvent;
 import com.metamagic.ms.events.ItemAddedEvent;
 import com.metamagic.ms.events.ItemRemovedEvent;
-import com.metamagic.ms.events.OrderPlacedEvent;
+import com.metamagic.ms.events.integration.OrderPlacedEvent;
 
 @Aggregate
 @AggregateRoot

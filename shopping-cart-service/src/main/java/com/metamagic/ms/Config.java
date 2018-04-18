@@ -39,8 +39,8 @@ import org.springframework.kafka.support.serializer.JsonDeserializer;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 
 import com.metamagic.ms.aggregate.ShoppingCart;
-import com.metamagic.ms.events.OrderPlacedEvent;
-import com.metamagic.ms.events.UserCreatedEvent;
+import com.metamagic.ms.events.integration.OrderPlacedEvent;
+import com.metamagic.ms.events.integration.UserCreatedEvent;
 import com.mongodb.MongoClient;
 
 @Configuration

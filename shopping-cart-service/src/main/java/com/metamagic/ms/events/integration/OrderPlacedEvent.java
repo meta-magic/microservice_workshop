@@ -1,4 +1,4 @@
-package com.metamagic.ms.events;
+package com.metamagic.ms.events.integration;
 
 import java.io.Serializable;
 import java.util.Set;
