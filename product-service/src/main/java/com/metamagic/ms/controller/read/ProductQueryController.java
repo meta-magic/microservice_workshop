@@ -16,6 +16,11 @@ import org.springframework.web.context.request.async.DeferredResult;
 import com.metamagic.ms.bean.ResponseBean;
 import com.metamagic.ms.service.read.ProductReadService;
 
+/**
+ * @author sagar
+ * 
+ * THIS CONTROLLER USED FOR PRODUCT READ
+ */
 @RestController
 @RequestMapping("/product/query")
 public class ProductQueryController {
@@ -24,6 +29,9 @@ public class ProductQueryController {
 	@Autowired
 	private ProductReadService productService;
 	
+	/**
+	 * ThIS METHOD IS USED FOR FINDING ALL PRODUCT 
+	 * */
 	@RequestMapping(value="/findall", method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public  @ResponseBody ResponseEntity<ResponseBean> findAll(){
 		ResponseBean response = new ResponseBean(true,"Data retrieved successfully","success",productService.getProducts());

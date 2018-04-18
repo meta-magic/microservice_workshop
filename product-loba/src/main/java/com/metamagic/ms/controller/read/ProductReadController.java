@@ -16,6 +16,10 @@ import org.springframework.web.client.RestTemplate;
 import com.metamagic.ms.bean.ResponseBean;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
+/**
+ * @author sagar
+ * THIS CLASS USED FOR PRODUCT READ
+ */
 @RestController
 @RequestMapping("/product/query")
 public class ProductReadController {
