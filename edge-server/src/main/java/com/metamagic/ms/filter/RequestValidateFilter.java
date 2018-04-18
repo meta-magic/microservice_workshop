@@ -1,4 +1,4 @@
-package com.metamagic.ms;
+package com.metamagic.ms.filter;
 
 import javax.servlet.http.HttpServletRequest;
 
