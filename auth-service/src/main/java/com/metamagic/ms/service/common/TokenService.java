@@ -1,4 +1,4 @@
-package com.metamagic.ms.service;
+package com.metamagic.ms.service.common;
 
 import java.util.Date;
 
@@ -14,6 +14,11 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
 
+/**
+ * @author sagar
+ * 
+ * THIS SERVICE IS USED FOR TOKEN VALIDATION 
+ */
 @Component
 public class TokenService {
 

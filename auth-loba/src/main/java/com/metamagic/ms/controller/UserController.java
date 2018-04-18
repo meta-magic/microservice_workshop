@@ -16,7 +16,13 @@ import org.springframework.web.client.RestTemplate;
 
 import com.metamagic.ms.bean.ResponseBean;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-
+/**
+ * @author sagar
+ * THIS CONTROLLER HANDLE REQUEST FROM UI
+ * 1.HANDLE REQUEST AND SEND TO SERVICE 
+ * 2.FALLBACK MECHANISM 
+ * 
+ */
 @RestController
 @RequestMapping("/user")
 public class UserController {

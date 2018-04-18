@@ -1,4 +1,4 @@
-package com.metamagic.ms.controller;
+package com.metamagic.ms.controller.read;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,7 +15,7 @@ import com.metamagic.ms.bean.LoginCredentials;
 import com.metamagic.ms.bean.LoginResponse;
 import com.metamagic.ms.bean.ResponseBean;
 import com.metamagic.ms.repository.read.UserReadRepository;
-import com.metamagic.ms.service.TokenService;
+import com.metamagic.ms.service.common.TokenService;
 
 @RestController
 @RequestMapping("/auth")

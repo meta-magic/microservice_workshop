@@ -1,24 +1,22 @@
-package com.metamagic.ms.repository.read;
+package com.metamagic.ms.repository.read.impl;
 
 import javax.jdo.PersistenceManager;
-import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.Query;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.metamagic.ms.bean.User;
+import com.metamagic.ms.repository.common.GenericRepository;
+import com.metamagic.ms.repository.read.UserReadRepository;
 
+/**
+ * @author sagar
+ * 
+ * THIS REPOSITORY IMPLMENTATION IS FOR USER READ OPERAIONS
+ */
 @Repository
-public class UserReadRepositoryImpl implements UserReadRepository {
+public class UserReadRepositoryImpl extends GenericRepository<User> implements UserReadRepository {
 
-	@Autowired
-	PersistenceManagerFactory pmf;
-
-	private PersistenceManager pm() {
-		return pmf.getPersistenceManager();
-	}
-	
 	@Override
 	public User findByUserId(String userId) {
 		PersistenceManager pm = pm();

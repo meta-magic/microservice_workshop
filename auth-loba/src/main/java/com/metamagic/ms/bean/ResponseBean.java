@@ -2,6 +2,10 @@ package com.metamagic.ms.bean;
 
 import java.io.Serializable;
 
+/**
+ * @author sagar
+ * THIS BEAN IS USED FOR SEDING REPONSE TO UI
+ */
 public class ResponseBean implements Serializable
 {
 

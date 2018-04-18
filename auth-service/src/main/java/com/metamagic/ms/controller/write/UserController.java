@@ -15,6 +15,11 @@ import com.metamagic.ms.bean.UserDTO;
 import com.metamagic.ms.exception.CustomException;
 import com.metamagic.ms.service.write.UserWriteService;
 
+/**
+ * @author sagar
+ * 
+ * THIS CONTROLLER USED FOR USER REQUEST 
+ */
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -22,6 +27,9 @@ public class UserController {
 	@Autowired
 	private UserWriteService userWriteService;
 	
+	/**
+	 * THIS METHOD USED FOR CREATE USER
+	 * */
 	@PostMapping(value = "/create", produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity<ResponseBean> createUser(@RequestBody UserDTO userDTO){
 		ResponseBean responseBean = null;
