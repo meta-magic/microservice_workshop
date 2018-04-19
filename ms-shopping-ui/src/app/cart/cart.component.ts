@@ -25,6 +25,7 @@ export class CartComponent implements OnInit {
         this.servermsg = [];
     }
 
+    //Method to close Error Dialogue box
     close() {
         this.showErrorDialog = false;
         this.msgData = [];
@@ -73,7 +74,8 @@ export class CartComponent implements OnInit {
             this.msg = responsedata.message;
         }
     }
-
+    
+    //Method to remove items from cart
     removeItem(node: any) {
         let req = {
             "itemId": node.id,
@@ -98,6 +100,7 @@ export class CartComponent implements OnInit {
         );
     }
 
+    //Method to Place Order
     checkout() {
         const headers = new HttpHeaders().append('Content-Type', 'application/json;charset=UTF-8').append('tokenid', this.cookieService.get('tokenid'));
         let responsedata: any;
@@ -113,8 +116,6 @@ export class CartComponent implements OnInit {
             ,
             () => {
                 this.showOrdersDialogue = true;
-                // this.servermsg.push("Order placed successfully!");
-                // this.router.navigate(['home/order']);
             }
         );
     }
