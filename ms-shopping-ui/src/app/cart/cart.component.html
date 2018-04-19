@@ -2,47 +2,100 @@
 </amexio-notification>
 
 
-<amexio-card [header]="true" [footer]="true" [footer-align]="'right'">
-    <amexio-header>
-        Cart {{msg}}
-    </amexio-header>
-    <amexio-body>
-
-        <amexio-row>
-            <amexio-column [size]=3>
-                <b>Name</b>
-            </amexio-column>
-            <amexio-column [size]=3>
-                <b>Quantity</b>
-            </amexio-column>
-            <amexio-column [size]=3>
-                <b>Price</b>
-            </amexio-column>
-        </amexio-row>
-        <br/>
-        <amexio-row *ngFor="let node of data">
-            <amexio-column [size]=3>
-                {{node.name}}
-            </amexio-column>
-            <amexio-column [size]=3>
-                {{node.quantity}}
-            </amexio-column>
-            <amexio-column [size]=3>
-                {{node.price}}
-            </amexio-column>
-            <amexio-column [size]=3>
-                <amexio-button (onClick)="removeItem(node)" [label]="'Remove'" [type]="'red'" [tooltip]="'Remove'">
+<amexio-row>
+    <amexio-column [size]=8>
+        <amexio-card [header]="true" [footer]="true" [footer-align]="'right'">
+            <amexio-header>
+                MY CART ({{number}})
+            </amexio-header>
+            <amexio-body>
+                <amexio-row *ngFor="let node of data">
+                    <amexio-column [size]=3>
+                        <amexio-label 
+                             size="small">
+                                  {{node.name}}
+                        </amexio-label>
+                       
+                    </amexio-column>
+                    <amexio-column [size]=3>
+                        <amexio-label 
+                             size="small-bold">
+                               <amexio-image [icon-class]="'fa fa-inr'" [tooltip]="'Rupee'">
+                        </amexio-image>
+                        {{node.price}}
+                        </amexio-label>
+                        
+                    </amexio-column>
+                    <amexio-column [size]=3>
+                        <amexio-label 
+                             size="small">
+                       {{node.quantity}}
+                        </amexio-label>
+                    </amexio-column>
+                   <amexio-column [size]=3>
+                         <span>
+                         <amexio-image style="color:red;" [icon-class]="'fa fa-minus-circle fa-2x'" [tooltip]="'Remove'" (onClick)="removeItem(node)">
+                         </amexio-image>
+                        </span>
+                    </amexio-column>
+                </amexio-row>
+            </amexio-body>
+            <amexio-action>
+                 <amexio-button
+                     [label]="'Continue Shopping'"
+                     [tooltip]="'Continue Shopping'" 
+                     [icon]="'fa fa-chevron-left'"
+                     (onClick)="onContinueShopping()">
+                </amexio-button> 
+                <amexio-button
+                     [label]="'Place Order'"
+                     [type]="'yellow'"
+                     [tooltip]="'Place Order'"
+                     (onClick)="checkout()">
                 </amexio-button>
-            </amexio-column>
-        </amexio-row>
-        <amexio-row>
-            <amexio-column size=6></amexio-column>
-            <amexio-column size=3 *ngIf="total">Total :{{total}}</amexio-column>
-            <amexio-column size=3></amexio-column>
-        </amexio-row>
-    </amexio-body>
-    <amexio-action>
-        <amexio-button (onClick)="checkout()" [icon]="'fa fa-money'" [label]="'Checkout'" [type]="'theme-color'" [tooltip]="'Checkout'">
-        </amexio-button>
-    </amexio-action>
-</amexio-card>
+            </amexio-action>
+        </amexio-card>
+    </amexio-column>
+    <amexio-column [size]=4>
+        <div class="product-details">
+        <amexio-card [header]="true" [footer]="true" height="100"
+        [footer-align]="'left'">
+            <amexio-header>
+                PRICE DETAILS
+            </amexio-header>
+            <amexio-body>
+                <amexio-row>
+                    <amexio-column [size] ="8" >
+                        <amexio-label 
+                             size="small">
+                     Price ({{number}} items)
+                      </amexio-label>
+                       
+                    </amexio-column>
+                     <amexio-column [size] ="4" >
+                      <amexio-image [icon-class]="'fa fa-inr'" [tooltip]="'Rupee'">
+                        </amexio-image>  
+                      {{total}}
+                    </amexio-column>
+                </amexio-row>
+                
+            </amexio-body>
+            <amexio-action >
+               <amexio-row>
+                    <amexio-column [size] ="8" >
+             <amexio-label size="small-bold">
+                     Amount Payable</amexio-label>
+
+                   
+                    </amexio-column> 
+                      <amexio-column [size] ="4" >
+                      <amexio-image [icon-class]="'fa fa-inr'" [tooltip]="'Rupee'">
+                        </amexio-image>  
+                      {{total}}
+                    </amexio-column> 
+                </amexio-row>
+            </amexio-action>
+        </amexio-card>
+        </div>
+    </amexio-column>
+</amexio-row>

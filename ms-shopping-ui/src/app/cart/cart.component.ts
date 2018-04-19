@@ -18,6 +18,7 @@ export class CartComponent implements OnInit{
     msgData:any=[];
     showErrorDialog:boolean;
     total:number;
+    number:number;
     constructor(private http: HttpClient, private router:Router,private cookieService:CookieService){
         this.servermsg = [];
     }
@@ -41,7 +42,7 @@ export class CartComponent implements OnInit{
                 responsedata = response;
             },
             error => {
-              this.msgData.push('Enable to connect to server.');
+              this.msgData.push('Unable to connect to server.');
               this.showErrorDialog=true;
             },
             () => {
@@ -59,7 +60,8 @@ export class CartComponent implements OnInit{
 
             if(responsedata.response.products){
               this.data = responsedata.response.products;
-
+             this.number=responsedata.response.products.length;
+             this.total=responsedata.response.total;
             }
 
         } else {
@@ -69,9 +71,8 @@ export class CartComponent implements OnInit{
     }
 
     removeItem(node:any){
-
         let req = {
-            "itemId":node.id,
+            "itemId":   node.id,
             "itemName" : node.name,
             "quantity" : node.quantity,
             "price" : node.price
@@ -96,6 +97,7 @@ export class CartComponent implements OnInit{
     checkout(){
       const headers = new HttpHeaders().append('Content-Type', 'application/json;charset=UTF-8').append('tokenid',this.cookieService.get('tokenid'));
         let responsedata: any;
+       
         this.http.post("api/sc/shoppingcart/write/placeorder",{}, { headers }).subscribe(
             response => {
                 responsedata = response;
@@ -109,6 +111,9 @@ export class CartComponent implements OnInit{
                 this.router.navigate(['home/order']);
             }
         );
+    }
+    onContinueShopping(){
+                        this.router.navigate(['home/productcatlog']);
     }
 
 }
