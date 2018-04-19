@@ -1,11 +1,10 @@
-package com.metamagic.ms.service.read.impl;
+package com.metamagic.ms.service.read;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.metamagic.ms.entity.User;
 import com.metamagic.ms.repository.read.UserReadRepository;
-import com.metamagic.ms.service.read.UserReadService;
 
 /**
  * @author sagar
