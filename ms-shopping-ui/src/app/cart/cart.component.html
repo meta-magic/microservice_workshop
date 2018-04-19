@@ -1,101 +1,143 @@
-<amexio-notification [data]="servermsg" [vertical-position]="'top'" [horizontal-position]="'right'" [auto-dismiss-msg]="true" [auto-dismiss-msg-interval]="4000">
+<amexio-notification [data]="servermsg" [vertical-position]="'top'" [horizontal-position]="'right'" [auto-dismiss-msg]="true"
+    [auto-dismiss-msg-interval]="4000">
 </amexio-notification>
 
+<ng-container *ngIf="showcart">
+    <amexio-row>
+        <amexio-column [size]=8>
+            <amexio-card [header]="true" [footer]="true" [footer-align]="'right'">
+                <amexio-header>
+                    MY CART ({{number}})
+                </amexio-header>
+                <amexio-body>
+                    <amexio-row *ngFor="let node of data">
+                        <amexio-column [size]=3>
+                            <amexio-label size="small">
+                                {{node.name}}
+                            </amexio-label>
 
-<amexio-row>
-    <amexio-column [size]=8>
-        <amexio-card [header]="true" [footer]="true" [footer-align]="'right'">
-            <amexio-header>
-                MY CART ({{number}})
-            </amexio-header>
+                        </amexio-column>
+                        <amexio-column [size]=3>
+                            <amexio-label size="small-bold">
+                                <amexio-image [icon-class]="'fa fa-inr'" [tooltip]="'Rupee'">
+                                </amexio-image>
+                                {{node.price}}
+                            </amexio-label>
+
+                        </amexio-column>
+                        <amexio-column [size]=3>
+                            <amexio-label size="small">
+                                {{node.quantity}}
+                            </amexio-label>
+                        </amexio-column>
+                        <amexio-column [size]=3>
+                            <span>
+                                <amexio-image style="color:red;" [icon-class]="'fa fa-minus-circle fa-2x'" [tooltip]="'Remove'" (onClick)="removeItem(node)">
+                                </amexio-image>
+                            </span>
+                        </amexio-column>
+                    </amexio-row>
+                </amexio-body>
+                <amexio-action>
+                    <amexio-button [label]="'Continue Shopping'" [tooltip]="'Continue Shopping'" [icon]="'fa fa-chevron-left'" (onClick)="onContinueShopping()">
+                    </amexio-button>
+                    <amexio-button [label]="'Place Order'" [type]="'yellow'" [tooltip]="'Place Order'" (onClick)="checkout()">
+                    </amexio-button>
+                </amexio-action>
+            </amexio-card>
+        </amexio-column>
+        <amexio-column [size]=4>
+            <div class="product-details">
+                <amexio-card [header]="true" [footer]="true" height="100" [footer-align]="'left'">
+                    <amexio-header>
+                        PRICE DETAILS
+                    </amexio-header>
+                    <amexio-body>
+                        <amexio-row>
+                            <amexio-column [size]="8">
+                                <amexio-label size="small">
+                                    Price ({{number}} items)
+                                </amexio-label>
+
+                            </amexio-column>
+                            <amexio-column [size]="4">
+                                <amexio-image [icon-class]="'fa fa-inr'" [tooltip]="'Rupee'">
+                                </amexio-image>
+                                {{total}}
+                            </amexio-column>
+                        </amexio-row>
+
+                    </amexio-body>
+                    <amexio-action>
+                        <amexio-row>
+                            <amexio-column [size]="8">
+                                <amexio-label size="small-bold">
+                                    Amount Payable</amexio-label>
+
+
+                            </amexio-column>
+                            <amexio-column [size]="4">
+                                <amexio-image [icon-class]="'fa fa-inr'" [tooltip]="'Rupee'">
+                                </amexio-image>
+                                {{total}}
+                            </amexio-column>
+                        </amexio-row>
+                    </amexio-action>
+                </amexio-card>
+            </div>
+        </amexio-column>
+
+        <amexio-dialogue [show-dialogue]="showOrdersDialogue" [custom]="true" [closable]="true" [title]="'Confirm'" [type]="'confirm'"
+            (close)="showOrdersDialogue = !showOrdersDialogue">
             <amexio-body>
-                <amexio-row *ngFor="let node of data">
-                    <amexio-column [size]=3>
-                        <amexio-label 
-                             size="small">
-                                  {{node.name}}
-                        </amexio-label>
-                       
-                    </amexio-column>
-                    <amexio-column [size]=3>
-                        <amexio-label 
-                             size="small-bold">
-                               <amexio-image [icon-class]="'fa fa-inr'" [tooltip]="'Rupee'">
-                        </amexio-image>
-                        {{node.price}}
-                        </amexio-label>
-                        
-                    </amexio-column>
-                    <amexio-column [size]=3>
-                        <amexio-label 
-                             size="small">
-                       {{node.quantity}}
-                        </amexio-label>
-                    </amexio-column>
-                   <amexio-column [size]=3>
-                         <span>
-                         <amexio-image style="color:red;" [icon-class]="'fa fa-minus-circle fa-2x'" [tooltip]="'Remove'" (onClick)="removeItem(node)">
-                         </amexio-image>
-                        </span>
-                    </amexio-column>
-                </amexio-row>
+                <amexio-label size="small">
+                    Your Order Placed Successfully!!
+                </amexio-label>
             </amexio-body>
             <amexio-action>
-                 <amexio-button
-                     [label]="'Continue Shopping'"
-                     [tooltip]="'Continue Shopping'" 
-                     [icon]="'fa fa-chevron-left'"
-                     (onClick)="onContinueShopping()">
-                </amexio-button> 
-                <amexio-button
-                     [label]="'Place Order'"
-                     [type]="'yellow'"
-                     [tooltip]="'Place Order'"
-                     (onClick)="checkout()">
+                <amexio-button (onClick)="cancel()" [size]="'small'" [label]="'Cancel'">
+                </amexio-button>
+
+                <amexio-button type="primary" (onClick)="showOrders()" [type]="'yellow'" [size]="'small'" [label]="'Show Orders'">
                 </amexio-button>
             </amexio-action>
-        </amexio-card>
-    </amexio-column>
-    <amexio-column [size]=4>
-        <div class="product-details">
-        <amexio-card [header]="true" [footer]="true" height="100"
-        [footer-align]="'left'">
-            <amexio-header>
-                PRICE DETAILS
-            </amexio-header>
-            <amexio-body>
-                <amexio-row>
-                    <amexio-column [size] ="8" >
-                        <amexio-label 
-                             size="small">
-                     Price ({{number}} items)
-                      </amexio-label>
-                       
-                    </amexio-column>
-                     <amexio-column [size] ="4" >
-                      <amexio-image [icon-class]="'fa fa-inr'" [tooltip]="'Rupee'">
-                        </amexio-image>  
-                      {{total}}
-                    </amexio-column>
-                </amexio-row>
-                
-            </amexio-body>
-            <amexio-action >
-               <amexio-row>
-                    <amexio-column [size] ="8" >
-             <amexio-label size="small-bold">
-                     Amount Payable</amexio-label>
+        </amexio-dialogue>
+    </amexio-row>
+</ng-container>
 
-                   
-                    </amexio-column> 
-                      <amexio-column [size] ="4" >
-                      <amexio-image [icon-class]="'fa fa-inr'" [tooltip]="'Rupee'">
-                        </amexio-image>  
-                      {{total}}
-                    </amexio-column> 
-                </amexio-row>
-            </amexio-action>
-        </amexio-card>
-        </div>
-    </amexio-column>
-</amexio-row>
+<ng-container *ngIf="!showcart">
+    <amexio-row>
+        <amexio-column [size]=12>
+            <amexio-card [header]="true" [footer]="true" [footer-align]="'right'">
+                <amexio-header>
+                    MY CART ({{number}})
+                </amexio-header>
+                <amexio-body>
+                    <amexio-row>
+                        <amexio-column [size]=5>
+                        </amexio-column>
+                        <amexio-column [size]=4>
+                            <amexio-image [path]="'https://goo.gl/8JaVkx'">
+                            </amexio-image>
+                        </amexio-column>
+                        <amexio-column [size]=3>
+                        </amexio-column>
+                        <amexio-column [size]=5>
+                        </amexio-column>
+                        <amexio-column [size]=4>
+                            <amexio-label size="medium-bold">
+                                Your Shopping Cart is empty
+                            </amexio-label>
+                        </amexio-column>
+                        <amexio-column [size]=3>
+                        </amexio-column>
+                    </amexio-row>
+                </amexio-body>
+                <amexio-action>
+                    <amexio-button [label]="'Continue Shopping'" [tooltip]="'Continue Shopping'" [icon]="'fa fa-chevron-left'" (onClick)="onContinueShopping()">
+                    </amexio-button>
+                </amexio-action>
+            </amexio-card>
+        </amexio-column>
+    </amexio-row>
+</ng-container>
