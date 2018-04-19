@@ -2,6 +2,11 @@ package com.metamagic.ms.commands;
 
 import org.axonframework.commandhandling.TargetAggregateIdentifier;
 
+/**
+ * @author sagar
+ * 
+ * THIS CLASS USED FOR PLACE ORDER
+ */
 public final class PlaceOrderCommand {
 	
 	@TargetAggregateIdentifier

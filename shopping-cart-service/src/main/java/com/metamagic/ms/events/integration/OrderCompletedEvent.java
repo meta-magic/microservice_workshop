@@ -2,6 +2,10 @@ package com.metamagic.ms.events.integration;
 
 import java.io.Serializable;
 
+/**
+ * @author sagar
+ * THIS EVENT IS USED FOR ORDER COMPLETED
+ */
 public class OrderCompletedEvent implements Serializable {
 
 	/**

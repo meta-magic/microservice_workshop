@@ -11,10 +11,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.metamagic.ms.aop.LoginInfoHelperBean;
-import com.metamagic.ms.bean.Cart;
 import com.metamagic.ms.bean.ResponseBean;
+import com.metamagic.ms.dto.CartDTO;
 import com.metamagic.ms.service.write.ShoppingCartWriteService;
 
+/**
+ * @author sagar
+ * THIS CONTROLLER IS USED FOR WRTIE CART OPERATION
+ */
 @RestController
 @RequestMapping("/shoppingcart/write")
 @Scope("request")
@@ -26,8 +30,11 @@ public class ShoppingCartWriteController {
 	@Autowired
 	private ShoppingCartWriteService shoppingCartService;
 	
+	/**
+	 * THIS METHOD IS USED FOR CREATE CART
+	 * */
 	@PostMapping("/create")
-	public @ResponseBody ResponseEntity<ResponseBean> createCart(@RequestBody Cart cart){
+	public @ResponseBody ResponseEntity<ResponseBean> createCart(@RequestBody CartDTO cart){
 		cart.setCartId(loginInfoHelperBean.getUserId());
 		cart.setCustomerId(loginInfoHelperBean.getUserId());
 		shoppingCartService.createCart(cart);
@@ -36,7 +43,7 @@ public class ShoppingCartWriteController {
 	}
 	
 	@PostMapping("/additem")
-	public @ResponseBody ResponseEntity<ResponseBean> addItem(@RequestBody Cart cart){
+	public @ResponseBody ResponseEntity<ResponseBean> addItem(@RequestBody CartDTO cart){
 		cart.setCartId(loginInfoHelperBean.getUserId());
 		cart.setCustomerId(loginInfoHelperBean.getUserId());
 		shoppingCartService.addItem(cart);
@@ -45,7 +52,7 @@ public class ShoppingCartWriteController {
 	}
 	
 	@PostMapping("/removeitem")
-	public @ResponseBody ResponseEntity<ResponseBean> removeItem(@RequestBody Cart cart){
+	public @ResponseBody ResponseEntity<ResponseBean> removeItem(@RequestBody CartDTO cart){
 		cart.setCartId(loginInfoHelperBean.getUserId());
 		cart.setCustomerId(loginInfoHelperBean.getUserId());
 		shoppingCartService.removeItem(cart);
@@ -54,7 +61,7 @@ public class ShoppingCartWriteController {
 	}
 	
 	@PostMapping("/placeorder")
-	public @ResponseBody ResponseEntity<ResponseBean> placeOrder(@RequestBody Cart cart){
+	public @ResponseBody ResponseEntity<ResponseBean> placeOrder(@RequestBody CartDTO cart){
 		cart.setCartId(loginInfoHelperBean.getUserId());
 		cart.setCustomerId(loginInfoHelperBean.getUserId());
 		shoppingCartService.placeOrder(cart);

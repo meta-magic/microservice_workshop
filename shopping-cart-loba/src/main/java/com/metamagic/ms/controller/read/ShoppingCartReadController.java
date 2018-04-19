@@ -1,7 +1,5 @@
 package com.metamagic.ms.controller.read;
 
-import java.util.Arrays;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +18,10 @@ import com.metamagic.ms.bean.ResponseBean;
 import com.metamagic.ms.controller.BaseComponent;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
+/**
+ * @author sagar
+ * THIS CONTROLLER IS USED FOR READING SHOPPING CART OPERTAIONS
+ */
 @RestController
 @RequestMapping("/shoppingcart/read")
 public class ShoppingCartReadController extends BaseComponent {

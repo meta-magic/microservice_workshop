@@ -8,6 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 
+/**
+ * @author sagar
+ * THIS CLASS USED FOR CONTROLLER HTTPHREADER ADD
+ */
 public abstract class BaseComponent {
 
 	protected final HttpHeaders createHeaders(HttpServletRequest request) {

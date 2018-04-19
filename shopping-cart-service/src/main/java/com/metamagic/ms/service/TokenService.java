@@ -14,6 +14,10 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
 
+/**
+ * @author sagar
+ * THIS SERVICE IS USED FOR TOKEN
+ */
 @Component
 public class TokenService {
 

@@ -5,19 +5,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
-import com.metamagic.ms.documents.UserCart;
+import com.metamagic.ms.entity.UserCart;
 import com.metamagic.ms.events.CartCreatedEvent;
 import com.metamagic.ms.events.ItemAddedEvent;
 import com.metamagic.ms.events.ItemRemovedEvent;
 import com.metamagic.ms.events.integration.OrderPlacedEvent;
-import com.metamagic.ms.repository.UserCartRepository;
+import com.metamagic.ms.repository.read.UserCartReadRepository;
+import com.metamagic.ms.repository.write.UserCartWriteRepository;
 
+/**
+ * @author sagar THIS COMPONENT IS USED FOR SHOPPING CARD OPERATION
+ */
 @Component
 public class ShoppingCartEventHandler {
 
 	@Autowired
-	private UserCartRepository userRepository;
+	private UserCartReadRepository cartReadRepository;
 
+	@Autowired
+	private UserCartWriteRepository cartWriteRepository;
+	
 	@Autowired
 	private KafkaTemplate<String, OrderPlacedEvent> kafkaTemplate;
 
@@ -51,14 +58,14 @@ public class ShoppingCartEventHandler {
 	}
 
 	private void updateUserCart(String userId, String itemId, String name, Integer quantity, Double price) {
-		UserCart userCart = userRepository.findByUserIdAndActive(userId, false);
+		UserCart userCart = cartReadRepository.findByUserIdAndActive(userId, null);
 		if (userCart == null) {
 			userCart = new UserCart();
 			userCart.setUserId(userId);
 		}
 		userCart.addOrUpdateProduct(itemId, name, quantity, price);
 
-		userRepository.save(userCart);
+		cartWriteRepository.save(userCart);
 	}
 
 }

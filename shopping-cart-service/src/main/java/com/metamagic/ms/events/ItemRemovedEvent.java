@@ -5,6 +5,10 @@ import java.util.Date;
 
 import com.metamagic.ms.aggregate.Items;
 
+/**
+ * @author sagar
+ * THIS EVENT IS USED FOR ITEM REMOVE
+ */
 public final class ItemRemovedEvent implements Serializable {
 
 	/**

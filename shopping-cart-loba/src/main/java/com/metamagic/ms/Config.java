@@ -7,7 +7,14 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
-
+/**
+ * @author sagar
+ * THIS CONFIG CLASS USED FOR FOLLWING THINGS
+ * 1.EUREKA
+ * 2.CIRCUITBREAKER
+ * 3.LOAD BALANCER
+ * 4.THREAD POOL
+ */
 @Configuration
 @EnableEurekaClient
 @EnableDiscoveryClient

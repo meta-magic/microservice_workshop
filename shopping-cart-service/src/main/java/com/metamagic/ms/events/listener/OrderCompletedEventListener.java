@@ -4,23 +4,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
-import com.metamagic.ms.documents.UserCart;
+import com.metamagic.ms.entity.UserCart;
 import com.metamagic.ms.events.integration.OrderCompletedEvent;
-import com.metamagic.ms.repository.UserCartRepository;
+import com.metamagic.ms.repository.read.UserCartReadRepository;
+import com.metamagic.ms.repository.write.UserCartWriteRepository;
 
+/**
+ * @author sagar
+ * 
+ *  THIS LISTNER IS USED FOR HANDLE ORDER
+ */
 @Component
 public class OrderCompletedEventListener {
 
 	@Autowired
-	private UserCartRepository userRepository;
+	private UserCartWriteRepository cartWriteRepository;
 
+	@Autowired
+	private UserCartReadRepository cartReadRepository;
+	
 	@KafkaListener(topics = "order_topic")
 	public void handle(OrderCompletedEvent orderCompletedEvent) {
-		UserCart userCart = userRepository.findByUserIdAndActive(orderCompletedEvent.getUserId(), false);
+		UserCart userCart = cartReadRepository.findByUserIdAndActive(orderCompletedEvent.getUserId(), null);
 
 		if (userCart != null) {
-			userCart.setActive(true);
-			userRepository.save(userCart);
+			userCart.setCompleted("COMPLETED");
+			cartWriteRepository.save(userCart);
 		}
 
 	}
