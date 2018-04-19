@@ -74,7 +74,7 @@ export class CartComponent implements OnInit {
             this.msg = responsedata.message;
         }
     }
-    
+
     //Method to remove items from cart
     removeItem(node: any) {
         let req = {
