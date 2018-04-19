@@ -1,4 +1,4 @@
-package com.metamagic.ms.service.write.impl;
+package com.metamagic.ms.service.write;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -13,7 +13,6 @@ import com.metamagic.ms.events.integration.UserCreatedEvent;
 import com.metamagic.ms.exception.CustomException;
 import com.metamagic.ms.repository.read.UserReadRepository;
 import com.metamagic.ms.repository.write.UserWriteRepository;
-import com.metamagic.ms.service.write.UserWriteService;
 
 /**
  * @author sagar
