@@ -17,7 +17,7 @@ public class UserCreatedEventListener {
 	private CommandGateway commandGateway;
 
 	@KafkaListener(topics = "user_topic")
-	public void userCreated(@Payload UserCreatedEvent userCreatedEvent, @Header(name="token") String header) {
+	public void userCreated(@Payload UserCreatedEvent userCreatedEvent, @Header(name="custom-header") String header) {
 		System.out.println(" +++++++++++++++++ "+ userCreatedEvent);
 		System.out.println(" +++++++++++++++++ "+ header);
 		commandGateway.send(new CreateCartCommand(userCreatedEvent.getUserId(), userCreatedEvent.getUserId()));
