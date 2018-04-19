@@ -2,6 +2,11 @@ package com.metamagic.ms.commands;
 
 import org.axonframework.commandhandling.TargetAggregateIdentifier;
 
+/**
+ * @author sagar
+ * 
+ * THID CLASS USED FOR ADDING ITEM
+ */
 public final class AddItemCommand {
 	
 

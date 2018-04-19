@@ -19,6 +19,10 @@ import com.metamagic.ms.bean.ResponseBean;
 import com.metamagic.ms.controller.BaseComponent;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
+/**
+ * @author sagar
+ * THIS CONTROLLER USED FOR WRITE SHOPPING CART OPERATION
+ */
 @RestController
 @RequestMapping("/shoppingcart/write")
 public class ShoppingCartWriteController extends BaseComponent {

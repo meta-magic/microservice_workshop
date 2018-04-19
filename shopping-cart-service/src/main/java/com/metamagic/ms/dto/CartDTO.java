@@ -1,8 +1,12 @@
-package com.metamagic.ms.bean;
+package com.metamagic.ms.dto;
 
 import java.io.Serializable;
 
-public class Cart implements Serializable{
+/**
+ * @author sagar
+ * THIS DTO USED TO CREATE CART
+ */
+public class CartDTO implements Serializable{
 
 	private String customerId;
 	private String cartId;

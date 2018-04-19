@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.jdo.JDOHelper;
+import javax.jdo.PersistenceManagerFactory;
+
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -43,6 +46,11 @@ import com.metamagic.ms.events.integration.OrderPlacedEvent;
 import com.metamagic.ms.events.integration.UserCreatedEvent;
 import com.mongodb.MongoClient;
 
+/**
+ * @author sagar
+ * CONFIG OF DATABASE
+ */
+
 @Configuration
 public class Config {
 
@@ -62,6 +70,10 @@ public class Config {
 	@Autowired
 	private EventStore eventStore;
 	
+	@Bean
+	public PersistenceManagerFactory persistenceManagerFactory() {
+		return JDOHelper.getPersistenceManagerFactory("PersistenceUnit");
+	}
 	
 	@Bean
 	public MongoTemplate axonMongoTemplate(){

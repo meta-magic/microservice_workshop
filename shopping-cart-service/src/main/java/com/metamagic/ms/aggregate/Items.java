@@ -3,6 +3,10 @@ package com.metamagic.ms.aggregate;
 import atg.taglib.json.util.JSONException;
 import atg.taglib.json.util.JSONObject;
 
+/**
+ * @author sagar
+ * THIS IS AN AGGREGATE ROOT
+ */
 public class Items {
 
 	private String itemId;

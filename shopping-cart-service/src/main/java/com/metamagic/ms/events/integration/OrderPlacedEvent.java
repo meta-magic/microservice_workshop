@@ -8,7 +8,10 @@ import com.metamagic.ms.aggregate.Items;
 import atg.taglib.json.util.JSONArray;
 import atg.taglib.json.util.JSONException;
 import atg.taglib.json.util.JSONObject;
-
+/**
+ * @author sagar
+ * THIS EVENT IS USED FOR ORDE PLACED
+ */
 public final class OrderPlacedEvent implements Serializable {
 
 	/**

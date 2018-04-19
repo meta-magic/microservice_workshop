@@ -2,12 +2,9 @@ package com.metamagic.ms.aggregate;
 
 
 import static org.axonframework.commandhandling.model.AggregateLifecycle.apply;
-import static org.axonframework.commandhandling.model.AggregateLifecycle.markDeleted;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 
 import org.axonframework.commandhandling.CommandHandler;
@@ -26,6 +23,10 @@ import com.metamagic.ms.events.ItemAddedEvent;
 import com.metamagic.ms.events.ItemRemovedEvent;
 import com.metamagic.ms.events.integration.OrderPlacedEvent;
 
+/**
+ * @author sagar
+ *
+ */
 @Aggregate
 @AggregateRoot
 public class ShoppingCart {

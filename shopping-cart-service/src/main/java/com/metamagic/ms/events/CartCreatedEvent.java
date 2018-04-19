@@ -4,6 +4,11 @@ import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * @author sagar
+ * 
+ * THIS EVENT IS USED FOR CREATE CART
+ */
 public final class CartCreatedEvent implements Serializable {
 
 	/**

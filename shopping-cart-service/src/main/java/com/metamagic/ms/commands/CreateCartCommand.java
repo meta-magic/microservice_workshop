@@ -2,6 +2,10 @@ package com.metamagic.ms.commands;
 
 import org.axonframework.commandhandling.TargetAggregateIdentifier;
 
+/**
+ * @author sagar
+ * THIS CLASS IS USED FOR CREATE CART
+ */
 public final class CreateCartCommand {
 
 	@TargetAggregateIdentifier

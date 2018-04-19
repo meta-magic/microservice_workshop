@@ -1,6 +1,20 @@
-package com.metamagic.ms.documents;
+package com.metamagic.ms.entity;
 
-public class UserProduct {
+import javax.jdo.annotations.EmbeddedOnly;
+import javax.jdo.annotations.FetchGroup;
+import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
+
+/**
+ * @author sagar
+ * 
+ * THIS LINE ITEM IS SUBDOCUMENTS OF USER CART
+ */
+@PersistenceCapable
+@EmbeddedOnly
+@FetchGroup(name = "lineItems", members = { @Persistent(name = "id"), @Persistent(name = "name"),
+		@Persistent(name = "quantity"), @Persistent(name = "price")})
+public class LineItem {
 
 	private String id;
 	
@@ -10,11 +24,11 @@ public class UserProduct {
 	
 	private Double price;
 
-	public UserProduct() {
+	public LineItem() {
 		super();
 	}
 
-	public UserProduct(String id,String name, Integer quantity, Double price) {
+	public LineItem(String id,String name, Integer quantity, Double price) {
 		super();
 		this.id = id;
 		this.name = name;
