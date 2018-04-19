@@ -24,6 +24,11 @@ import com.metamagic.ms.bean.ResponseBean;
 import com.metamagic.ms.controller.BaseComponent;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
+/**
+ * @author sagar
+ * 
+ * THIS REST CONTROLLER USE FOR WRITE PRODUCT OPERATION
+ */
 @RestController
 @RequestMapping("/product/write")
 public class ProductWriteController extends BaseComponent {

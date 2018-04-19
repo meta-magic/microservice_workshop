@@ -10,7 +10,14 @@ import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.web.client.AsyncRestTemplate;
 import org.springframework.web.client.RestTemplate;
-
+/**
+ * @author sagar
+ * THIS CONFIG CLASS USED FOR FOLLWING THINGS
+ * 1.EUREKA
+ * 2.CIRCUITBREAKER
+ * 3.LOAD BALANCER
+ * 4.THREAD POOL
+ */
 @Configuration
 @EnableEurekaClient
 @EnableDiscoveryClient
