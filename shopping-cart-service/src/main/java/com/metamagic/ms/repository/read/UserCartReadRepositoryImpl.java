@@ -19,10 +19,10 @@ public class UserCartReadRepositoryImpl extends GenericRepository<UserCart> impl
 		PersistenceManager pm = pm();
 		UserCart userCart = null;
 		try {
-			Query query = pm.newQuery(UserCart.class);
-			query.setFilter("userId == :userId && completed == :completed");
+			Query<UserCart> query = pm.newQuery(UserCart.class);
+			query.setFilter("userId == :userId && status == :completed");
 			query.setUnique(true);
-			userCart = (UserCart) query.execute(userId,"Null");
+			userCart = (UserCart) query.execute(userId, completed);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

@@ -127,7 +127,7 @@ public class ShoppingCart {
 	public void handle(OrderPlacedEvent orderPlacedEvent) {
 		System.out.println(this.getClass()+" OrderPlacedEvent Start "+orderPlacedEvent);
 		this.cartId = orderPlacedEvent.getCartId();
-		this.customerId = orderPlacedEvent.getCustomerId();
+		this.customerId = orderPlacedEvent.getUserId();
 		this.items = new HashSet<Items>();
 		System.out.println(this.getClass()+" OrderPlacedEvent End "+orderPlacedEvent);
 	}
