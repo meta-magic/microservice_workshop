@@ -58,9 +58,9 @@ export class CartComponent implements OnInit {
     setData(responsedata: any) {
         if (responsedata && responsedata.success) {
 
-            if (responsedata.response.products.length > 0) {
-                this.data = responsedata.response.products;
-                this.number = responsedata.response.products.length;
+            if (responsedata.response.lineItems.length > 0) {
+                this.data = responsedata.response.lineItems;
+                this.number = responsedata.response.lineItems.length;
                 this.total = responsedata.response.total;
                 this.showcart = true;
             }
