@@ -4,10 +4,6 @@ import java.io.Serializable;
 import java.util.Set;
 
 import com.metamagic.ms.aggregate.Items;
-
-import atg.taglib.json.util.JSONArray;
-import atg.taglib.json.util.JSONException;
-import atg.taglib.json.util.JSONObject;
 /**
  * @author sagar
  * THIS EVENT IS USED FOR ORDE PLACED
@@ -21,45 +17,27 @@ public final class OrderPlacedEvent implements Serializable {
 
 	private final String cartId;
 
-	private final String customerId;
+	private final String userId;
 
 	private final Set<Items> items;
 
-	public OrderPlacedEvent(String cartId, String customerId, Set<Items> items) {
+	public OrderPlacedEvent(String cartId, String userId, Set<Items> items) {
 		super();
 		this.cartId = cartId;
-		this.customerId = customerId;
+		this.userId = userId;
 		this.items = items;
 	}
 
 	public String getCartId() {
 		return cartId;
 	}
-
-	public String getCustomerId() {
-		return customerId;
+	
+	public String getUserId() {
+		return userId;
 	}
 
 	public Set<Items> getItems() {
 		return items;
-	}
-
-	@Override
-	public String toString() {
-		JSONObject jsonObject = new JSONObject();
-		try {
-			jsonObject.put("cartId", cartId);
-			jsonObject.put("customerId", customerId);
-			if (items != null) {
-				JSONArray array = new JSONArray();
-				items.stream().forEach(o -> array.add(o.toJSON()));
-				jsonObject.put("items", array);
-			}
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-
-		return jsonObject.toString();
 	}
 
 }
