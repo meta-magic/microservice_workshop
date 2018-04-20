@@ -24,17 +24,19 @@ import com.metamagic.ms.service.read.OrderReadService;
 @Scope("request")
 public class OrderQueryController {
 
+
 	@Autowired
 	private OrderReadService orderReadService;
-	
+
 	/**
-	 * THIS METHOD IS USED FOR GET ORDER HISTORY 
-	 * */
-	@RequestMapping(value="/orderhistory", method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public  @ResponseBody ResponseEntity<ResponseBean> findAll(){
-		ResponseBean response = new ResponseBean(true,"Data retrieved successfully","success",orderReadService.findAll());
-		
+	 * THIS METHOD IS USED FOR GET ORDER HISTORY
+	 */
+	@RequestMapping(value = "/orderhistory", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity<ResponseBean> findAll() {
+		ResponseBean response = new ResponseBean(true, "Data retrieved successfully", "success",
+				orderReadService.findAll());
+
 		return new ResponseEntity<ResponseBean>(response, HttpStatus.OK);
 	}
-	
+
 }

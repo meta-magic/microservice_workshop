@@ -30,17 +30,12 @@ public class UserCart {
 	private double total;
 
 	@Persistent
-	private String completed;
+	private String status;
 
 	public UserCart() {
-		super();
+		
 	}
-
-	public UserCart(String userId) {
-		super();
-		this.userId = userId;
-	}
-
+	
 	public UserCart(String id, String userId, List<LineItem> lineItems) {
 		super();
 		this.id = id;
@@ -108,12 +103,12 @@ public class UserCart {
 		this.total = total;
 	}
 
-	public String getCompleted() {
-		return completed;
+	public String getStatus() {
+		return status;
 	}
 
-	public void setCompleted(String completed) {
-		this.completed = completed;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public void addProduct(String id, String name, Integer quantity, Double price) {

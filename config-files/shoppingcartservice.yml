@@ -11,8 +11,6 @@ spring:
       database: ecommdb
       port: 27017
       host: localhost
-      username: ecomuser
-      password: ecomuser123
   
 server:
   port: 8582
@@ -38,5 +36,10 @@ mongodb:
     snapshot:
       collection:
         name: snapshots
+                
+logging:
+  file: /home/sagar/git/logs/productservice.log 
+  level:
+    com.metamagic.ms: INFO
 
       

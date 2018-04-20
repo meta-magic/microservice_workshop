@@ -1,11 +1,11 @@
-package com.metamagic.ms.service.read.impl;
+package com.metamagic.ms.service.read;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.metamagic.ms.entity.User;
+import com.metamagic.ms.exception.RepositoryException;
 import com.metamagic.ms.repository.read.UserReadRepository;
-import com.metamagic.ms.service.read.UserReadService;
 
 /**
  * @author sagar
@@ -20,8 +20,9 @@ public class UserReadServiceImpl implements UserReadService {
 
 	/**
 	 * THIS METHOD IS FIND THE USER BY LOGINID
+	 * @throws RepositoryException 
 	 */
-	public User findByLoginId(String loginId) {
+	public User findByLoginId(String loginId) throws RepositoryException {
 		return loginReadRepository.findByUserId(loginId);
 	}
 }

@@ -18,5 +18,10 @@ eureka:
       instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${server.port}}}
   client:
     serviceUrl:
-      defaultZone: http://localhost:7070/eureka/  
+      defaultZone: http://localhost:7070/eureka/
+        
+logging:
+  file: /home/sagar/git/logs/productservice.log 
+  level:
+    com.metamagic.ms: INFO
       

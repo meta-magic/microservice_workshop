@@ -4,15 +4,6 @@ spring:
     
   kafka:
     bootstrap-servers: localhost:9092
-  
-  data:
-    mongodb:
-      database: ecommdb
-      port: 27017
-      host: localhost
-      username: ecomuser
-      password: ecomuser123
-      
 
 token:
   key: abcd0987654321qwertyuio
@@ -31,6 +22,9 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:7070/eureka/  
       
-
+logging:
+  file: /home/sagar/git/logs/orderservice.log 
+  level:
+    com.metamagic.ms: INFO
 
       

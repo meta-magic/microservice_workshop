@@ -35,6 +35,8 @@ public class OrderDocument {
 	private double total;
 
 	private String status;
+	
+	private String orderNumber; 
 
 	public OrderDocument() {
 		super();
@@ -105,5 +107,15 @@ public class OrderDocument {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+	public String getOrderNumber() {
+		return orderNumber;
+	}
+
+	public void setOrderNumber(String orderNumber) {
+		this.orderNumber = orderNumber;
+	}
+	
+	
 
 }

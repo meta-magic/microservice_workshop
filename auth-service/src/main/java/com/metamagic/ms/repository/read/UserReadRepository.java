@@ -1,6 +1,7 @@
 package com.metamagic.ms.repository.read;
 
 import com.metamagic.ms.entity.User;
+import com.metamagic.ms.exception.RepositoryException;
 
 /**
  * @author sagar
@@ -9,5 +10,5 @@ import com.metamagic.ms.entity.User;
  */
 public interface UserReadRepository {
 
-	public User findByUserId(String loginId);
+	public User findByUserId(String loginId) throws RepositoryException;
 }

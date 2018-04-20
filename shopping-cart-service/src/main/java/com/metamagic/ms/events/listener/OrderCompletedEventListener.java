@@ -28,7 +28,7 @@ public class OrderCompletedEventListener {
 		UserCart userCart = cartReadRepository.findByUserIdAndActive(orderCompletedEvent.getUserId(), null);
 
 		if (userCart != null) {
-			userCart.setCompleted("COMPLETED");
+			userCart.setStatus("COMPLETED");
 			cartWriteRepository.save(userCart);
 		}
 
