@@ -16,7 +16,7 @@ import com.metamagic.ms.service.read.OrderReadService;
 /**
  * @author sagar
  * 
- *         THIS CONTROLLER IS USED FOR READ ORDER
+ * THIS CONTROLLER IS USED FOR READ ORDER
  *
  */
 @RestController

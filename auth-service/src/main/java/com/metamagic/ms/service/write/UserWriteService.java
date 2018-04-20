@@ -1,7 +1,8 @@
 package com.metamagic.ms.service.write;
 
 import com.metamagic.ms.dto.UserDTO;
-import com.metamagic.ms.exception.CustomException;
+import com.metamagic.ms.exception.BussinessException;
+import com.metamagic.ms.exception.RepositoryException;
 
 /**
  * @author sagar
@@ -10,5 +11,5 @@ import com.metamagic.ms.exception.CustomException;
  */
 public interface UserWriteService {
 	
-	public void createUser(UserDTO userDTO) throws CustomException;
+	public void createUser(UserDTO userDTO) throws RepositoryException, BussinessException ;
 }

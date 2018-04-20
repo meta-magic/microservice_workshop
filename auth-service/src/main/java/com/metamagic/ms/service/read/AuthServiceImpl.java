@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import com.metamagic.ms.bean.LoginResponse;
 import com.metamagic.ms.dto.LoginDTO;
 import com.metamagic.ms.entity.User;
+import com.metamagic.ms.exception.BussinessException;
+import com.metamagic.ms.exception.RepositoryException;
 import com.metamagic.ms.repository.read.UserReadRepository;
 import com.metamagic.ms.service.TokenService;
 
@@ -23,19 +25,19 @@ public class AuthServiceImpl implements AuthService {
 
 	/**
 	 * THIS METHOD IS USED FOR AUTHENTICATE AND ADD TOKEN
+	 * 
+	 * @throws RepositoryException
 	 */
 	@Override
-	public LoginResponse authenticate(LoginDTO loginDTO) {
-		LoginResponse loginResponse = null;
+	public LoginResponse authenticate(LoginDTO loginDTO) throws RepositoryException, BussinessException {
 		if (loginDTO.getUserId() != null && loginDTO.getPassword() != null) {
 			User login = loginRepository.findByUserId(loginDTO.getUserId());
-			if (login != null) {
-				if (loginDTO.getPassword().equals(login.getPassword())) {
-					loginResponse = new LoginResponse(tokenService.generateToken(login.getId()));
-				}
+			if (login != null && loginDTO.getPassword().equals(login.getPassword())) {
+				LoginResponse loginResponse = new LoginResponse(tokenService.generateToken(login.getId()));
+				return loginResponse;
 			}
 		}
-		return loginResponse;
+		throw new BussinessException("User not found.");
 	}
 
 }

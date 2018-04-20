@@ -6,6 +6,7 @@ import javax.jdo.Query;
 import org.springframework.stereotype.Repository;
 
 import com.metamagic.ms.entity.User;
+import com.metamagic.ms.exception.RepositoryException;
 import com.metamagic.ms.repository.GenericRepository;
 
 /**
@@ -17,20 +18,18 @@ import com.metamagic.ms.repository.GenericRepository;
 public class UserReadRepositoryImpl extends GenericRepository<User> implements UserReadRepository {
 
 	@Override
-	public User findByUserId(String userId) {
+	public User findByUserId(String userId) throws RepositoryException {
 		PersistenceManager pm = pm();
-		User user = null;
 		try {
 			Query query = pm.newQuery(User.class);
 			query.setFilter("userId == :userId");
 			query.setUnique(true);
-			user = (User) query.execute(userId);
+			User user = (User) query.execute(userId);
+			return user;
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new RepositoryException(e.getMessage());
 		} finally {
 			pm.close();
 		}
-		return user;
 	}
-
 }

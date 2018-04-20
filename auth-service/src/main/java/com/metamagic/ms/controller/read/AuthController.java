@@ -14,10 +14,17 @@ import org.springframework.web.bind.annotation.RestController;
 import com.metamagic.ms.bean.LoginResponse;
 import com.metamagic.ms.bean.ResponseBean;
 import com.metamagic.ms.dto.LoginDTO;
+import com.metamagic.ms.exception.BussinessException;
+import com.metamagic.ms.exception.RepositoryException;
 import com.metamagic.ms.service.read.AuthService;
 
 import ch.qos.logback.classic.Logger;
 
+/**
+ * @author sagar
+ * 
+ * THIS CONTROLLER IS USED AUTHENTICATION
+ */
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -26,21 +33,26 @@ public class AuthController {
 
 	@Autowired
 	private AuthService authService;
-
+	
+	/**
+	 * THIS METHOD IS USED FOR AUTHENTICATE USER
+	 * */
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity<ResponseBean> authenticate(@RequestBody LoginDTO loginDTO) {
-		LOGGER.info("User login started USERID: " + loginDTO.getUserId());
-		ResponseBean response = null;
-		LoginResponse loginResponse = authService.authenticate(loginDTO);
-		if (loginResponse != null) {
-			response = new ResponseBean(true, "User authenticated successfully.", "success", loginResponse);
+		try {
+			LoginResponse loginResponse = authService.authenticate(loginDTO);
+			ResponseBean response = new ResponseBean(true, "User authenticated successfully.", "success",
+					loginResponse);
 			LOGGER.info("User authenticated successfully. USERID: " + loginDTO.getUserId());
-
-		} else {
+			return new ResponseEntity<ResponseBean>(response, HttpStatus.OK);
+		} catch (RepositoryException e) {
+			ResponseBean response = new ResponseBean(false, e.getMessage(), "failure", null);
+			return new ResponseEntity<ResponseBean>(response, HttpStatus.OK);
+		} catch (BussinessException e) {
 			LOGGER.error("User not found USERID: " + loginDTO.getUserId());
-			response = new ResponseBean(false, "User not found.", "failure", null);
+			ResponseBean response = new ResponseBean(false, e.getMessage(), "failure", null);
+			return new ResponseEntity<ResponseBean>(response, HttpStatus.OK);
 		}
-		return new ResponseEntity<ResponseBean>(response, HttpStatus.OK);
 	}
 
 }
