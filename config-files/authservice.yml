@@ -30,3 +30,8 @@ productservice:
     # NFLoadBalancerRuleClassName: com.netflix.loadbalancer.AvailabilityFilteringRule
     ServerListRefreshInterval : 5000
             
+logging:
+  file: /home/sagar/git/logs/authservice.log 
+  level:
+    com.metamagic.ms: INFO
+            

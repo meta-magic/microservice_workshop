@@ -21,7 +21,8 @@ public class UserCartReadRepositoryImpl extends GenericRepository<UserCart> impl
 		try {
 			Query query = pm.newQuery(UserCart.class);
 			query.setFilter("userId == :userId && completed == :completed");
-			userCart = (UserCart) query.execute(userId,completed);
+			query.setUnique(true);
+			userCart = (UserCart) query.execute(userId,"Null");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

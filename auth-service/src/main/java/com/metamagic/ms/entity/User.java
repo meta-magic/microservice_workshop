@@ -4,6 +4,10 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+/**
+ * @author sagar
+ *
+ */
 @PersistenceCapable(detachable = "true")
 public class User {
 

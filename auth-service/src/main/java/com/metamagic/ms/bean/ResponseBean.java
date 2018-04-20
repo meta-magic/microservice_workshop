@@ -2,17 +2,12 @@ package com.metamagic.ms.bean;
 
 import java.io.Serializable;
 
-public class ResponseBean implements Serializable
-{
+public class ResponseBean implements Serializable {
 
 	private boolean success;
 	private String message;
 	private String code;
 	private Object response;
-	
-	public ResponseBean(){
-		super();
-	}
 
 	public ResponseBean(boolean success, String message, String code, Object response) {
 		super();
@@ -53,6 +48,5 @@ public class ResponseBean implements Serializable
 	public void setResponse(Object response) {
 		this.response = response;
 	}
-	
-	
+
 }

@@ -10,8 +10,7 @@ import com.metamagic.ms.repository.read.UserReadRepository;
 import com.metamagic.ms.service.TokenService;
 
 /**
- * @author sagar
- * THIS SERVICE I USED FOR AUTHENTICATE USER
+ * @author sagar THIS SERVICE I USED FOR AUTHENTICATE USER
  */
 @Service
 public class AuthServiceImpl implements AuthService {
@@ -24,15 +23,14 @@ public class AuthServiceImpl implements AuthService {
 
 	/**
 	 * THIS METHOD IS USED FOR AUTHENTICATE AND ADD TOKEN
-	 * */
+	 */
 	@Override
 	public LoginResponse authenticate(LoginDTO loginDTO) {
 		LoginResponse loginResponse = null;
 		if (loginDTO.getUserId() != null && loginDTO.getPassword() != null) {
 			User login = loginRepository.findByUserId(loginDTO.getUserId());
 			if (login != null) {
-				if (loginDTO.getUserId().equals(login.getUserId())
-						&& loginDTO.getPassword().equals(login.getPassword())) {
+				if (loginDTO.getPassword().equals(login.getPassword())) {
 					loginResponse = new LoginResponse(tokenService.generateToken(login.getId()));
 				}
 			}

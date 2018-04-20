@@ -17,7 +17,7 @@ import com.metamagic.ms.repository.write.UserWriteRepository;
 /**
  * @author sagar
  *
- *         THIS SERVICE IS USED FOR WRITE OPERATION OF USERS
+ * THIS SERVICE IS USED FOR WRITE OPERATION OF USERS
  */
 @Service
 public class UserWriteServiceImpl implements UserWriteService {
@@ -42,11 +42,19 @@ public class UserWriteServiceImpl implements UserWriteService {
 			User user = new User(userDTO.getFirstName(), userDTO.getLastName(), userDTO.getUserId(),
 					userDTO.getPassword());
 			userWriteRepository.save(user);
-			Message<UserCreatedEvent> message = MessageBuilder.withPayload(new UserCreatedEvent(user.getId()))
-					.setHeader(KafkaHeaders.TOPIC, "user_topic").setHeader("custom-header", "My custom header.").build();
-			kafkaTemplate.send(message);
+			UserCreatedEvent createdEvent = new UserCreatedEvent(user.getId());
+			this.onUserCreateEvent(createdEvent);
 		} else {
 			throw new CustomException("User with same userId is present, please choose other");
 		}
+	}
+
+	/**
+	 * THIS METHOD IS USED FOR CREATE USER EVENT
+	 * */
+	private void onUserCreateEvent(UserCreatedEvent createdEvent) {
+		Message<UserCreatedEvent> message = MessageBuilder.withPayload(createdEvent)
+				.setHeader(KafkaHeaders.TOPIC, "user_topic").setHeader("custom-header", "My custom header.").build();
+		kafkaTemplate.send(message);
 	}
 }
