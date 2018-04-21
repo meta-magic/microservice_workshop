@@ -19,12 +19,15 @@ import com.metamagic.ms.entity.ItemDocument;
 import com.metamagic.ms.entity.OrderDocument;
 import com.metamagic.ms.events.integration.OrderCompletedEvent;
 import com.metamagic.ms.events.integration.OrderPlacedEvent;
+import com.metamagic.ms.exception.BussinessException;
+import com.metamagic.ms.exception.IllegalArgumentCustomException;
+import com.metamagic.ms.exception.RepositoryException;
 import com.metamagic.ms.service.write.OrderWriteService;
 
 /**
  * @author sagar
  * 
- * ORDER LISTNER 
+ *         ORDER LISTNER
  */
 @Component
 public class OrderEventListener {
@@ -42,8 +45,8 @@ public class OrderEventListener {
 	}
 
 	@KafkaListener(topics = "test_topic")
-	public void receive(OrderPlacedEvent orderPlacedEvent)
-			throws JsonParseException, JsonMappingException, IOException {
+	public void receive(OrderPlacedEvent orderPlacedEvent) throws JsonParseException, JsonMappingException, IOException,
+			BussinessException, RepositoryException, IllegalArgumentCustomException {
 		System.out.println(orderPlacedEvent);
 		latch.countDown();
 
@@ -54,14 +57,16 @@ public class OrderEventListener {
 		Set<ItemDocument> documents = new HashSet<>();
 		for (Iterator<Items> iterator = orderPlacedEvent.getItems().iterator(); iterator.hasNext();) {
 			Items items = (Items) iterator.next();
-			ItemDocument document = new ItemDocument();
+
 			if (items.getItemId() != null && items.getName() != null) {
-				document.setItemId(items.getItemId());
-				document.setName(items.getName());
-				document.setPrice(items.getPrice());
-				document.setQuantity(items.getQuantity());
+				try {
+					ItemDocument document = new ItemDocument(items.getItemId(), items.getName(), items.getQuantity(),
+							items.getPrice());
+					documents.add(document);
+				} catch (IllegalArgumentCustomException e) {
+					throw new BussinessException(e.getMessage());
+				}
 			}
-			documents.add(document);
 		}
 
 		OrderDocument order = new OrderDocument(orderPlacedEvent.getCartId(), orderPlacedEvent.getCustomerId(),

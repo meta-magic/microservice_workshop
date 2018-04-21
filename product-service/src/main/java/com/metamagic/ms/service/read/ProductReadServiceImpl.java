@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.metamagic.ms.entity.Product;
+import com.metamagic.ms.exception.RepositoryException;
 import com.metamagic.ms.repo.read.ProductReadRepository;
 
 /**
@@ -21,8 +22,9 @@ public class ProductReadServiceImpl implements ProductReadService {
  
 	/**
 	 * THIS METHOD IS USED FOR GET ALL PRODUCT LIST
+	 * @throws RepositoryException 
 	 * */
-	public List<Product> getProducts() {
+	public List<Product> getProducts() throws RepositoryException {
 		List<Product> prds = productRepository.findAll();
 		return prds;
 	}

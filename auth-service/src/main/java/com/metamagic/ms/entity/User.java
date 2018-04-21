@@ -47,7 +47,7 @@ public class User implements CommonValidation {
 		return firstName;
 	}
 
-	protected void setFirstName(String firstName) throws IllegalArgumentCustomException {
+	private void setFirstName(String firstName) throws IllegalArgumentCustomException {
 		if (!this.isValid(firstName)) {
 			throw new IllegalArgumentCustomException("First name should not be null.");
 		} else {
@@ -59,7 +59,7 @@ public class User implements CommonValidation {
 		return lastName;
 	}
 
-	protected void setLastName(String lastName) throws IllegalArgumentCustomException {
+	private void setLastName(String lastName) throws IllegalArgumentCustomException {
 		if (!this.isValid(lastName)) {
 			throw new IllegalArgumentCustomException("Last name should not be null.");
 		} else {
@@ -71,7 +71,7 @@ public class User implements CommonValidation {
 		return userId;
 	}
 
-	protected void setUserId(String userId) throws IllegalArgumentCustomException {
+	private void setUserId(String userId) throws IllegalArgumentCustomException {
 		if (!this.isValid(userId)) {
 			throw new IllegalArgumentCustomException("User id should not be null.");
 		} else {
@@ -83,7 +83,7 @@ public class User implements CommonValidation {
 		return password;
 	}
 
-	protected void setPassword(String password) throws IllegalArgumentCustomException {
+	private void setPassword(String password) throws IllegalArgumentCustomException {
 		if (!this.isValid(password)) {
 			throw new IllegalArgumentCustomException("Password should not be null.");
 		} else {

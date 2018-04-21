@@ -8,6 +8,7 @@ import javax.jdo.Query;
 import org.springframework.stereotype.Repository;
 
 import com.metamagic.ms.entity.OrderDocument;
+import com.metamagic.ms.exception.RepositoryException;
 import com.metamagic.ms.repository.GenericRepository;
 
 /**
@@ -19,13 +20,19 @@ import com.metamagic.ms.repository.GenericRepository;
 public class OrderReadRepositoryImpl extends GenericRepository<OrderDocument> implements OrderReadRepository {
 
 	@Override
-	public List<OrderDocument> findAll(String userId) {
+	public List<OrderDocument> findAll(String userId) throws RepositoryException {
 		PersistenceManager pm = pm();
-		Query query = pm.newQuery(OrderDocument.class);
-		query.setFilter("this.userId == :userId");
-		List<OrderDocument> orDocuments = (List<OrderDocument>) query.execute(userId);
-		pm.close();
-		return orDocuments;
+		try {
+			Query query = pm.newQuery(OrderDocument.class);
+			query.setFilter("this.userId == :userId");
+			List<OrderDocument> orDocuments = (List<OrderDocument>) query.execute(userId);
+			return orDocuments;
+		} catch (Exception e) {
+			throw new RepositoryException(e.getMessage());
+		} finally {
+			pm.close();
+		}
+
 	}
 
 }

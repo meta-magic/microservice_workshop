@@ -1,6 +1,7 @@
 package com.metamagic.ms.repository.write;
 
 import com.metamagic.ms.entity.OrderDocument;
+import com.metamagic.ms.exception.RepositoryException;
 
 /**
  * @author sagar
@@ -9,5 +10,5 @@ import com.metamagic.ms.entity.OrderDocument;
  */
 
 public interface OrderWriteRepository {
-	public OrderDocument save(OrderDocument order);
+	public OrderDocument save(OrderDocument order)throws RepositoryException;
 }

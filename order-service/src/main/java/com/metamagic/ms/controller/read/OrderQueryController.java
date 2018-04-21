@@ -11,19 +11,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.metamagic.ms.bean.ResponseBean;
+import com.metamagic.ms.exception.RepositoryException;
 import com.metamagic.ms.service.read.OrderReadService;
 
 /**
  * @author sagar
  * 
- * THIS CONTROLLER IS USED FOR READ ORDER
+ *         THIS CONTROLLER IS USED FOR READ ORDER
  *
  */
 @RestController
 @RequestMapping("/order/query")
 @Scope("request")
 public class OrderQueryController {
-
 
 	@Autowired
 	private OrderReadService orderReadService;
@@ -33,10 +33,14 @@ public class OrderQueryController {
 	 */
 	@RequestMapping(value = "/orderhistory", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity<ResponseBean> findAll() {
-		ResponseBean response = new ResponseBean(true, "Data retrieved successfully", "success",
-				orderReadService.findAll());
+		try {
+			ResponseBean response = new ResponseBean(true, "Data retrieved successfully", "success",
+					orderReadService.findAll());
+			return new ResponseEntity<ResponseBean>(response, HttpStatus.OK);
+		} catch (RepositoryException e) {
+			ResponseBean response = new ResponseBean(false, e.getMessage(), "failed", null);
+			return new ResponseEntity<ResponseBean>(response, HttpStatus.OK);
+		}
 
-		return new ResponseEntity<ResponseBean>(response, HttpStatus.OK);
 	}
-
 }

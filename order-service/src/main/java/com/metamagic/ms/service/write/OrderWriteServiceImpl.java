@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.metamagic.ms.entity.OrderDocument;
+import com.metamagic.ms.exception.RepositoryException;
 import com.metamagic.ms.repository.write.OrderWriteRepository;
 
 /**
@@ -16,7 +17,7 @@ public class OrderWriteServiceImpl implements OrderWriteService {
 	@Autowired
 	private OrderWriteRepository orderWriteRepository;
 
-	public OrderDocument save(OrderDocument order) {
+	public OrderDocument save(OrderDocument order) throws RepositoryException {
 
 		OrderDocument order2 = orderWriteRepository.save(order);
 

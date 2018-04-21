@@ -8,34 +8,35 @@ import javax.jdo.Query;
 import org.springframework.stereotype.Repository;
 
 import com.metamagic.ms.entity.Product;
+import com.metamagic.ms.exception.RepositoryException;
 import com.metamagic.ms.repo.GenericRepository;
 
 /**
  * @author sagar
  * 
- * THIS REPOSITORY USED FOR READING PRODUCT 
+ *         THIS REPOSITORY USED FOR READING PRODUCT
  */
 @Repository
 public class ProductReadRepositoryImpl extends GenericRepository<Product> implements ProductReadRepository {
 
 	/**
 	 * THIS METHOD IS USED FOR RETIEVD ALL PRODUCT
-	 * */
+	 * 
+	 * @throws RepositoryException
+	 */
 	@SuppressWarnings("unchecked")
-	public List<Product> findAll() {
+	public List<Product> findAll() throws RepositoryException {
 
-		List<Product> working_greeting = null;
 		PersistenceManager pm = pm();
 		try {
 			Query query = pm.newQuery(Product.class);
 			List<Product> list = (List<Product>) query.execute();
-			working_greeting = (List<Product>) pm.detachCopyAll(list);
+			List<Product> products = (List<Product>) pm.detachCopyAll(list);
+			return products;
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new RepositoryException(e.getMessage());
 		} finally {
+			pm.close();
 		}
-
-		return working_greeting;
 	}
-
 }

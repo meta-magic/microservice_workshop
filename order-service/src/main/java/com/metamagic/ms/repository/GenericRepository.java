@@ -5,10 +5,13 @@ import javax.jdo.PersistenceManagerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.metamagic.ms.exception.RepositoryException;
+
 /**
  * @author sagar
  * 
- * THIS ABSTRACT CLASS USED FOR COMMON OPERATION OF REPO LIKE PERSIST,UPDATE,DELETE
+ *         THIS ABSTRACT CLASS USED FOR COMMON OPERATION OF REPO LIKE
+ *         PERSIST,UPDATE,DELETE
  * 
  * @param <T>
  */
@@ -26,12 +29,18 @@ public abstract class GenericRepository<T> {
 
 	/**
 	 * THIS METHOD IS USED FOR PERSIST T TYPE OF OBJECT IN DATABASE
-	 * */
-	public T persist(T t) {
+	 * @throws RepositoryException 
+	 */
+	public T persist(T t) throws RepositoryException {
 		PersistenceManager pm = pm();
-		T storedObject = pm.makePersistent(t);
-		T detachedObject = pm.detachCopy(storedObject);
-		pm.close();
-		return detachedObject;
+		try {
+			T storedObject = pm.makePersistent(t);
+			T detachedObject = pm.detachCopy(storedObject);
+			return detachedObject;
+		} catch (Exception e) {
+			throw new RepositoryException(e.getMessage());
+		} finally {
+			pm.close();
+		}
 	}
 }

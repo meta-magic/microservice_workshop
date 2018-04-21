@@ -8,13 +8,16 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+import com.metamagic.ms.exception.IllegalArgumentCustomException;
+import com.metamagic.ms.validation.CommonValidation;
+
 /**
  * @author sagar
  *
  */
 @PersistenceCapable(table = "ui_designs", detachable = "true")
 @DatastoreIdentity(customStrategy = "uuid")
-public class OrderDocument {
+public class OrderDocument implements CommonValidation {
 
 	@PrimaryKey
 	@Persistent(column = "_id", customValueStrategy = "uuid")
@@ -35,21 +38,23 @@ public class OrderDocument {
 	private double total;
 
 	private String status;
-	
-	private String orderNumber; 
+
+	private String orderNumber;
 
 	public OrderDocument() {
 		super();
 	}
 
-	public OrderDocument(String cartId, String userId, Date date, Set<ItemDocument> items, double total,
-			String status) {
-		this.cartId = cartId;
-		this.userId = userId;
-		this.date = date;
-		this.items = items;
-		this.total = total;
-		this.status = status;
+	public OrderDocument(String cartId, String userId, Date date, Set<ItemDocument> items, double total, String status)
+			throws IllegalArgumentCustomException {
+
+		this.setCartId(cartId);
+		this.setUserId(userId);
+		this.setDate(date);
+		this.setItems(items);
+		this.setTotal(total);
+		this.setStatus(status);
+
 	}
 
 	public String getId() {
@@ -64,58 +69,85 @@ public class OrderDocument {
 		return cartId;
 	}
 
-	public void setCartId(String cartId) {
-		this.cartId = cartId;
+	private void setCartId(String cartId) throws IllegalArgumentCustomException {
+		if (!this.isValid(cartId)) {
+			throw new IllegalArgumentCustomException("Cart Id should not be null.");
+		} else {
+			this.cartId = cartId;
+		}
 	}
 
 	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	private void setUserId(String userId) throws IllegalArgumentCustomException {
+		if (!this.isValid(userId)) {
+			throw new IllegalArgumentCustomException("User Id should not be null.");
+		} else {
+			this.userId = userId;
+		}
 	}
 
 	public Set<ItemDocument> getItems() {
 		return items;
 	}
 
-	public void setItems(Set<ItemDocument> items) {
-		this.items = items;
+	private void setItems(Set<ItemDocument> items) throws IllegalArgumentCustomException {
+		if (!this.isValid(items)) {
+			throw new IllegalArgumentCustomException("items should not be null.");
+		} else {
+			this.items = items;
+		}
 	}
 
 	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	private void setDate(Date date) throws IllegalArgumentCustomException {
+		if (!this.isValid(date)) {
+			throw new IllegalArgumentCustomException("Date should not be null.");
+		} else {
+			this.date = date;
+		}
 	}
 
 	public double getTotal() {
 		return total;
 	}
 
-	public void setTotal(double total) {
-		this.total = total;
+	private void setTotal(double total) throws IllegalArgumentCustomException {
+		if (!this.isValid(total)) {
+			throw new IllegalArgumentCustomException("total should not be null.");
+		} else {
+			this.total = total;
+		}
 	}
 
 	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	private void setStatus(String status) throws IllegalArgumentCustomException {
+		if (!this.isValid(status)) {
+			throw new IllegalArgumentCustomException("status should not be null.");
+		} else {
+			this.status = status;
+		}
 	}
 
 	public String getOrderNumber() {
 		return orderNumber;
 	}
 
-	public void setOrderNumber(String orderNumber) {
-		this.orderNumber = orderNumber;
+	private void setOrderNumber(String orderNumber) throws IllegalArgumentCustomException {
+		if (!this.isValid(orderNumber)) {
+			throw new IllegalArgumentCustomException("Order Number should not be null.");
+		} else {
+			this.orderNumber = orderNumber;
+		}
+
 	}
-	
-	
 
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.metamagic.ms.aop.LoginInfoHelperBean;
 import com.metamagic.ms.entity.OrderDocument;
+import com.metamagic.ms.exception.RepositoryException;
 import com.metamagic.ms.repository.read.OrderReadRepository;
 
 /**
@@ -24,7 +25,7 @@ public class OrderReadServiceImpl implements OrderReadService {
 	@Autowired
 	private LoginInfoHelperBean loginInfoHelperBean;
 
-	public List<OrderDocument> findAll() {
+	public List<OrderDocument> findAll() throws RepositoryException {
 		List<OrderDocument> ordersList = orderReadRepository.findAll(loginInfoHelperBean.getUserId());
 		return ordersList;
 	}
