@@ -23,4 +23,9 @@ productservice:
     # NFLoadBalancerRuleClassName: com.netflix.loadbalancer.WeightedResponseTimeRule
     # NFLoadBalancerRuleClassName: com.netflix.loadbalancer.AvailabilityFilteringRule
     ServerListRefreshInterval : 5000
-            
+    
+management:
+    endpoints:
+        web:
+         exposure:
+          include: info, health, metrics           

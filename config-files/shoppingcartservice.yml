@@ -42,4 +42,8 @@ logging:
   level:
     com.metamagic.ms: INFO
 
-      
+management:
+    endpoints:
+        web:
+         exposure:
+          include: info, health, metrics

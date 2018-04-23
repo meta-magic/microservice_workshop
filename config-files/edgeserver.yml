@@ -35,5 +35,10 @@ zuul:
       serviceId: ORDERLOBASERVICE
     authlobaservice:
       path: /as/**
-      serviceId: AUTHLOBASERVICE    
-            
+      serviceId: AUTHLOBASERVICE
+      
+management:
+    endpoints:
+        web:
+         exposure:
+          include: info, health, metrics

@@ -26,5 +26,9 @@ logging:
   file: /home/sagar/git/logs/orderservice.log 
   level:
     com.metamagic.ms: INFO
-
-      
+    
+management:
+    endpoints:
+        web:
+         exposure:
+          include: info, health, metrics      

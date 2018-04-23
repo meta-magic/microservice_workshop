@@ -1,15 +1,18 @@
 server:
-  port: 7070   
-
+    port: 7070
 spring:
-  application:
-    name: eurekaserver  
-  
+    application:
+        name: eurekaserver
 eureka:
-  instance:
-    prefer-ip-address: true
-  client:  
-    registerWithEureka: false
-    fetchRegistry: false
-    service-url:
-      defaultZone: http://localhost:7070/eureka      
+    instance:
+        prefer-ip-address: true
+    client:
+        registerWithEureka: false
+        fetchRegistry: false
+        service-url:
+            defaultZone: 'http://localhost:7070/eureka'
+management:
+    endpoints:
+        web:
+         exposure:
+          include: info, health, metrics

@@ -3,45 +3,29 @@ package com.metamagic.ms.controller.read;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 import com.metamagic.ms.bean.ResponseBean;
-import com.metamagic.ms.controller.BaseComponent;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.metamagic.ms.service.read.ShoppingCartReadService;
 
 /**
- * @author sagar
+ * @author sagar 
  * THIS CONTROLLER IS USED FOR READING SHOPPING CART OPERTAIONS
  */
 @RestController
 @RequestMapping("/shoppingcart/read")
-public class ShoppingCartReadController extends BaseComponent {
+public class ShoppingCartReadController {
 
 	@Autowired
-	private RestTemplate restTemplate;
+	private ShoppingCartReadService cartReadService;
 
-	@HystrixCommand(fallbackMethod = "fecthcartFallBack")
 	@RequestMapping(value = "/fecthcart", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ResponseBean> fecthcart(@RequestBody Object payload, HttpServletRequest request) {
-		org.springframework.http.HttpHeaders headers = this.createHeaders(request);
-		HttpEntity<?> httpEntity = new HttpEntity<>(payload, headers);
-		ResponseEntity<ResponseBean> response = this.restTemplate.exchange("http://shoppingcartservice/shoppingcart/read/fecthcart",
-				HttpMethod.POST, httpEntity, ResponseBean.class);
-		return response;
-	}
-
-	public ResponseEntity<ResponseBean> fecthcartFallBack(Object payload, HttpServletRequest request) {
-		ResponseBean response = new ResponseBean(false,
-				"Enable to connect to requested Shopping cart service, please try after some time", "error", null);
-		return new ResponseEntity<ResponseBean>(response, HttpStatus.OK);
+		return cartReadService.fecthcart(payload, request);
 	}
 }

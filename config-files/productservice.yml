@@ -24,4 +24,9 @@ logging:
   file: /home/sagar/git/logs/productservice.log 
   level:
     com.metamagic.ms: INFO
-      
+
+management:
+    endpoints:
+        web:
+         exposure:
+          include: info, health, metrics
