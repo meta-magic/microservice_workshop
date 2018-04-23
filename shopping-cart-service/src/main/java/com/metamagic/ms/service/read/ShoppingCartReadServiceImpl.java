@@ -4,10 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.metamagic.ms.entity.UserCart;
+import com.metamagic.ms.exception.RepositoryException;
 import com.metamagic.ms.repository.read.UserCartReadRepository;
+
 /**
- * @author sagar
- * THIS SERVICE IS USED FOR SHOPPING CART READ OPERATION
+ * @author sagar THIS SERVICE IS USED FOR SHOPPING CART READ OPERATION
  */
 @Service
 public class ShoppingCartReadServiceImpl implements ShoppingCartReadService {
@@ -17,9 +18,10 @@ public class ShoppingCartReadServiceImpl implements ShoppingCartReadService {
 
 	/**
 	 * THIS METHOD IS USED FOR FINDING USER CART
-	 * */
+	 * @throws RepositoryException 
+	 */
 	@Override
-	public UserCart fetchcart(String id) {
+	public UserCart fetchcart(String id) throws RepositoryException {
 		UserCart userCart = cartReadRepository.findByUserIdAndActive(id, null);
 		return userCart;
 	}

@@ -9,12 +9,15 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+import com.metamagic.ms.exception.IllegalArgumentCustomException;
+import com.metamagic.ms.validation.CommonValidation;
+
 /**
  * @author sagar THIS CLASS IS USED FOR USER CART DOCUMENTS
  */
 @PersistenceCapable(table = "usercart", detachable = "true")
 @DatastoreIdentity(customStrategy = "uuid")
-public class UserCart {
+public class UserCart implements CommonValidation {
 
 	@PrimaryKey
 	@Persistent(column = "_id", customValueStrategy = "uuid")
@@ -33,9 +36,9 @@ public class UserCart {
 	private String status;
 
 	public UserCart() {
-		
+
 	}
-	
+
 	public UserCart(String id, String userId, List<LineItem> lineItems) {
 		super();
 		this.id = id;
@@ -55,16 +58,24 @@ public class UserCart {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setUserId(String userId) throws IllegalArgumentCustomException {
+		if (!this.isValid(userId)) {
+			throw new IllegalArgumentCustomException("User Id should not be null.");
+		} else {
+			this.userId = userId;
+		}
 	}
 
 	public List<LineItem> getlineItems() {
 		return lineItems;
 	}
 
-	public void setlineItems(List<LineItem> lineItems) {
-		this.lineItems = lineItems;
+	public void setlineItems(List<LineItem> lineItems) throws IllegalArgumentCustomException {
+		if (!this.isValid(lineItems)) {
+			throw new IllegalArgumentCustomException("Line Items should not be null.");
+		} else {
+			this.lineItems = lineItems;
+		}
 	}
 
 	public void addOrUpdateProduct(String id, String name, Integer quantity, Double price) {
@@ -99,16 +110,25 @@ public class UserCart {
 		return total;
 	}
 
-	public void setTotal(double total) {
-		this.total = total;
+	public void setTotal(double total) throws IllegalArgumentCustomException {
+		if (!this.isValid(total)) {
+			throw new IllegalArgumentCustomException("Total should not be null.");
+		} else {
+			this.total = total;
+		}
+		
 	}
 
 	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setStatus(String status) throws IllegalArgumentCustomException {
+		if (!this.isValid(status)) {
+			throw new IllegalArgumentCustomException("Status should not be null.");
+		} else {
+			this.status = status;
+		}
 	}
 
 	public void addProduct(String id, String name, Integer quantity, Double price) {

@@ -5,6 +5,9 @@ import javax.jdo.annotations.FetchGroup;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 
+import com.metamagic.ms.exception.IllegalArgumentCustomException;
+import com.metamagic.ms.validation.CommonValidation;
+
 /**
  * @author sagar
  * 
@@ -14,7 +17,7 @@ import javax.jdo.annotations.Persistent;
 @EmbeddedOnly
 @FetchGroup(name = "lineItems", members = { @Persistent(name = "id"), @Persistent(name = "name"),
 		@Persistent(name = "quantity"), @Persistent(name = "price")})
-public class LineItem {
+public class LineItem implements CommonValidation{
 
 	private String id;
 	
@@ -40,24 +43,36 @@ public class LineItem {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setName(String name) throws IllegalArgumentCustomException {
+		if(!this.isValid(name)) {
+			throw new IllegalArgumentCustomException("Name should not be null.");
+		}else {
+			this.name=name;
+		}
 	}
 
 	public Integer getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(Integer quantity) {
-		this.quantity = quantity;
+	public void setQuantity(Integer quantity) throws IllegalArgumentCustomException {
+		if(!this.isValid(quantity)) {
+			throw new IllegalArgumentCustomException("Quantity should not be null.");
+		}else {
+			this.quantity = quantity;
+		}
 	}
 
 	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(Double price) {
-		this.price = price;
+	public void setPrice(Double price) throws IllegalArgumentCustomException {
+		if(!this.isValid(price)) {
+			throw new IllegalArgumentCustomException("Price should not be null.");
+		}else {
+			this.price = price;
+		}
 	}
 
 	

@@ -69,10 +69,10 @@ public class OrderEventListener {
 			}
 		}
 
-		OrderDocument order = new OrderDocument(orderPlacedEvent.getCartId(), orderPlacedEvent.getCustomerId(),
+		OrderDocument order = new OrderDocument(orderPlacedEvent.getCartId(), orderPlacedEvent.getUserId(),
 				new Date(), documents, total, "COMPLETED");
 		orderWriteService.save(order);
 
-		kafkaTemplate.send("order_topic", new OrderCompletedEvent(orderPlacedEvent.getCustomerId()));
+		kafkaTemplate.send("order_topic", new OrderCompletedEvent(orderPlacedEvent.getUserId()));
 	}
 }

@@ -10,6 +10,8 @@ import com.metamagic.ms.events.CartCreatedEvent;
 import com.metamagic.ms.events.ItemAddedEvent;
 import com.metamagic.ms.events.ItemRemovedEvent;
 import com.metamagic.ms.events.integration.OrderPlacedEvent;
+import com.metamagic.ms.exception.IllegalArgumentCustomException;
+import com.metamagic.ms.exception.RepositoryException;
 import com.metamagic.ms.repository.read.UserCartReadRepository;
 import com.metamagic.ms.repository.write.UserCartWriteRepository;
 
@@ -34,14 +36,14 @@ public class ShoppingCartEventHandler {
 	}
 
 	@EventHandler
-	public void handle(ItemAddedEvent event) {
+	public void handle(ItemAddedEvent event) throws RepositoryException, IllegalArgumentCustomException {
 		System.out.println(this.getClass() + " ItemAddedEvent");
 		this.updateUserCart(event.getCustomerId(), event.getItems().getItemId(), event.getItems().getName(),
 				event.getItems().getQuantity(), event.getItems().getPrice());
 	}
 
 	@EventHandler
-	public void handle(ItemRemovedEvent event) {
+	public void handle(ItemRemovedEvent event) throws RepositoryException, IllegalArgumentCustomException {
 		System.out.println(this.getClass() + " ItemRemovedEvent");
 		this.updateUserCart(event.getCustomerId(), event.getItems().getItemId(), event.getItems().getName(),
 				event.getItems().getQuantity(), event.getItems().getPrice());
@@ -57,7 +59,7 @@ public class ShoppingCartEventHandler {
 		System.out.println("--kafkaTemplate--");
 	}
 
-	private void updateUserCart(String userId, String itemId, String name, Integer quantity, Double price) {
+	private void updateUserCart(String userId, String itemId, String name, Integer quantity, Double price) throws RepositoryException, IllegalArgumentCustomException {
 		UserCart userCart = cartReadRepository.findByUserIdAndActive(userId, null);
 		if (userCart == null) {
 			userCart = new UserCart();

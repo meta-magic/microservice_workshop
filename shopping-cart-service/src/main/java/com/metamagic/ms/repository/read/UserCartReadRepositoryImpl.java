@@ -6,6 +6,7 @@ import javax.jdo.Query;
 import org.springframework.stereotype.Repository;
 
 import com.metamagic.ms.entity.UserCart;
+import com.metamagic.ms.exception.RepositoryException;
 import com.metamagic.ms.repository.GenericRepository;
 
 /**
@@ -15,20 +16,20 @@ import com.metamagic.ms.repository.GenericRepository;
 public class UserCartReadRepositoryImpl extends GenericRepository<UserCart> implements UserCartReadRepository {
 
 	@Override
-	public UserCart findByUserIdAndActive(String userId, String completed) {
+	public UserCart findByUserIdAndActive(String userId, String completed) throws RepositoryException {
 		PersistenceManager pm = pm();
-		UserCart userCart = null;
 		try {
 			Query<UserCart> query = pm.newQuery(UserCart.class);
 			query.setFilter("userId == :userId && status == :completed");
 			query.setUnique(true);
-			userCart = (UserCart) pm.detachCopy( query.execute(userId, completed));
+			UserCart userCart = (UserCart) pm.detachCopy(query.execute(userId, completed));
+			return userCart;
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new RepositoryException(e.getMessage());
 		} finally {
 			pm.close();
 		}
-		return userCart;
+
 	}
 
 }
