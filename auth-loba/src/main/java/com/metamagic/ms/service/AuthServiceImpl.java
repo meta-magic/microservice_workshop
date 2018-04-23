@@ -28,7 +28,7 @@ public class AuthServiceImpl implements AuthService{
 	@Autowired
 	private RestTemplate restTemplate;
 
-	@HystrixCommand(fallbackMethod = "authenticateFallBack")
+	@HystrixCommand(fallbackMethod = "authenticateFallBack",commandKey="Authenticate",groupKey="Auth Service")
 	public ResponseEntity<ResponseBean> authenticate(@RequestBody Object object){
 		org.springframework.http.HttpHeaders headers = new org.springframework.http.HttpHeaders();
 		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));

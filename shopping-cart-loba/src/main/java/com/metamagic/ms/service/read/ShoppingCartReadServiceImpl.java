@@ -27,7 +27,7 @@ public class ShoppingCartReadServiceImpl extends BaseComponent implements Shoppi
 	@Autowired
 	private RestTemplate restTemplate;
 
-	@HystrixCommand(fallbackMethod = "fecthcartFallBack")
+	@HystrixCommand(fallbackMethod = "fecthcartFallBack",commandKey="Fetch All Cart",groupKey="Shopping Read Service")
 	public ResponseEntity<ResponseBean> fecthcart(@RequestBody Object payload, HttpServletRequest request) {
 		org.springframework.http.HttpHeaders headers = this.createHeaders(request);
 		HttpEntity<?> httpEntity = new HttpEntity<>(payload, headers);

@@ -24,7 +24,7 @@ public class ProductReadServiceImpl implements ProductReadService {
 	@Autowired
 	private RestTemplate restTemplate;
 
-	@HystrixCommand(fallbackMethod = "findAllFallBack")
+	@HystrixCommand(fallbackMethod = "findAllFallBack",commandKey="Find All Products",groupKey="Product Read Service")
 	public ResponseEntity<ResponseBean> findAll() {
 		org.springframework.http.HttpHeaders headers = new org.springframework.http.HttpHeaders();
 		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));

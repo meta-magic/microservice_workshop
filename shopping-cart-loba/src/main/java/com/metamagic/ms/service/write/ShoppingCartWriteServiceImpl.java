@@ -25,7 +25,7 @@ public class ShoppingCartWriteServiceImpl extends BaseComponent implements Shopp
 	@Autowired
 	private RestTemplate restTemplate;
 
-	@HystrixCommand(fallbackMethod = "writefallback")
+	@HystrixCommand(fallbackMethod = "writefallback",commandKey="Create Cart",groupKey="Shopping Write Service")
 	public ResponseEntity<ResponseBean> create(@RequestBody Object payload, HttpServletRequest request) {
 		HttpHeaders headers = this.createHeaders(request);
 		HttpEntity<?> httpEntity = new HttpEntity<>(payload, headers);
@@ -35,7 +35,7 @@ public class ShoppingCartWriteServiceImpl extends BaseComponent implements Shopp
 		return response;
 	}
 
-	@HystrixCommand(fallbackMethod = "writefallback")
+	@HystrixCommand(fallbackMethod = "writefallback",commandKey="Add Item",groupKey="Shopping Write Service")
 	public ResponseEntity<ResponseBean> addItem(@RequestBody Object payload, HttpServletRequest request) {
 		HttpHeaders headers = this.createHeaders(request);
 		HttpEntity<?> httpEntity = new HttpEntity<>(payload, headers);
@@ -45,7 +45,7 @@ public class ShoppingCartWriteServiceImpl extends BaseComponent implements Shopp
 		return response;
 	}
 
-	@HystrixCommand(fallbackMethod = "writefallback")
+	@HystrixCommand(fallbackMethod = "writefallback",commandKey="Remove Item",groupKey="Shopping Write Service")
 	public ResponseEntity<ResponseBean> removeItem(@RequestBody Object payload, HttpServletRequest request) {
 		HttpHeaders headers = this.createHeaders(request);
 		HttpEntity<?> httpEntity = new HttpEntity<>(payload, headers);
@@ -55,7 +55,7 @@ public class ShoppingCartWriteServiceImpl extends BaseComponent implements Shopp
 		return response;
 	}
 
-	@HystrixCommand(fallbackMethod = "writefallback")
+	@HystrixCommand(fallbackMethod = "writefallback",commandKey="Place Order",groupKey="Shopping Write Service")
 	public ResponseEntity<ResponseBean> placeorder(@RequestBody Object payload, HttpServletRequest request) {
 		HttpHeaders headers = this.createHeaders(request);
 		HttpEntity<?> httpEntity = new HttpEntity<>(payload, headers);

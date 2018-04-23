@@ -25,7 +25,7 @@ public class OrderReadServiceImpl extends BaseComponent implements OrderReadServ
 	@Autowired
 	private RestTemplate restTemplate;
 
-	@HystrixCommand(fallbackMethod = "findAllFallBack")
+	@HystrixCommand(fallbackMethod = "findAllFallBack",commandKey="Order History",groupKey="Order Read Service")
 	public ResponseEntity<ResponseBean> findAll(HttpServletRequest request) {
 		org.springframework.http.HttpHeaders headers = this.createHeaders(request);
 		HttpEntity<?> httpEntity = new HttpEntity<>(headers);

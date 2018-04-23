@@ -36,7 +36,7 @@ public class ProductWriteServiceImpl extends BaseComponent implements ProductWri
 	@Autowired
 	private AsyncRestTemplate asyncRestTemplate;
 
-	@HystrixCommand(fallbackMethod = "saveFallBack")
+	@HystrixCommand(fallbackMethod = "saveFallBack",commandKey="Save Product",groupKey="Product Service")
 	public ResponseEntity<ResponseBean> save(@RequestBody Object payload, HttpServletRequest request) {
 		org.springframework.http.HttpHeaders headers = this.createHeaders(request);
 		HttpEntity<?> httpEntity = new HttpEntity<>(payload, headers);
@@ -45,7 +45,7 @@ public class ProductWriteServiceImpl extends BaseComponent implements ProductWri
 		return response;
 	}
 
-	@HystrixCommand(fallbackMethod = "findAllFallBack2")
+	@HystrixCommand(fallbackMethod = "findAllFallBack2",commandKey="Find All Products",groupKey="Product Service")
 	public DeferredResult<ResponseEntity<ResponseBean>> findAll() {
 		org.springframework.http.HttpHeaders headers = new org.springframework.http.HttpHeaders();
 		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));

@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private RestTemplate restTemplate;
 
-	@HystrixCommand(fallbackMethod = "createFallBack")
+	@HystrixCommand(fallbackMethod = "createFallBack",commandKey="Create User",groupKey="User Service")
 	public ResponseEntity<ResponseBean> create(@RequestBody Object object) {
 		org.springframework.http.HttpHeaders headers = new org.springframework.http.HttpHeaders();
 		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
