@@ -25,7 +25,7 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 /**
  * @author sagar
  * 
- * THIS SERVICE USE FOR WRITE PRODUCT WRITE OPERATION
+ *         THIS SERVICE USE FOR WRITE PRODUCT WRITE OPERATION
  */
 @Service
 public class ProductWriteServiceImpl extends BaseComponent implements ProductWriteService {
@@ -73,16 +73,16 @@ public class ProductWriteServiceImpl extends BaseComponent implements ProductWri
 		return deferredResult;
 	}
 
-	public ResponseEntity<ResponseBean> saveFallBack(Object payload, HttpServletRequest request) {
+	public ResponseEntity<ResponseBean> saveFallBack(Object payload, HttpServletRequest request, Throwable t) {
 		ResponseBean response = new ResponseBean(false,
-				"Enable to connect to requested Product Service, please try after some time", "error", null);
+				"Enable to connect to requested Product Service, please try after some time", "error", t.getMessage());
 		return new ResponseEntity<ResponseBean>(response, HttpStatus.OK);
 	}
 
-	public DeferredResult<ResponseEntity<ResponseBean>> findAllFallBack2() {
+	public DeferredResult<ResponseEntity<ResponseBean>> findAllFallBack2(Throwable t) {
 		DeferredResult<ResponseEntity<ResponseBean>> deferredResult = new DeferredResult<>();
 		ResponseBean response = new ResponseBean(false,
-				"Enable to connect to requested Product Service, please try after some time", "error", null);
+				"Enable to connect to requested Product Service, please try after some time", "error", t.getMessage());
 		deferredResult.setErrorResult(new ResponseEntity<>(response, HttpStatus.OK));
 		return deferredResult;
 	}

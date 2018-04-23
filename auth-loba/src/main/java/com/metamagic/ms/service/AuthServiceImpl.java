@@ -38,8 +38,8 @@ public class AuthServiceImpl implements AuthService{
 		return response;
 	}
 	
-	public ResponseEntity<ResponseBean> authenticateFallBack(Object object){
-		ResponseBean response = new ResponseBean(false, "Unable to connect to requested Auth Service, please try after some time", "error", null);
+	public ResponseEntity<ResponseBean> authenticateFallBack(Object object, Throwable t){
+		ResponseBean response = new ResponseBean(false, "Unable to connect to requested Auth Service, please try after some time", "error", t.getMessage());
 		return new ResponseEntity<ResponseBean>(response, HttpStatus.OK);
 	}
 }

@@ -16,15 +16,14 @@ import com.metamagic.ms.bean.ResponseBean;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 /**
- * @author sagar 
+ * @author sagar
  * 
- * THIS SERVICE HANDLE REQUEST FROM CONTROLLER 
- * 1.HANDLE REQUEST AND SEND TO SERVICE 
- * 2.FALLBACK MECHANISM
+ *         THIS SERVICE HANDLE REQUEST FROM CONTROLLER 1.HANDLE REQUEST AND SEND
+ *         TO SERVICE 2.FALLBACK MECHANISM
  * 
  */
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private RestTemplate restTemplate;
@@ -40,9 +39,9 @@ public class UserServiceImpl implements UserService{
 		return response;
 	}
 
-	public ResponseEntity<ResponseBean> createFallBack(Object object) {
+	public ResponseEntity<ResponseBean> createFallBack(Object object, Throwable t) {
 		ResponseBean response = new ResponseBean(false,
-				"Unable to connect to requested Auth Service, please try after some time", "error", null);
+				"Unable to connect to requested Auth Service, please try after some time", "error", t.getMessage());
 		return new ResponseEntity<ResponseBean>(response, HttpStatus.OK);
 	}
 }

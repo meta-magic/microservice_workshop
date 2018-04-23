@@ -17,8 +17,7 @@ import com.metamagic.ms.controller.BaseComponent;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 /**
- * @author sagar 
- * THIS SERVICE USED FOR WRITE SHOPPING CART OPERATION
+ * @author sagar THIS SERVICE USED FOR WRITE SHOPPING CART OPERATION
  */
 @Service
 public class ShoppingCartWriteServiceImpl extends BaseComponent implements ShoppingCartWriteService {
@@ -66,9 +65,11 @@ public class ShoppingCartWriteServiceImpl extends BaseComponent implements Shopp
 		return response;
 	}
 
-	public ResponseEntity<ResponseBean> writefallback(@RequestBody Object payload, HttpServletRequest request) {
+	public ResponseEntity<ResponseBean> writefallback(@RequestBody Object payload, HttpServletRequest request,
+			Throwable t) {
 		ResponseBean response = new ResponseBean(false,
-				"Enable to connect to requested Shopping Cart Service, please try after some time", "error", null);
+				"Enable to connect to requested Shopping Cart Service, please try after some time", "error",
+				t.getMessage());
 		return new ResponseEntity<ResponseBean>(response, HttpStatus.OK);
 	}
 

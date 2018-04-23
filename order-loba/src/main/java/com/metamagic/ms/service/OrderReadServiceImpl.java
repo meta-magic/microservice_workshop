@@ -15,14 +15,12 @@ import com.metamagic.ms.controller.BaseComponent;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 /**
- * @author sagar 
- * THIS SERVICE HANDLE REQUEST FROM CONTROLLER 
- * 1.HANDLE REQUEST AND SEND TO SERVICE 
- * 2.FALLBACK MECHANISM
+ * @author sagar THIS SERVICE HANDLE REQUEST FROM CONTROLLER 1.HANDLE REQUEST
+ *         AND SEND TO SERVICE 2.FALLBACK MECHANISM
  * 
  */
 @Service
-public class OrderReadServiceImpl extends BaseComponent implements OrderReadService{
+public class OrderReadServiceImpl extends BaseComponent implements OrderReadService {
 
 	@Autowired
 	private RestTemplate restTemplate;
@@ -36,9 +34,9 @@ public class OrderReadServiceImpl extends BaseComponent implements OrderReadServ
 		return response;
 	}
 
-	public ResponseEntity<ResponseBean> findAllFallBack(HttpServletRequest request) {
+	public ResponseEntity<ResponseBean> findAllFallBack(HttpServletRequest request, Throwable t) {
 		ResponseBean response = new ResponseBean(false,
-				"Enable to connect to requested Product Service, please try after some time", "error", null);
+				"Enable to connect to requested Product Service, please try after some time", "error", t.getMessage());
 		return new ResponseEntity<ResponseBean>(response, HttpStatus.OK);
 	}
 }
