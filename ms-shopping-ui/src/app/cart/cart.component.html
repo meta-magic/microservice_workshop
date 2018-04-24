@@ -1,5 +1,4 @@
-<amexio-notification [data]="servermsg" [vertical-position]="'top'" [horizontal-position]="'right'" [auto-dismiss-msg]="true"
-    [auto-dismiss-msg-interval]="4000">
+<amexio-notification [data]="servermsg" [vertical-position]="'top'" [horizontal-position]="'right'" [auto-dismiss-msg]="true" [auto-dismiss-msg-interval]="4000">
 </amexio-notification>
 
 <ng-container *ngIf="showcart">
@@ -31,7 +30,7 @@
                             </amexio-label>
                         </amexio-column>
                         <amexio-column [size]=3>
-                            <span>
+                            <span style="cursor:pointer">
                                 <amexio-image style="color:red;" [icon-class]="'fa fa-minus-circle fa-2x'" [tooltip]="'Remove'" (onClick)="removeItem(node)">
                                 </amexio-image>
                             </span>
@@ -87,8 +86,7 @@
             </div>
         </amexio-column>
 
-        <amexio-dialogue [show-dialogue]="showOrdersDialogue" [custom]="true" [closable]="true" [title]="'Confirm'" [type]="'confirm'"
-            (close)="showOrdersDialogue = !showOrdersDialogue">
+        <amexio-dialogue [show-dialogue]="showOrdersDialogue" [custom]="true" [closable]="true" [title]="'Confirm'" [type]="'confirm'" (close)="showOrdersDialogue = !showOrdersDialogue">
             <amexio-body>
                 <amexio-label size="small">
                     Your Order Placed Successfully!!

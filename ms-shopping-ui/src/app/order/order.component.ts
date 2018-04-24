@@ -41,14 +41,13 @@ export class OrderComponent implements OnInit{
     }
 
     setData(responsedata: any) {
-        debugger;
         if (responsedata && responsedata.success) {
             this.showorders = true;
             this.data = responsedata.response;
 
         } else {
-            this.showorders = false;
-            this.msg = responsedata.message;
+          this.msgData.push(responsedata.message);
+          this.showErrorDialog=true;
         }
     }
 
