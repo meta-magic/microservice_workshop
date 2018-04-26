@@ -36,7 +36,7 @@ public class OrderDocument implements CommonValidation {
 	@Persistent
 	private Date date;
 
-	@Persistent(mappedBy = "order", defaultFetchGroup="true")
+	@Persistent(mappedBy = "order", defaultFetchGroup = "true")
 	private Set<ItemDocument> items;
 
 	@Persistent(mappedBy = "order", defaultFetchGroup = "true")
@@ -151,6 +151,14 @@ public class OrderDocument implements CommonValidation {
 		this.status = Status.PAID;
 	}
 
+	public void markPaymentFailure() throws InvalidDataException {
+		this.status = Status.PAYMENT_FAILURE;
+	}
+
+	public void markPaymentInitiated() throws InvalidDataException {
+		this.status = Status.PAYMENT_INITIATED;
+	}
+
 	public String getCartId() {
 		return cartId;
 	}
@@ -254,7 +262,7 @@ public class OrderDocument implements CommonValidation {
 	public void addPaymentDetails(String paymentmode) throws InvalidDataException {
 		Payment payment = new Payment(paymentmode, getTotal(), this);
 		this.payment = payment;
-		this.markPaid();
+		this.markPaymentInitiated();
 	}
 
 	private void setOrderNumber(String orderNumber) throws IllegalArgumentCustomException {
@@ -274,10 +282,18 @@ public class OrderDocument implements CommonValidation {
 		PAYMENT_EXPECTED,
 
 		/**
+		 * Payment initiated
+		 */
+
+		PAYMENT_INITIATED,
+		/**
 		 * {@link Order} was payed. No changes allowed to it anymore.
 		 */
 		PAID,
-
+		/**
+		 * PAYMENT FAILURE
+		 */
+		PAYMENT_FAILURE,
 		/**
 		 * The {@link Order} is currently processed.
 		 */

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.metamagic.ms.aop.LoginInfoHelperBean;
 import com.metamagic.ms.bean.ResponseBean;
 import com.metamagic.ms.exception.RepositoryException;
 import com.metamagic.ms.service.read.OrderReadService;
@@ -28,6 +29,9 @@ public class OrderQueryController {
 	@Autowired
 	private OrderReadService orderReadService;
 
+	@Autowired
+	private LoginInfoHelperBean infoHelperBean;
+
 	/**
 	 * THIS METHOD IS USED FOR GET ORDER HISTORY
 	 */
@@ -35,7 +39,7 @@ public class OrderQueryController {
 	public @ResponseBody ResponseEntity<ResponseBean> findAll() {
 		try {
 			ResponseBean response = new ResponseBean(true, "Data retrieved successfully", "success",
-					orderReadService.findAll());
+					orderReadService.findAll(infoHelperBean.getUserId()));
 			return new ResponseEntity<ResponseBean>(response, HttpStatus.OK);
 		} catch (RepositoryException e) {
 			ResponseBean response = new ResponseBean(false, e.getMessage(), "failed", null);
@@ -51,7 +55,7 @@ public class OrderQueryController {
 	public @ResponseBody ResponseEntity<ResponseBean> getOrderId() {
 		try {
 			ResponseBean response = new ResponseBean(true, "Data retrieved successfully", "success",
-					orderReadService.getOrderId());
+					orderReadService.getOrderId(infoHelperBean.getUserId()));
 			return new ResponseEntity<ResponseBean>(response, HttpStatus.OK);
 		} catch (RepositoryException e) {
 			ResponseBean response = new ResponseBean(false, e.getMessage(), "failed", null);

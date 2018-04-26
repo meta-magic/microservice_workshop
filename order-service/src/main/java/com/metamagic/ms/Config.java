@@ -25,6 +25,7 @@ import org.springframework.kafka.support.serializer.JsonSerializer;
 
 import com.metamagic.ms.events.integration.OrderCompletedEvent;
 import com.metamagic.ms.events.integration.OrderPlacedEvent;
+import com.metamagic.ms.events.integration.PaymentInitiatedEvent;
 
 /**
  * @author sagar
@@ -77,11 +78,22 @@ public class Config {
 		return props;
 	}
 
+	
+	@Bean
+	public KafkaTemplate<String, PaymentInitiatedEvent> kafkaTemplate1() {
+		return new KafkaTemplate<>(producerFactory1());
+	}
+	@Bean
+	public ProducerFactory<String, PaymentInitiatedEvent> producerFactory1() {
+		return new DefaultKafkaProducerFactory<>(producerConfigs());
+	}
+	
+	
 	@Bean
 	public ProducerFactory<String, OrderCompletedEvent> producerFactory() {
 		return new DefaultKafkaProducerFactory<>(producerConfigs());
 	}
-
+	
 	@Bean
 	public KafkaTemplate<String, OrderCompletedEvent> kafkaTemplate() {
 		return new KafkaTemplate<>(producerFactory());

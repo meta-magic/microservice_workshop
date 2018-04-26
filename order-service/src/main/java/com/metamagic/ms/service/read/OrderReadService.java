@@ -10,7 +10,9 @@ import com.metamagic.ms.exception.RepositoryException;
  *
  */
 public interface OrderReadService {
-	public List<OrderDocument> findAll() throws RepositoryException;
+	public List<OrderDocument> findAll(String userId) throws RepositoryException;
 
-	public String getOrderId() throws RepositoryException;
+	public String getOrderId(String userId) throws RepositoryException;
+
+	public OrderDocument findOrderById(String orderId) throws RepositoryException;
 }

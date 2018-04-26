@@ -1,11 +1,13 @@
 package com.metamagic.ms.service.write;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import com.metamagic.ms.dto.PaymentDTO;
 import com.metamagic.ms.dto.ShippingAddressDTO;
 import com.metamagic.ms.entity.OrderDocument;
+import com.metamagic.ms.events.integration.PaymentInitiatedEvent;
 import com.metamagic.ms.exception.InvalidDataException;
 import com.metamagic.ms.exception.RepositoryException;
 import com.metamagic.ms.repository.read.OrderReadRepository;
@@ -22,6 +24,9 @@ public class OrderWriteServiceImpl implements OrderWriteService {
 
 	@Autowired
 	private OrderReadRepository orderReadRepository;
+
+	@Autowired
+	private KafkaTemplate<String, PaymentInitiatedEvent> kafkaTemplate;
 
 	public OrderDocument save(OrderDocument order) throws RepositoryException {
 
@@ -55,8 +60,10 @@ public class OrderWriteServiceImpl implements OrderWriteService {
 	public void addPaymentDetails(PaymentDTO dto) throws InvalidDataException, Exception {
 		OrderDocument order = orderReadRepository.findByOrderId(dto.getOrderId());
 		order.addPaymentDetails(dto.getMode());
-		order.markPaid();
+		order.markPaymentInitiated();
 		orderWriteRepository.save(order);
+		kafkaTemplate.send("order_payment", new PaymentInitiatedEvent(order.getUserId(), order.getOrderId(),
+				order.getPayment().getPaymentid(), order.getTotal(), dto.getMode()));
 	}
 
 }
