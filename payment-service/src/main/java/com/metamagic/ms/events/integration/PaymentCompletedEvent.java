@@ -2,32 +2,23 @@ package com.metamagic.ms.events.integration;
 
 import java.io.Serializable;
 
-
-/**
- * @author Ashutosh.Jadhav
- *
- *	This event represents a completed payment.
- */
-public class PaymentCompletedEvent implements Serializable {
+public final class PaymentCompletedEvent implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 5466569965484039329L;
 
-	private String orderId;
+	private final String orderId;
 
-	private String paymentId;
+	private final String paymentId;
 
-	private String userId;
+	private final String userId;
 
-	private String status;
+	private final String status;
 
-	private String message;
+	private final String message;
 
-	public PaymentCompletedEvent() {
-	}
-	
 	/**
 	 * @param orderId
 	 * @param paymentId
