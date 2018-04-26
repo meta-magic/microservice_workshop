@@ -1,3 +1,5 @@
+import { OrderSummary } from './../cart/ordersummary/ordersummary.component';
+import { RouteGaurd } from './../route-gaurd/route.gaurd';
 import { ProductCatlogComponent } from './../product/productcatlog.component';
 import { FormsModule } from '@angular/forms';
 import { OrderComponent } from './../order/order.component';
@@ -9,7 +11,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from "@angular/core";
 import { HomeComponent } from "./home.component";
 import {PageNotFoundComponent} from "./../page_not_found/pagenotfound.component";
-import { RouteGaurd } from '../route-gaurd/route.gaurd';
 @NgModule({
 declarations:[
   HomeComponent,
@@ -18,6 +19,7 @@ declarations:[
   OrderComponent,
   ProductCatlogComponent,
   PageNotFoundComponent,
+  OrderSummary
 ],
 imports:[
   CommonModule,
@@ -38,6 +40,9 @@ imports:[
       },
       {
         path: 'order', canActivate:[RouteGaurd],component : OrderComponent
+      },
+      {
+        path:'order_summary',canActivate:[RouteGaurd],component:OrderSummary
       }
       // ,
       // {

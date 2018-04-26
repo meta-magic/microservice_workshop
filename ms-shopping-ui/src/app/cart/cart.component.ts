@@ -127,7 +127,7 @@ export class CartComponent implements OnInit {
 
     //Method that navigates to order screen
     showOrders() {
-        this.router.navigate(['home/order']);
+        this.router.navigate(['home/order_summary']);
     }
 
     //Method to close the Dialogue box

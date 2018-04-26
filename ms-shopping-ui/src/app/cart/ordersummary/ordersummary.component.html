@@ -1,0 +1,145 @@
+<amexio-row>
+    <amexio-column size="1">
+    </amexio-column>
+    <amexio-column size="10">
+        <amexio-steps [block]="true" [icon]="true">
+            <amexio-step-block [label]="'Order Summary'" [active]="orderSummary" [icon]="'fa fa-shopping-bag'">
+            </amexio-step-block>
+            <amexio-step-block [label]="'Delivery Address'" [active]="deliveryAddress" [icon]="'fa fa-address-book'">
+            </amexio-step-block>
+            <amexio-step-block [label]="'Payment Options'" [active]="paymentOptions" [icon]="'fa fa-cc-visa'">
+            </amexio-step-block>
+        </amexio-steps>
+    </amexio-column>
+    <amexio-column size="1">
+    </amexio-column>
+</amexio-row>
+<amexio-row>
+    <amexio-column size="1">
+    </amexio-column>
+    <amexio-column size="10">
+        <ng-container *ngIf="orderSummary">
+            <amexio-card header="true" footer="true">
+                <amexio-header>Order Details</amexio-header>
+                <amexio-body>
+                    <amexio-row *ngFor="let node of data">
+                        <amexio-column [size]=3>
+                            <amexio-label size="small">
+                                {{node.name}}
+                            </amexio-label>
+
+                        </amexio-column>
+                        <amexio-column [size]=3>
+                            <amexio-label size="small">
+                                {{node.quantity}}
+                            </amexio-label>
+                        </amexio-column>
+                        <amexio-column [size]=3>
+                            <amexio-label size="small">
+                                <amexio-image [icon-class]="'fa fa-inr'" [tooltip]="'Rupee'">
+                                </amexio-image>
+                                {{node.price}}
+                            </amexio-label>
+
+                        </amexio-column>
+
+                    </amexio-row>
+                    <amexio-row>
+                        <amexio-column size="6">
+
+                        </amexio-column>
+                        <amexio-column size="3">
+                            <amexio-label size="small-bold">{{total}}</amexio-label>
+                        </amexio-column>
+                    </amexio-row>
+                </amexio-body>
+                <amexio-action>
+                    <amexio-button label="Add Shipping Addresss" [icon]="'fa fa-arrow-circle-o-right'" [type]="'theme-color'" [tooltip]="'Next'" (onClick)="onOrderSummayNextClick($event)"></amexio-button>
+                </amexio-action>
+            </amexio-card>
+        </ng-container>
+        <ng-container *ngIf="deliveryAddress">
+            <amexio-card header="true" footer="true">
+                <amexio-header>Delivery Address</amexio-header>
+                <amexio-body>
+                    <amexio-row>
+                        <amexio-column size="6">
+                            <amexio-radio-group name="shippingAddress.label" [display-field]="'name'" [value-field]="'id'" [horizontal]="true" [data]="addressLabelData" [default-value]="'1'" (onSelection)="setSelectedLabel($event)">
+                            </amexio-radio-group>
+                        </amexio-column>
+                        <amexio-column size="6">
+                        </amexio-column>
+                    </amexio-row>
+                    <amexio-row>
+                        <amexio-column size="6">
+                            <amexio-textarea-input [enable-popover]="true" [field-label]="'Address'" name="shippingAddress.address" [place-holder]="'Enter Address'" [(ngModel)]="shippingAddress.address" [allow-blank]="true" [error-msg]="'Please enter Address'" [icon-feedback]="true"
+                                [rows]="'1'" [columns]="'2'">
+                            </amexio-textarea-input>
+                        </amexio-column>
+                        <amexio-column size="6">
+                            <amexio-dropdown [(ngModel)]="shippingAddress.country" [place-holder]="'Choose'" name="shippingAddress.country" [data-reader]="'data'" [field-label]="'Country'" [http-url]="'assets/data/country.json'" [http-method]="'get'" [display-field]="'countryName'"
+                                [value-field]="'countryName'">
+                            </amexio-dropdown>
+                        </amexio-column>
+                        <amexio-column size="6">
+                            <amexio-dropdown [(ngModel)]="shippingAddress.province" [place-holder]="'Choose'" name="shippingAddress.province" [data-reader]="'data'" [field-label]="'Province'" [http-url]="'assets/data/province.json'" [http-method]="'get'" [display-field]="'provinceName'"
+                                [value-field]="'province'">
+                            </amexio-dropdown>
+                        </amexio-column>
+                        <amexio-column size="6">
+                            <amexio-dropdown [(ngModel)]="shippingAddress.city" [place-holder]="'Choose'" name="shippingAddress.city" [data-reader]="'data'" [field-label]="'City'" [http-url]="'assets/data/city.json'" [http-method]="'get'" [display-field]="'cityName'" [value-field]="'city'">
+                            </amexio-dropdown>
+                        </amexio-column>
+                        <amexio-column size="6">
+                            <amexio-text-input enable-popover="true" field-label="Postal Code" name="shippingAddress.postalcode" [(ngModel)]="shippingAddress.postalcode" place-holder="Enter Postal Code" allow-blank="false" error-msg="Please enter postal code" min-length="6" min-error-msg="Minimum 6 char required"
+                                max-length="10" max-error-msg="Maximum 10 char allowed" icon-feedback="true">
+                            </amexio-text-input>
+
+                        </amexio-column>
+                    </amexio-row>
+                </amexio-body>
+                <amexio-action>
+                    <amexio-button label="Make Payment" [icon]="'fa fa-arrow-circle-o-right'" [type]="'theme-color'" [tooltip]="'Next'" (onClick)="onDeliveryNextClick($event)"></amexio-button>
+                </amexio-action>
+            </amexio-card>
+        </ng-container>
+        <ng-container *ngIf="paymentOptions">
+            <amexio-card header="true" footer="true">
+                <amexio-header>Payment Options</amexio-header>
+                <amexio-body>
+                    <amexio-row>
+                        <amexio-column size="12">
+                            <amexio-radio-group name="paymentOption" [display-field]="'name'" [value-field]="'id'" [horizontal]="true" [data]="paymentOptionsData" [default-value]="'1'" (onSelection)="setSelectedPaymentOptions($event)">
+                            </amexio-radio-group>
+                        </amexio-column>
+                        <amexio-column size="12">
+                            <amexio-label size="medium">Pay Amount (
+                                <amexio-image [icon-class]="'fa fa-inr'" [tooltip]="'Rupee'">
+                                </amexio-image>) : {{total}}
+
+                            </amexio-label>
+                        </amexio-column>
+                    </amexio-row>
+
+                </amexio-body>
+                <amexio-action>
+                    <amexio-button label="CONFIRM ORDER" [icon]="'fa fa-shopping-cart'" [type]="'theme-color'" [tooltip]="'Next'" (onClick)="onPaymentOptionNextClick($event)"></amexio-button>
+                </amexio-action>
+            </amexio-card>
+        </ng-container>
+    </amexio-column>
+    <amexio-column size="1">
+    </amexio-column>
+</amexio-row>
+
+<amexio-dialogue [show-dialogue]="showErrorDialogue" (close)="close()" [custom]="true" [title]="'Error'" [type]="'error'">
+    <amexio-body>
+        <li style="text-align: left" *ngFor="let msg of msgData">
+            {{msg}}
+        </li>
+    </amexio-body>
+    <amexio-action>
+        <amexio-button type="primary" (onClick)="close()" [label]="'Ok'">
+        </amexio-button>
+    </amexio-action>
+</amexio-dialogue>
