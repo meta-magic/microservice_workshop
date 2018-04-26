@@ -43,4 +43,20 @@ public class OrderQueryController {
 		}
 
 	}
+
+	/**
+	 * THIS METHOD RETURN ORDER ID OF LOGGED IN USER
+	 */
+	@RequestMapping(value = "/getorderid", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity<ResponseBean> getOrderId() {
+		try {
+			ResponseBean response = new ResponseBean(true, "Data retrieved successfully", "success",
+					orderReadService.getOrderId());
+			return new ResponseEntity<ResponseBean>(response, HttpStatus.OK);
+		} catch (RepositoryException e) {
+			ResponseBean response = new ResponseBean(false, e.getMessage(), "failed", null);
+			return new ResponseEntity<ResponseBean>(response, HttpStatus.OK);
+		}
+
+	}
 }

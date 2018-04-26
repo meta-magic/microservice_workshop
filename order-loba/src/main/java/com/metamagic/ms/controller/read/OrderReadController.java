@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.metamagic.ms.bean.ResponseBean;
-import com.metamagic.ms.service.OrderReadService;
+import com.metamagic.ms.service.read.OrderReadService;
 
 /**
  * @author sagar 
@@ -29,5 +29,9 @@ public class OrderReadController {
 	@RequestMapping(value = "/orderhistory", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ResponseBean> findAll(HttpServletRequest request) {
 		return orderReadService.findAll(request);
+	}
+	@RequestMapping(value = "/getorderid", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseBean> getOrderId(HttpServletRequest request) {
+		return orderReadService.getOrderId(request);
 	}
 }
