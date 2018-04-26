@@ -1,8 +1,7 @@
 package com.metamagic.ms.entity;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.jdo.annotations.DatastoreIdentity;
 import javax.jdo.annotations.PersistenceCapable;
@@ -27,7 +26,7 @@ public class UserCart implements CommonValidation {
 	private String userId;
 
 	@Persistent(defaultFetchGroup = "true")
-	private List<LineItem> lineItems;
+	private Set<LineItem> lineItems;
 
 	@Persistent
 	private double total;
@@ -39,7 +38,7 @@ public class UserCart implements CommonValidation {
 
 	}
 
-	public UserCart(String id, String userId, List<LineItem> lineItems) {
+	public UserCart(String id, String userId, Set<LineItem> lineItems) {
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -66,44 +65,32 @@ public class UserCart implements CommonValidation {
 		}
 	}
 
-	public List<LineItem> getlineItems() {
+	public Set<LineItem> getlineItems() {
 		return lineItems;
-	}
-
-	public void setlineItems(List<LineItem> lineItems) throws IllegalArgumentCustomException {
-		if (!this.isValid(lineItems)) {
-			throw new IllegalArgumentCustomException("Line Items should not be null.");
-		} else {
-			this.lineItems = lineItems;
-		}
 	}
 
 	public void addOrUpdateProduct(String id, String name, Integer quantity, Double price) {
 		if (this.lineItems == null) {
-			this.lineItems = new ArrayList<LineItem>();
+			this.lineItems = new HashSet<LineItem>();
 		}
 
-		boolean add = true;
-		for (Iterator<LineItem> iterator = lineItems.iterator(); iterator.hasNext();) {
-			LineItem userProduct = (LineItem) iterator.next();
-			if (userProduct.getId().equals(id)) {
-				// userProduct.setName(name);
-				// userProduct.setQuantity(quantity);
-				// userProduct.setPrice(price);
-				add = false;
-				iterator.remove();
-			}
-		}
-
-		if (add) {
-			LineItem userProduct = new LineItem(id, name, quantity, price);
-			this.lineItems.add(userProduct);
-			this.addToTotal(userProduct);
+		LineItem lineItem = new LineItem(id, name, quantity, price);
+		
+		if(!lineItems.contains(lineItem)) {
+			lineItems.add(lineItem);
+			this.addToTotal(lineItem);
+		} else {
+			lineItems.remove(lineItem);
+			this.subFromTotal(lineItem);
 		}
 	}
 
-	private void addToTotal(LineItem userProduct) {
-		this.total = total + userProduct.getPrice();
+	private void addToTotal(LineItem lineItem) {
+		this.total = total + lineItem.getPrice();
+	}
+	
+	private void subFromTotal(LineItem lineItem) {
+		this.total = total - lineItem.getPrice();
 	}
 
 	public double getTotal() {
@@ -129,15 +116,6 @@ public class UserCart implements CommonValidation {
 		} else {
 			this.status = status;
 		}
-	}
-
-	public void addProduct(String id, String name, Integer quantity, Double price) {
-		if (this.lineItems == null) {
-			this.lineItems = new ArrayList<LineItem>();
-		}
-		LineItem userProduct = new LineItem(id, name, quantity, price);
-		this.lineItems.add(userProduct);
-		this.addToTotal(userProduct);
 	}
 
 	@Override
