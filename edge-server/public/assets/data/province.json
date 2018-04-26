@@ -1,0 +1,24 @@
+{
+  "data": [
+    {
+      "provinceName": "Maharastra",
+      "province": "maharastra"
+    },
+    {
+      "provinceName": "Goa",
+      "province": "goa"
+    },{
+      "provinceName": "UP",
+      "province": "up"
+    },
+    {
+      "provinceName": "MP",
+      "province": "mp"
+    },{
+      "provinceName": "Gujarat",
+      "province": "gujarat"
+    },{
+        "provinceName": "Rajasthan",
+      "province": "rajasthan"
+    }]
+}

@@ -10,7 +10,9 @@ import com.metamagic.ms.exception.RepositoryException;
 import com.metamagic.ms.repository.GenericRepository;
 
 /**
- * @author sagar THIS REPOSITORY CLASS IS USED FOR USER CART READ
+ * @author sagar 
+ * 
+ * THIS REPOSITORY CLASS IS USED FOR USER CART READ
  */
 @Repository
 public class UserCartReadRepositoryImpl extends GenericRepository<UserCart> implements UserCartReadRepository {
@@ -29,7 +31,5 @@ public class UserCartReadRepositoryImpl extends GenericRepository<UserCart> impl
 		} finally {
 			pm.close();
 		}
-
 	}
-
 }

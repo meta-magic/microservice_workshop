@@ -1,0 +1,23 @@
+{
+  "data": [
+    {
+      "cityName": "Mumbai",
+      "city": "mumbai"
+    },
+    {
+      "cityName": "Pune",
+      "city": "pune"
+    },
+    {
+      "cityName": "Thane",
+      "city": "thane"
+    },
+    {
+      "cityName": "Solapur",
+      "city": "solapur"
+    },
+    {
+      "cityName": "Kolapur",
+      "city": "kolhapur"
+    }]
+}

@@ -1,85 +1,198 @@
+/**
+
+ * Copyright (c) 2018 Ketan Gote
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+
+*/
 package com.metamagic.ms.entity;
 
-import javax.jdo.annotations.EmbeddedOnly;
-import javax.jdo.annotations.FetchGroup;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
 
-import com.metamagic.ms.exception.IllegalArgumentCustomException;
-import com.metamagic.ms.validation.CommonValidation;
+import com.metamagic.ms.exception.InvalidDataException;
 
 /**
- * @author sagar THIS CLASS IS USED FOR ITEM OF ORDER
+ * Line items for the order.
+ * 
+ * @author ketan gote
+ *
  */
-@PersistenceCapable
-@EmbeddedOnly
-@FetchGroup(name = "items", members = { @Persistent(name = "itemId"), @Persistent(name = "name"),
-		@Persistent(name = "quantity"), @Persistent(name = "price") })
-public class ItemDocument implements CommonValidation {
+@PersistenceCapable(table = "lineitems", detachable = "true")
+public class ItemDocument {
+
+	@PrimaryKey
+	@Persistent(column = "ItemDocumentid", customValueStrategy = "uuid")
+	private String ItemDocumentid;
+
+	@Persistent(column = "orderId")
+	private OrderDocument order;
+
+	@Persistent(column = "itemid")
 	private String itemId;
 
-	private String name;
+	@Persistent(column = "itemname")
+	private String itemName;
 
-	private int quantity;
+	@Persistent(column = "price")
+	private Double price;
 
-	private double price;
+	@Persistent(column = "quantity")
+	private Integer quantity;
 
-	public ItemDocument(String itemId, String name, int quantity, double price) throws IllegalArgumentCustomException {
-		super();
+	@Persistent(column = "subtotal")
+	private Double subTotal;
+
+	/**
+	 *
+	 * @param itemId
+	 *            {@link String}
+	 * @param itemName
+	 *            {@link String}
+	 * @param price
+	 *            {@link Double}
+	 * @param quantity
+	 *            {@link Integer}
+	 * @param order
+	 *            {@link Order}
+	 * @throws InvalidDataException
+	 */
+	public ItemDocument(String itemId, String itemName, Double price, Integer quantity, OrderDocument order)
+			throws InvalidDataException {
 		this.setItemId(itemId);
-		this.setName(name);
-		this.setQuantity(quantity);
+		this.setItemName(itemName);
 		this.setPrice(price);
+		this.setQuantity(quantity);
+		this.order = order;
+		this.subTotal = price * quantity;
 	}
 
+	/**
+	 * Sets itemid if its is not null
+	 * 
+	 * @param itemId
+	 * @throws InvalidDataException
+	 */
+	private void setItemId(String itemId) throws InvalidDataException {
+		if (itemId == null)
+			throw new InvalidDataException("Invalid itemId");
+
+		this.itemId = itemId;
+	}
+
+	/**
+	 * Sets itemname if its is not null
+	 * 
+	 * @param itemName
+	 * @throws InvalidDataException
+	 */
+	private void setItemName(String itemName) throws InvalidDataException {
+		if (itemName == null)
+			throw new InvalidDataException("Invalid itemName");
+
+		this.itemName = itemName;
+	}
+
+	/**
+	 * Sets price if its is not null
+	 * 
+	 * @param price
+	 * @throws InvalidDataException
+	 */
+	private void setPrice(Double price) throws InvalidDataException {
+		if (price == null)
+			throw new InvalidDataException("Invalid price");
+
+		this.price = price;
+	}
+
+	/**
+	 * Sets quantity if its is not null
+	 * 
+	 * @param quantity
+	 * @throws InvalidDataException
+	 */
+	private void setQuantity(Integer quantity) throws InvalidDataException {
+		if (quantity == null)
+			throw new InvalidDataException("Invalid quantity");
+
+		this.quantity = quantity;
+	}
+
+	/**
+	 * @return ItemDocumentid {@link String}
+	 */
+	public String getItemDocumentid() {
+		return ItemDocumentid;
+	}
+
+	/**
+	 * @return itemid {@link String}
+	 */
 	public String getItemId() {
 		return itemId;
 	}
 
-	private void setItemId(String itemId) throws IllegalArgumentCustomException {
-		if (!this.isValid(itemId)) {
-			throw new IllegalArgumentCustomException("Item Id should not be null.");
-		} else {
-			this.itemId = itemId;
-		}
+	/**
+	 * @return item name {@link String}
+	 */
+	public String getItemName() {
+		return itemName;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	private void setName(String name) throws IllegalArgumentCustomException {
-		if (!this.isValid(name)) {
-			throw new IllegalArgumentCustomException("Name should not be null.");
-		} else {
-			this.name = name;
-		}
-	}
-
-	public int getQuantity() {
-		return quantity;
-	}
-
-	private void setQuantity(int quantity) throws IllegalArgumentCustomException {
-		if (!this.isValid(quantity)) {
-			throw new IllegalArgumentCustomException("Quantity should not be null.");
-		} else {
-			this.quantity = quantity;
-		}
-
-	}
-
-	public double getPrice() {
+	/**
+	 * @return price {@link Double}
+	 */
+	public Double getPrice() {
 		return price;
 	}
 
-	private void setPrice(double price) throws IllegalArgumentCustomException {
-		if (!this.isValid(price)) {
-			throw new IllegalArgumentCustomException("Price should not be null.");
+	/**
+	 * 
+	 * @return quantity {@link Integer}
+	 */
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+	/**
+	 * 
+	 * @return subtotal {@link Double}
+	 */
+	public Double getSubTotal() {
+		return subTotal;
+	}
+
+	@Override
+	public boolean equals(Object ItemDocument) {
+		if (ItemDocument instanceof ItemDocument) {
+			return itemId.equals(((ItemDocument) ItemDocument).getItemId());
 		} else {
-			this.price = price;
+			return false;
 		}
 
+	}
+
+	@Override
+	public int hashCode() {
+		return itemId.hashCode();
+	}
+
+	@Override
+	public String toString() {
+		return "{ itemId=" + itemId + ", itemName=" + itemName + ", price=" + price + ", quantity=" + quantity
+				+ ", subTotal=" + subTotal + " }";
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.metamagic.ms.service;
+package com.metamagic.ms.service.read;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,5 +14,7 @@ import com.metamagic.ms.bean.ResponseBean;
 public interface OrderReadService {
 
 	public ResponseEntity<ResponseBean> findAll(HttpServletRequest request);
+
+	public ResponseEntity<ResponseBean> getOrderId(HttpServletRequest request);
 
 }
