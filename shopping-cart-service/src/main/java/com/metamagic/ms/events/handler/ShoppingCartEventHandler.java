@@ -39,14 +39,14 @@ public class ShoppingCartEventHandler {
 	public void handle(ItemAddedEvent event) throws RepositoryException, IllegalArgumentCustomException {
 		System.out.println(this.getClass() + " ItemAddedEvent");
 		this.updateUserCart(event.getCustomerId(), event.getItems().getItemId(), event.getItems().getName(),
-				event.getItems().getQuantity(), event.getItems().getPrice());
+				event.getItems().getQuantity(), event.getItems().getPrice(), false);
 	}
 
 	@EventHandler
 	public void handle(ItemRemovedEvent event) throws RepositoryException, IllegalArgumentCustomException {
 		System.out.println(this.getClass() + " ItemRemovedEvent");
 		this.updateUserCart(event.getCustomerId(), event.getItems().getItemId(), event.getItems().getName(),
-				event.getItems().getQuantity(), event.getItems().getPrice());
+				event.getItems().getQuantity(), event.getItems().getPrice(), true);
 	}
 
 	@EventHandler
@@ -59,13 +59,13 @@ public class ShoppingCartEventHandler {
 		System.out.println("--kafkaTemplate--");
 	}
 
-	private void updateUserCart(String userId, String itemId, String name, Integer quantity, Double price) throws RepositoryException, IllegalArgumentCustomException {
+	private void updateUserCart(String userId, String itemId, String name, Integer quantity, Double price, boolean remove) throws RepositoryException, IllegalArgumentCustomException {
 		UserCart userCart = cartReadRepository.findByUserIdAndActive(userId, null);
 		if (userCart == null) {
 			userCart = new UserCart();
 			userCart.setUserId(userId);
 		}
-		userCart.addOrUpdateProduct(itemId, name, quantity, price);
+		userCart.addOrUpdateProduct(itemId, name, quantity, price, remove);
 
 		cartWriteRepository.save(userCart);
 	}

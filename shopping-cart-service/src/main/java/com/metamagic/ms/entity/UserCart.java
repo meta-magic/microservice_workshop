@@ -69,20 +69,21 @@ public class UserCart implements CommonValidation {
 		return lineItems;
 	}
 
-	public void addOrUpdateProduct(String id, String name, Integer quantity, Double price) {
+	public void addOrUpdateProduct(String id, String name, Integer quantity, Double price, boolean remove) {
 		if (this.lineItems == null) {
 			this.lineItems = new HashSet<LineItem>();
 		}
 
 		LineItem lineItem = new LineItem(id, name, quantity, price);
 		
-		if(!lineItems.contains(lineItem)) {
-			lineItems.add(lineItem);
-			this.addToTotal(lineItem);
+		if(remove) {
+			if(lineItems.remove(lineItem))
+				this.subFromTotal(lineItem);
 		} else {
-			lineItems.remove(lineItem);
-			this.subFromTotal(lineItem);
+			if(lineItems.add(lineItem))
+				this.addToTotal(lineItem);
 		}
+		
 	}
 
 	private void addToTotal(LineItem lineItem) {

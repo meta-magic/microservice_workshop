@@ -5,7 +5,7 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
 import com.metamagic.ms.entity.UserCart;
-import com.metamagic.ms.events.integration.PaymentDeclinedEvent;
+import com.metamagic.ms.events.integration.PaymentCompletedEvent;
 import com.metamagic.ms.exception.IllegalArgumentCustomException;
 import com.metamagic.ms.exception.RepositoryException;
 import com.metamagic.ms.repository.read.UserCartReadRepository;
@@ -25,11 +25,11 @@ public class PaymentEventListener {
 	@Autowired
 	private UserCartReadRepository cartReadRepository;
 
-	@KafkaListener(topics = "payment_failure")
-	public void receive(PaymentDeclinedEvent paymentFailureEvent)
+	@KafkaListener(topics = "payment_success")
+	public void receive(PaymentCompletedEvent paymentCompletedEvent)
 			throws RepositoryException, IllegalArgumentCustomException {
-		UserCart userCart = cartReadRepository.findByUserIdAndActive(paymentFailureEvent.getUserId(), "PREPARING");
-		userCart.setStatus("COMPLETED");
+		UserCart userCart = cartReadRepository.findByUserIdAndActive(paymentCompletedEvent.getUserId(), "PREPARING");
+		userCart.setStatus(paymentCompletedEvent.getStatus());
 		cartWriteRepository.save(userCart);
 	}
 }

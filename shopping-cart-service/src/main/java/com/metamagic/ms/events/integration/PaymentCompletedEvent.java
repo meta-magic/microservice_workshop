@@ -5,15 +5,15 @@ import java.io.Serializable;
 
 /**
  * @author Ashutosh.Jadhav
- * 
- *  This event represents declined payment.
+ *
+ *	This event represents a completed payment.
  */
-public class PaymentDeclinedEvent implements Serializable {
+public class PaymentCompletedEvent implements Serializable {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -3391996758147882617L;
+	private static final long serialVersionUID = 5466569965484039329L;
 
 	private String orderId;
 
@@ -25,7 +25,7 @@ public class PaymentDeclinedEvent implements Serializable {
 
 	private String message;
 
-	public PaymentDeclinedEvent() {
+	public PaymentCompletedEvent() {
 	}
 	
 	/**
@@ -35,7 +35,7 @@ public class PaymentDeclinedEvent implements Serializable {
 	 * @param status
 	 * @param message
 	 */
-	public PaymentDeclinedEvent(String orderId, String paymentId, String userId, String status, String message) {
+	public PaymentCompletedEvent(String orderId, String paymentId, String userId, String status, String message) {
 		super();
 		this.orderId = orderId;
 		this.paymentId = paymentId;
