@@ -2,7 +2,8 @@ package com.metamagic.ms.service.read;
 
 import java.util.List;
 
-import com.metamagic.ms.entity.OrderDocument;
+import com.metamagic.ms.dto.OrderDTO;
+import com.metamagic.ms.entity.Order;
 import com.metamagic.ms.exception.RepositoryException;
 
 /**
@@ -10,9 +11,9 @@ import com.metamagic.ms.exception.RepositoryException;
  *
  */
 public interface OrderReadService {
-	public List<OrderDocument> findAll(String userId) throws RepositoryException;
+	public List<Order> findAll(String userId) throws RepositoryException;
 
-	public String getOrderId(String userId) throws RepositoryException;
+	public OrderDTO getOrderDetails(String userId) throws RepositoryException;
 
-	public OrderDocument findOrderById(String orderId) throws RepositoryException;
+	public Order findOrderById(String orderId) throws RepositoryException;
 }

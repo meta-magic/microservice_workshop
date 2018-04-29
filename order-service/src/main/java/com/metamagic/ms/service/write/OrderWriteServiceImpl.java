@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.metamagic.ms.dto.PaymentDTO;
 import com.metamagic.ms.dto.ShippingAddressDTO;
-import com.metamagic.ms.entity.OrderDocument;
+import com.metamagic.ms.entity.Order;
 import com.metamagic.ms.events.integration.PaymentInitiatedEvent;
 import com.metamagic.ms.exception.InvalidDataException;
 import com.metamagic.ms.exception.RepositoryException;
@@ -28,9 +28,9 @@ public class OrderWriteServiceImpl implements OrderWriteService {
 	@Autowired
 	private KafkaTemplate<String, PaymentInitiatedEvent> kafkaTemplate;
 
-	public OrderDocument save(OrderDocument order) throws RepositoryException {
+	public Order save(Order order) throws RepositoryException {
 
-		OrderDocument order2 = orderWriteRepository.save(order);
+		Order order2 = orderWriteRepository.save(order);
 
 		return order2;
 	}
@@ -43,7 +43,7 @@ public class OrderWriteServiceImpl implements OrderWriteService {
 	 * @throws Exception
 	 */
 	public void addShippingAddressDetails(ShippingAddressDTO dto) throws Exception {
-		OrderDocument order = orderReadRepository.findByOrderId(dto.getOrderId());
+		Order order = orderReadRepository.findByOrderId(dto.getOrderId());
 		order.addShippingAddress(dto.getLabel(), dto.getAddress(), dto.getCountry(), dto.getProvince(),
 				dto.getPostalcode(), dto.getCity());
 		order.markPaymentExepected();
@@ -58,7 +58,7 @@ public class OrderWriteServiceImpl implements OrderWriteService {
 	 * @throws Exception
 	 */
 	public void addPaymentDetails(PaymentDTO dto) throws InvalidDataException, Exception {
-		OrderDocument order = orderReadRepository.findByOrderId(dto.getOrderId());
+		Order order = orderReadRepository.findByOrderId(dto.getOrderId());
 		order.addPaymentDetails(dto.getMode());
 		order.markPaymentInitiated();
 		orderWriteRepository.save(order);

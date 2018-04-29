@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
-import com.metamagic.ms.entity.OrderDocument;
+import com.metamagic.ms.entity.Order;
 import com.metamagic.ms.events.integration.PaymentDeclinedEvent;
 import com.metamagic.ms.events.integration.PaymentCompletedEvent;
 import com.metamagic.ms.exception.InvalidDataException;
@@ -30,7 +30,7 @@ public class PaymentEventListener {
 	// THIS MEHTOD RECEIVE PAYMENTSUCCESSEVENT
 	@KafkaListener(topics = "payment_success")
 	public void receive(PaymentCompletedEvent paymentSuccessEvent) throws RepositoryException, InvalidDataException {
-		OrderDocument orderDocument = orderReadService.findOrderById(paymentSuccessEvent.getOrderId());
+		Order orderDocument = orderReadService.findOrderById(paymentSuccessEvent.getOrderId());
 		orderDocument.markPaid();
 		orderWriteService.save(orderDocument);
 	}
@@ -38,7 +38,7 @@ public class PaymentEventListener {
 	// THIS MEHTOD RECEIVE PAYMENTFAILUREEVENT
 	@KafkaListener(topics = "payment_failure")
 	public void receive(PaymentDeclinedEvent paymentFailureEvent) throws RepositoryException, InvalidDataException {
-		OrderDocument orderDocument = orderReadService.findOrderById(paymentFailureEvent.getOrderId());
+		Order orderDocument = orderReadService.findOrderById(paymentFailureEvent.getOrderId());
 		orderDocument.markPaymentFailure();
 		orderWriteService.save(orderDocument);
 	}

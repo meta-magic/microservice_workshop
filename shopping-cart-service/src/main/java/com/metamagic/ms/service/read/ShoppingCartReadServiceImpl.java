@@ -21,8 +21,8 @@ public class ShoppingCartReadServiceImpl implements ShoppingCartReadService {
 	 * @throws RepositoryException 
 	 */
 	@Override
-	public UserCart fetchcart(String id) throws RepositoryException {
-		UserCart userCart = cartReadRepository.findByUserIdAndActive(id, null);
+	public UserCart fetchcart(String id,String status) throws RepositoryException {
+		UserCart userCart = cartReadRepository.findByUserIdAndActive(id, status);
 		return userCart;
 	}
 

@@ -34,12 +34,12 @@ public class OrderReadServiceImpl extends BaseComponent implements OrderReadServ
 		return response;
 	}
 
-	@HystrixCommand(fallbackMethod = "findOrderIdFallBack", commandKey = "Order History", groupKey = "Order Read Service")
-	public ResponseEntity<ResponseBean> getOrderId(HttpServletRequest request) {
+	@HystrixCommand(fallbackMethod = "getOrderDetailsFallBack", commandKey = "Order Details", groupKey = "Order Read Service")
+	public ResponseEntity<ResponseBean> getOrderDetails(HttpServletRequest request) {
 		org.springframework.http.HttpHeaders headers = this.createHeaders(request);
 		HttpEntity<?> httpEntity = new HttpEntity<>(headers);
 		ResponseEntity<ResponseBean> response = this.restTemplate.exchange(
-				"http://orderservice/order/query/getorderid", HttpMethod.GET, httpEntity, ResponseBean.class);
+				"http://orderservice/order/query/getOrderDetails", HttpMethod.GET, httpEntity, ResponseBean.class);
 		return response;
 	}
 
@@ -49,7 +49,7 @@ public class OrderReadServiceImpl extends BaseComponent implements OrderReadServ
 		return new ResponseEntity<ResponseBean>(response, HttpStatus.OK);
 	}
 
-	public ResponseEntity<ResponseBean> findOrderIdFallBack(HttpServletRequest request, Throwable t) {
+	public ResponseEntity<ResponseBean> getOrderDetailsFallBack(HttpServletRequest request, Throwable t) {
 		ResponseBean response = new ResponseBean(false,
 				"Enable to connect to requested Order Service, please try after some time", "error", t.getMessage());
 		return new ResponseEntity<ResponseBean>(response, HttpStatus.OK);

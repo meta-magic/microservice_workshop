@@ -30,14 +30,14 @@ import com.metamagic.ms.exception.InvalidDataException;
  *
  */
 @PersistenceCapable(table = "lineitems", detachable = "true")
-public class ItemDocument {
+public class LineItem {
 
 	@PrimaryKey
 	@Persistent(column = "ItemDocumentid", customValueStrategy = "uuid")
 	private String ItemDocumentid;
 
 	@Persistent(column = "orderId")
-	private OrderDocument order;
+	private Order order;
 
 	@Persistent(column = "itemid")
 	private String itemId;
@@ -68,7 +68,7 @@ public class ItemDocument {
 	 *            {@link Order}
 	 * @throws InvalidDataException
 	 */
-	public ItemDocument(String itemId, String itemName, Double price, Integer quantity, OrderDocument order)
+	public LineItem(String itemId, String itemName, Double price, Integer quantity, Order order)
 			throws InvalidDataException {
 		this.setItemId(itemId);
 		this.setItemName(itemName);
@@ -176,8 +176,8 @@ public class ItemDocument {
 
 	@Override
 	public boolean equals(Object ItemDocument) {
-		if (ItemDocument instanceof ItemDocument) {
-			return itemId.equals(((ItemDocument) ItemDocument).getItemId());
+		if (ItemDocument instanceof LineItem) {
+			return itemId.equals(((LineItem) ItemDocument).getItemId());
 		} else {
 			return false;
 		}

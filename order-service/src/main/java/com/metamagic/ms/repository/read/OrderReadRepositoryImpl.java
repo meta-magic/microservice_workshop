@@ -7,8 +7,8 @@ import javax.jdo.Query;
 
 import org.springframework.stereotype.Repository;
 
-import com.metamagic.ms.entity.OrderDocument;
-import com.metamagic.ms.entity.OrderDocument.Status;
+import com.metamagic.ms.entity.Order;
+import com.metamagic.ms.entity.Order.Status;
 import com.metamagic.ms.exception.RepositoryException;
 import com.metamagic.ms.repository.GenericRepository;
 
@@ -18,15 +18,15 @@ import com.metamagic.ms.repository.GenericRepository;
  *         THIS REPOSITORY USED FOR READ ORDER OPERATION
  */
 @Repository
-public class OrderReadRepositoryImpl extends GenericRepository<OrderDocument> implements OrderReadRepository {
+public class OrderReadRepositoryImpl extends GenericRepository<Order> implements OrderReadRepository {
 
 	@Override
-	public List<OrderDocument> findAll(String userId) throws RepositoryException {
+	public List<Order> findAll(String userId) throws RepositoryException {
 		PersistenceManager pm = pm();
 		try {
-			Query query = pm.newQuery(OrderDocument.class);
+			Query query = pm.newQuery(Order.class);
 			query.setFilter("this.userId == :userId");
-			List<OrderDocument> orDocuments = (List<OrderDocument>) query.execute(userId);
+			List<Order> orDocuments = (List<Order>) query.execute(userId);
 			return orDocuments;
 		} catch (Exception e) {
 			throw new RepositoryException(e.getMessage());
@@ -37,13 +37,13 @@ public class OrderReadRepositoryImpl extends GenericRepository<OrderDocument> im
 	}
 
 	@Override
-	public OrderDocument findByUserIdAndStatus(String userId, Status status) throws RepositoryException {
+	public Order findByUserIdAndStatus(String userId, Status status) throws RepositoryException {
 		PersistenceManager pm = pm();
 		try {
-			Query query = pm.newQuery(OrderDocument.class);
+			Query query = pm.newQuery(Order.class);
 			query.setFilter("this.userId == :userId && this.status== :status");
 			query.setUnique(true);
-			OrderDocument document = (OrderDocument) query.execute(userId, status);
+			Order document = (Order) query.execute(userId, status);
 			return pm.detachCopy(document);
 		} catch (Exception e) {
 			throw new RepositoryException(e.getMessage());
@@ -53,13 +53,13 @@ public class OrderReadRepositoryImpl extends GenericRepository<OrderDocument> im
 	}
 
 	@Override
-	public OrderDocument findByOrderId(String orderId) throws RepositoryException {
+	public Order findByOrderId(String orderId) throws RepositoryException {
 		PersistenceManager pm = pm();
 		try {
-			Query query = pm.newQuery(OrderDocument.class);
+			Query query = pm.newQuery(Order.class);
 			query.setFilter("this.orderId == :orderId");
 			query.setUnique(true);
-			OrderDocument orderDocument = (OrderDocument) query.execute(orderId);
+			Order orderDocument = (Order) query.execute(orderId);
 			return pm.detachCopy(orderDocument);
 		} catch (Exception e) {
 			throw new RepositoryException(e.getMessage());

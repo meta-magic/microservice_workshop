@@ -49,7 +49,7 @@ public class Payment {
 	private Double amount;
 
 	@Persistent(column = "orderId")
-	private OrderDocument order;
+	private Order order;
 
 	/**
 	 * Creates payment object with requried attributes.
@@ -59,7 +59,7 @@ public class Payment {
 	 * @param order
 	 * @throws InvalidDataException
 	 */
-	public Payment(String mode, Double amount, OrderDocument order) throws InvalidDataException {
+	public Payment(String mode, Double amount, Order order) throws InvalidDataException {
 		this.setMode(mode);
 		this.setAmount(amount);
 		this.generateTransactionId();
@@ -137,7 +137,7 @@ public class Payment {
 	 * 
 	 * @return order {@link Order}
 	 */
-	public OrderDocument getOrder() {
+	public Order getOrder() {
 		return order;
 	}
 

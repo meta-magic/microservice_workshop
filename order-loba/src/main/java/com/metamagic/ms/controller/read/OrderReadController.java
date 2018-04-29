@@ -30,8 +30,8 @@ public class OrderReadController {
 	public ResponseEntity<ResponseBean> findAll(HttpServletRequest request) {
 		return orderReadService.findAll(request);
 	}
-	@RequestMapping(value = "/getorderid", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseBean> getOrderId(HttpServletRequest request) {
-		return orderReadService.getOrderId(request);
+	@RequestMapping(value = "/getOrderDetails", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseBean> getOrderDetails(HttpServletRequest request) {
+		return orderReadService.getOrderDetails(request);
 	}
 }

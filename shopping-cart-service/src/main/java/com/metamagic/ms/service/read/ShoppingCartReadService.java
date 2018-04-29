@@ -9,5 +9,5 @@ import com.metamagic.ms.exception.RepositoryException;
  * THIS INTERFACE IS USED FOR SHOPPING CART READ OPERATION
  */
 public interface ShoppingCartReadService {
-	public UserCart fetchcart(String id) throws RepositoryException;
+	public UserCart fetchcart(String id,String status) throws RepositoryException;
 }

@@ -2,7 +2,7 @@ package com.metamagic.ms.repository.write;
 
 import org.springframework.stereotype.Repository;
 
-import com.metamagic.ms.entity.OrderDocument;
+import com.metamagic.ms.entity.Order;
 import com.metamagic.ms.exception.RepositoryException;
 import com.metamagic.ms.repository.GenericRepository;
 
@@ -12,11 +12,11 @@ import com.metamagic.ms.repository.GenericRepository;
  * THIS CLASS USED FOR WRITE ORDER OPERATION
  */
 @Repository
-public class OrderWriteRepositoryImpl extends GenericRepository<OrderDocument> implements OrderWriteRepository {
+public class OrderWriteRepositoryImpl extends GenericRepository<Order> implements OrderWriteRepository {
 
 	@Override
-	public OrderDocument save(OrderDocument order) throws RepositoryException {
-		OrderDocument persistedObject = persist(order);
+	public Order save(Order order) throws RepositoryException {
+		Order persistedObject = persist(order);
 		return persistedObject;
 	}
 

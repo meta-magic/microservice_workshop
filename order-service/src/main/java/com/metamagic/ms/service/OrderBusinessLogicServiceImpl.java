@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.metamagic.ms.aggregate.Items;
-import com.metamagic.ms.entity.ItemDocument;
-import com.metamagic.ms.entity.OrderDocument;
-import com.metamagic.ms.entity.OrderDocument.Status;
+import com.metamagic.ms.entity.LineItem;
+import com.metamagic.ms.entity.Order;
+import com.metamagic.ms.entity.Order.Status;
 import com.metamagic.ms.events.integration.OrderPlacedEvent;
 import com.metamagic.ms.exception.BussinessException;
 import com.metamagic.ms.exception.IllegalArgumentCustomException;
@@ -41,7 +41,7 @@ public class OrderBusinessLogicServiceImpl implements OrderBusinessLogicService 
 	 */
 	public void save(OrderPlacedEvent orderPlacedEvent)
 			throws BussinessException, IllegalArgumentCustomException, RepositoryException, InvalidDataException {
-		OrderDocument doOrderDocument = orderReadRepository.findByUserIdAndStatus(orderPlacedEvent.getUserId(),
+		Order doOrderDocument = orderReadRepository.findByUserIdAndStatus(orderPlacedEvent.getUserId(),
 				Status.PREPARING);
 
 		// HERE CART ITEM EMPTY
@@ -53,13 +53,13 @@ public class OrderBusinessLogicServiceImpl implements OrderBusinessLogicService 
 		if (orderPlacedEvent.getItems() != null) {
 			total = orderPlacedEvent.getItems().stream().mapToDouble(o -> o.getPrice()).sum();
 		}
-		Set<ItemDocument> documents = new HashSet<>();
+		Set<LineItem> documents = new HashSet<>();
 		for (Iterator<Items> iterator = orderPlacedEvent.getItems().iterator(); iterator.hasNext();) {
 			Items items = (Items) iterator.next();
 
 			if (items.getItemId() != null && items.getName() != null) {
 				try {
-					ItemDocument document = new ItemDocument(items.getItemId(), items.getName(), items.getPrice(),
+					LineItem document = new LineItem(items.getItemId(), items.getName(), items.getPrice(),
 							items.getQuantity(), doOrderDocument);
 					if (doOrderDocument != null) {
 						doOrderDocument.addLineItem(items.getItemId(), items.getName(), items.getPrice(),
@@ -72,7 +72,7 @@ public class OrderBusinessLogicServiceImpl implements OrderBusinessLogicService 
 			}
 		}
 		if (doOrderDocument == null) {
-			OrderDocument order = new OrderDocument(orderPlacedEvent.getCartId(), orderPlacedEvent.getUserId(),
+			Order order = new Order(orderPlacedEvent.getCartId(), orderPlacedEvent.getUserId(),
 					new Date(), documents, total, Status.PREPARING);
 			orderWriteService.save(order);
 		} else {

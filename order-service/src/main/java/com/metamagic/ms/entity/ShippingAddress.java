@@ -55,7 +55,7 @@ public class ShippingAddress {
 	private String postalcode;
 
 	@Persistent(column = "orderId")
-	private OrderDocument order;
+	private Order order;
 
 	/**
 	 * Create shipping address for order with required attributes
@@ -77,7 +77,7 @@ public class ShippingAddress {
 	 * @throws InvalidDataException
 	 */
 	public ShippingAddress(String label, String address, String country, String province, String postalcode,
-			String city, OrderDocument order) throws InvalidDataException {
+			String city, Order order) throws InvalidDataException {
 		this.setLabel(label);
 		this.setAddress(address);
 		this.setCountry(country);
@@ -191,7 +191,7 @@ public class ShippingAddress {
 	 * @param order
 	 * @throws InvalidDataException
 	 */
-	private void setOrder(OrderDocument order) throws InvalidDataException {
+	private void setOrder(Order order) throws InvalidDataException {
 		if (order == null) {
 			throw new InvalidDataException("Invalid city");
 		}

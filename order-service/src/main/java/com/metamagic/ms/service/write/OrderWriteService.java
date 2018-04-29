@@ -2,7 +2,7 @@ package com.metamagic.ms.service.write;
 
 import com.metamagic.ms.dto.PaymentDTO;
 import com.metamagic.ms.dto.ShippingAddressDTO;
-import com.metamagic.ms.entity.OrderDocument;
+import com.metamagic.ms.entity.Order;
 import com.metamagic.ms.exception.InvalidDataException;
 import com.metamagic.ms.exception.RepositoryException;
 
@@ -12,7 +12,7 @@ import com.metamagic.ms.exception.RepositoryException;
  *         THIS ITERFACE IS USED FOR ORDER WRITE OPERATION
  */
 public interface OrderWriteService {
-	public OrderDocument save(OrderDocument order) throws RepositoryException;
+	public Order save(Order order) throws RepositoryException;
 
 	public void addShippingAddressDetails(ShippingAddressDTO dto) throws Exception;
 

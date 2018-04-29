@@ -15,6 +15,6 @@ public interface OrderReadService {
 
 	public ResponseEntity<ResponseBean> findAll(HttpServletRequest request);
 
-	public ResponseEntity<ResponseBean> getOrderId(HttpServletRequest request);
+	public ResponseEntity<ResponseBean> getOrderDetails(HttpServletRequest request);
 
 }

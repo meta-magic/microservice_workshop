@@ -21,7 +21,7 @@ import com.metamagic.ms.validation.CommonValidation;
  */
 @PersistenceCapable(table = "order", detachable = "true")
 @DatastoreIdentity(customStrategy = "uuid")
-public class OrderDocument implements CommonValidation {
+public class Order implements CommonValidation {
 
 	@PrimaryKey
 	@Persistent(column = "_id", customValueStrategy = "uuid")
@@ -34,10 +34,10 @@ public class OrderDocument implements CommonValidation {
 	private String userId;
 
 	@Persistent
-	private Date date;
+	private Date orderDate;
 
 	@Persistent(mappedBy = "order", defaultFetchGroup = "true")
-	private Set<ItemDocument> items;
+	private Set<LineItem> items;
 
 	@Persistent(mappedBy = "order", defaultFetchGroup = "true")
 	private ShippingAddress shippingAddress;
@@ -52,13 +52,13 @@ public class OrderDocument implements CommonValidation {
 
 	private Status status;
 
-	private String orderNumber;
+	private String orderNo;
 
-	public OrderDocument() {
+	public Order() {
 		super();
 	}
 
-	public OrderDocument(String cartId, String userId, Date date, Set<ItemDocument> items, double total, Status status)
+	public Order(String cartId, String userId, Date date, Set<LineItem> items, double total, Status status)
 			throws IllegalArgumentCustomException {
 
 		this.setCartId(cartId);
@@ -68,6 +68,11 @@ public class OrderDocument implements CommonValidation {
 		this.setTotal(total);
 		this.setStatus(status);
 		this.moneytoryValue();
+		this.generateOrderNo();
+	}
+
+	public String getOrderNo() {
+		return orderNo;
 	}
 
 	public ShippingAddress getShippingAddress() {
@@ -101,26 +106,26 @@ public class OrderDocument implements CommonValidation {
 
 	public void addLineItem(String itemId, String itemName, Double price, Integer quantity)
 			throws InvalidDataException, IllegalArgumentCustomException {
-		ItemDocument lineItem = new ItemDocument(itemId, itemName, price, quantity, this);
+		LineItem lineItem = new LineItem(itemId, itemName, price, quantity, this);
 		items.add(lineItem);
 	}
 
 	public void initCart() {
-		this.items = new HashSet<ItemDocument>();
+		this.items = new HashSet<LineItem>();
 	}
 
 	/**
 	 * Set order date an order no
 	 */
 	private void generateOrderNo() {
-		this.date = new Date(Calendar.getInstance().getTimeInMillis());
-		this.orderNumber = "OD" + date.getTime() + "";
+		this.orderDate = new Date(Calendar.getInstance().getTimeInMillis());
+		this.orderNo = "OD" + orderDate.getTime() + "";
 	}
 
 	public Double getTotal() {
 		total = 0.0;
-		for (Iterator<ItemDocument> iterator = items.iterator(); iterator.hasNext();) {
-			ItemDocument lineItem = (ItemDocument) iterator.next();
+		for (Iterator<LineItem> iterator = items.iterator(); iterator.hasNext();) {
+			LineItem lineItem = (LineItem) iterator.next();
 			total = total + lineItem.getSubTotal();
 		}
 		return total;
@@ -131,7 +136,7 @@ public class OrderDocument implements CommonValidation {
 	 * @return orderdate {@link Date}
 	 */
 	public void updateOrderDate() {
-		this.date = new Date();
+		this.orderDate = new Date();
 	}
 
 	/**
@@ -183,11 +188,11 @@ public class OrderDocument implements CommonValidation {
 		}
 	}
 
-	public Set<ItemDocument> getItems() {
+	public Set<LineItem> getItems() {
 		return items;
 	}
 
-	private void setItems(Set<ItemDocument> items) throws IllegalArgumentCustomException {
+	private void setItems(Set<LineItem> items) throws IllegalArgumentCustomException {
 		if (!this.isValid(items)) {
 			throw new IllegalArgumentCustomException("items should not be null.");
 		} else {
@@ -196,14 +201,14 @@ public class OrderDocument implements CommonValidation {
 	}
 
 	public Date getDate() {
-		return date;
+		return orderDate;
 	}
 
-	private void setDate(Date date) throws IllegalArgumentCustomException {
-		if (!this.isValid(date)) {
+	private void setDate(Date orderDate) throws IllegalArgumentCustomException {
+		if (!this.isValid(orderDate)) {
 			throw new IllegalArgumentCustomException("Date should not be null.");
 		} else {
-			this.date = date;
+			this.orderDate = orderDate;
 		}
 	}
 
@@ -225,10 +230,6 @@ public class OrderDocument implements CommonValidation {
 		} else {
 			this.status = status;
 		}
-	}
-
-	public String getOrderNumber() {
-		return orderNumber;
 	}
 
 	/**
@@ -263,15 +264,6 @@ public class OrderDocument implements CommonValidation {
 		Payment payment = new Payment(paymentmode, getTotal(), this);
 		this.payment = payment;
 		this.markPaymentInitiated();
-	}
-
-	private void setOrderNumber(String orderNumber) throws IllegalArgumentCustomException {
-		if (!this.isValid(orderNumber)) {
-			throw new IllegalArgumentCustomException("Order Number should not be null.");
-		} else {
-			this.orderNumber = orderNumber;
-		}
-
 	}
 
 	public static enum Status {
