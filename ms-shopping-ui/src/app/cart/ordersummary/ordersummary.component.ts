@@ -20,6 +20,7 @@ export class OrderSummary implements OnInit{
   showErrorDialogue: boolean;
   number: number;
   msg:any;
+  showOrdersDialogue:boolean;
   constructor(private router:Router,private httpclient:HttpClient,private cookieService: CookieService){
     this.shippingAddress=new ShippingAddress();
     this.payment=new Payment();
@@ -128,10 +129,10 @@ export class OrderSummary implements OnInit{
         },
         ()=>{
           if(responseData.success){
-            this.router.navigate(['home/order']);
             this.orderSummary=true;
             this.deliveryAddress=false;
             this.paymentOptions=false;
+            this.showOrdersDialogue=true;
           }
         }
       )
@@ -166,11 +167,11 @@ export class OrderSummary implements OnInit{
 
 
 //THIS METHOD IS USED FOR GETTING ORDER ID
-fetchOrderId(){
+fetchOrderDetails(){
   const headers = new HttpHeaders().append('Content-Type', 'application/json;charset=UTF-8').append('tokenid',this.cookieService.get('tokenid'));
 
   let responseData:any;
-   this.httpclient.get('api/od/order/query/getorderid',{headers}).subscribe(
+   this.httpclient.get('api/od/order/query/getOrderDetails',{headers}).subscribe(
      response=>{
        responseData=response;
      },
@@ -179,14 +180,26 @@ fetchOrderId(){
        this.showErrorDialogue = true;
      },
      () => {
-       this.payment.orderId =responseData.response;
-       this.shippingAddress.orderId =responseData.response;
+       if(responseData){
+        this.payment.orderId =responseData.response.orderId;
+        this.shippingAddress.orderId =responseData.response.orderId;
+        if (responseData.response && responseData.response.itemDTOs && responseData.response.itemDTOs.length > 0) {
+         this.data = responseData.response.itemDTOs;
+         this.number = responseData.response.itemDTOs.length;
+         this.total = responseData.response.total;
+     }
+     else {
+         this.number = 0;
+     }
+       }
+
      }
    );
  }
 //THIS METHOD FETCH THE ITEM WHICH ADDED IN CART
 fetchData() {
   let req = {
+    "status":"PREPARING"
   };
   let responsedata: any;
   const headers = new HttpHeaders().append('Content-Type', 'application/json;charset=UTF-8').append('tokenid', this.cookieService.get('tokenid'));
@@ -222,10 +235,17 @@ setData(responsedata: any) {
       this.msg = responsedata.message;
   }
 }
-
+//Method that navigates to order screen
+showOrders() {
+  this.router.navigate(['home/order']);
+}
+ //Method to close the Dialogue box
+ cancel() {
+  this.showOrdersDialogue = false;
+}
 ngOnInit(){
-  this.fetchData();
-  this.fetchOrderId();
+  // this.fetchData();
+  this.fetchOrderDetails();
 }
 }
 

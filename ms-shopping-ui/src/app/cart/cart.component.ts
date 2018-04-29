@@ -38,6 +38,7 @@ export class CartComponent implements OnInit {
     //Method to fetch Items that are added in the cart
     fetchData() {
         let req = {
+          "status":null
         };
         let responsedata: any;
         const headers = new HttpHeaders().append('Content-Type', 'application/json;charset=UTF-8').append('tokenid', this.cookieService.get('tokenid'));
@@ -115,7 +116,9 @@ export class CartComponent implements OnInit {
             }
             ,
             () => {
-                this.showOrdersDialogue = true;
+
+                this.router.navigate(['home/order_summary']);
+                // this.showOrdersDialogue = true;
             }
         );
     }
