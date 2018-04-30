@@ -1,43 +1,55 @@
+/**
+
+ * Copyright (c) 2018 Ketan Gote
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+
+*/
 package com.metamagic.ms.entity;
 
+import java.sql.Date;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import javax.jdo.annotations.DatastoreIdentity;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
-import com.metamagic.ms.exception.IllegalArgumentCustomException;
 import com.metamagic.ms.exception.InvalidDataException;
-import com.metamagic.ms.validation.CommonValidation;
 
-/**
- * @author sagar
- *
- */
 @PersistenceCapable(table = "order", detachable = "true")
-@DatastoreIdentity(customStrategy = "uuid")
-public class Order implements CommonValidation {
+public class Order {
 
 	@PrimaryKey
-	@Persistent(column = "_id", customValueStrategy = "uuid")
+	@Persistent(column = "orderid", customValueStrategy = "uuid")
 	private String orderId;
 
-	@Persistent
-	private String cartId;
-
-	@Persistent
+	@Persistent(column = "userid")
 	private String userId;
 
-	@Persistent
+	@Persistent(column = "orderno")
+	private String orderNo;
+
+	@Persistent(column = "orderdate")
 	private Date orderDate;
 
+	@Persistent(column = "status")
+	private Status status;
+
 	@Persistent(mappedBy = "order", defaultFetchGroup = "true")
-	private Set<LineItem> items;
+	private Set<LineItem> lineItems;
 
 	@Persistent(mappedBy = "order", defaultFetchGroup = "true")
 	private ShippingAddress shippingAddress;
@@ -48,70 +60,22 @@ public class Order implements CommonValidation {
 	@Persistent(defaultFetchGroup = "true")
 	private MoneytoryValue moneytoryValue;
 
-	private double total;
-
-	private Status status;
-
-	private String orderNo;
-
-	public Order() {
-		super();
-	}
-
-	public Order(String cartId, String userId, Date date, Set<LineItem> items, double total, Status status)
-			throws IllegalArgumentCustomException {
-
-		this.setCartId(cartId);
+	/**
+	 *
+	 * @param userId
+	 *            {@link String}
+	 * @throws InvalidDataException
+	 */
+	public Order(String userId) throws InvalidDataException {
 		this.setUserId(userId);
-		this.setDate(date);
-		this.setItems(items);
-		this.setTotal(total);
-		this.setStatus(status);
-		this.moneytoryValue();
 		this.generateOrderNo();
-	}
-
-	public String getOrderNo() {
-		return orderNo;
-	}
-
-	public ShippingAddress getShippingAddress() {
-		return shippingAddress;
+		this.initCart();
+		this.markPreparing();
+		this.moneytoryValue();
 	}
 
 	public Payment getPayment() {
 		return payment;
-	}
-
-	public MoneytoryValue getMoneytoryValue() {
-		return moneytoryValue;
-	}
-
-	public String getOrderId() {
-		return orderId;
-	}
-
-	public void setOrderId(String orderId) {
-		this.orderId = orderId;
-	}
-
-	/**
-	 * 
-	 * @return {@link MoneytoryValue}
-	 */
-	public MoneytoryValue moneytoryValue() {
-		moneytoryValue = new MoneytoryValue(getTotal(), "USD");
-		return moneytoryValue;
-	}
-
-	public void addLineItem(String itemId, String itemName, Double price, Integer quantity)
-			throws InvalidDataException, IllegalArgumentCustomException {
-		LineItem lineItem = new LineItem(itemId, itemName, price, quantity, this);
-		items.add(lineItem);
-	}
-
-	public void initCart() {
-		this.items = new HashSet<LineItem>();
 	}
 
 	/**
@@ -122,23 +86,20 @@ public class Order implements CommonValidation {
 		this.orderNo = "OD" + orderDate.getTime() + "";
 	}
 
-	public Double getTotal() {
-		total = 0.0;
-		for (Iterator<LineItem> iterator = items.iterator(); iterator.hasNext();) {
-			LineItem lineItem = (LineItem) iterator.next();
-			total = total + lineItem.getSubTotal();
-		}
-		return total;
+	/**
+	 * Initialize the empty cart
+	 */
+	private void initCart() {
+		this.lineItems = new HashSet<LineItem>();
 	}
 
 	/**
-	 * 
-	 * @return orderdate {@link Date}
+	 * Maps cart status as PREPARING
 	 */
-	public void updateOrderDate() {
-		this.orderDate = new Date();
+	public void markPreparing() {
+		this.status = Status.PREPARING;
 	}
-
+	
 	/**
 	 * Maps cart status as open
 	 */
@@ -161,75 +122,53 @@ public class Order implements CommonValidation {
 	}
 
 	public void markPaymentInitiated() throws InvalidDataException {
+		if (this.shippingAddress == null) {
+			throw new InvalidDataException("Invalid state exception");
+		}
 		this.status = Status.PAYMENT_INITIATED;
 	}
 
-	public String getCartId() {
-		return cartId;
+	/**
+	 * 
+	 * @return {@link MoneytoryValue}
+	 */
+	public MoneytoryValue moneytoryValue() {
+		moneytoryValue = new MoneytoryValue(getTotal(), "USD");
+		return moneytoryValue;
 	}
 
-	private void setCartId(String cartId) throws IllegalArgumentCustomException {
-		if (!this.isValid(cartId)) {
-			throw new IllegalArgumentCustomException("Cart Id should not be null.");
-		} else {
-			this.cartId = cartId;
+	/**
+	 * Added line item to user cart
+	 * 
+	 * @param itemId
+	 * @param itemName
+	 * @param price
+	 * @param quantity
+	 * @throws InvalidDataException
+	 */
+	public void addLineItem(String itemId, String itemName, Double price, Integer quantity)
+			throws InvalidDataException {
+		LineItem lineItem = new LineItem(itemId, itemName, price, quantity, this);
+		this.lineItems.add(lineItem);
+		this.moneytoryValue();
+	}
+
+	/**
+	 * Removes line item from user cart
+	 * 
+	 * @param itemId
+	 */
+	public void removeItem(String itemId) {
+		for (LineItem lineItem : lineItems) {
+			if (lineItem.getItemId().equals(itemId)) {
+				lineItems.remove(lineItem);
+			}
 		}
-	}
 
-	public String getUserId() {
-		return userId;
 	}
-
-	private void setUserId(String userId) throws IllegalArgumentCustomException {
-		if (!this.isValid(userId)) {
-			throw new IllegalArgumentCustomException("User Id should not be null.");
-		} else {
-			this.userId = userId;
-		}
-	}
-
-	public Set<LineItem> getItems() {
-		return items;
-	}
-
-	private void setItems(Set<LineItem> items) throws IllegalArgumentCustomException {
-		if (!this.isValid(items)) {
-			throw new IllegalArgumentCustomException("items should not be null.");
-		} else {
-			this.items = items;
-		}
-	}
-
-	public Date getDate() {
-		return orderDate;
-	}
-
-	private void setDate(Date orderDate) throws IllegalArgumentCustomException {
-		if (!this.isValid(orderDate)) {
-			throw new IllegalArgumentCustomException("Date should not be null.");
-		} else {
-			this.orderDate = orderDate;
-		}
-	}
-
-	private void setTotal(double total) throws IllegalArgumentCustomException {
-		if (!this.isValid(total)) {
-			throw new IllegalArgumentCustomException("total should not be null.");
-		} else {
-			this.total = total;
-		}
-	}
-
-	public Status getStatus() {
-		return status;
-	}
-
-	private void setStatus(Status status) throws IllegalArgumentCustomException {
-		if (!this.isValid(status)) {
-			throw new IllegalArgumentCustomException("status should not be null.");
-		} else {
-			this.status = status;
-		}
+	
+	public void removeLineItems() {
+		this.initCart();
 	}
 
 	/**
@@ -252,6 +191,7 @@ public class Order implements CommonValidation {
 		} else {
 			this.shippingAddress.updateShippingAddress(shippinglabel, address, country, province, postalcode, city);
 		}
+		this.markPaymentExepected();
 	}
 
 	/**
@@ -264,6 +204,110 @@ public class Order implements CommonValidation {
 		Payment payment = new Payment(paymentmode, getTotal(), this);
 		this.payment = payment;
 		this.markPaymentInitiated();
+	}
+
+	/**
+	 * 
+	 * @return total {@link Double}
+	 */
+	public Double getTotal() {
+		double total = 0.0;
+		for (Iterator iterator = lineItems.iterator(); iterator.hasNext();) {
+			LineItem lineItem = (LineItem) iterator.next();
+			System.out.println("---" + lineItem.getItemId() + "--" + lineItem.getItemName() + "--" + lineItem.getPrice()
+					+ "--" + lineItem.getQuantity());
+			total = total + lineItem.getSubTotal();
+		}
+		return total;
+	}
+
+	/**
+	 * 
+	 * @param userId
+	 *            {@link String}
+	 * @throws InvalidDataException
+	 */
+	private void setUserId(String userId) throws InvalidDataException {
+		if (userId == null || userId.length() == 0)
+			throw new InvalidDataException("Invalid UserId");
+		else
+			this.userId = userId;
+	}
+
+	/**
+	 * 
+	 * @return orderid {@link String}
+	 */
+	public String getOrderId() {
+		return orderId;
+	}
+
+	/**
+	 * 
+	 * @return userid {@link String}
+	 */
+	public String getUserId() {
+		return userId;
+	}
+
+	/**
+	 * 
+	 * @return orderno {@link String}
+	 */
+	public String getOrderNo() {
+		return orderNo;
+	}
+
+	/**
+	 * 
+	 * @return orderdate {@link Date}
+	 */
+	public Date getOrderDate() {
+		return orderDate;
+	}
+
+	/**
+	 * 
+	 * @return order status {@link String}
+	 */
+	public boolean isPaid() {
+		return this.status.equals(Status.PAID);
+	}
+
+	/**
+	 * 
+	 * @return Set<LineItem>
+	 */
+	public Set<LineItem> getLineItems() {
+		return lineItems;
+	}
+
+	public Status getStatus() {
+		return this.status;
+	}
+
+	public MoneytoryValue getMoneytoryValue() {
+		return this.moneytoryValue;
+	}
+
+	@Override
+	public boolean equals(Object order) {
+		if (order instanceof Order) {
+			return orderId.equals(((Order) order).getOrderId());
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return orderId.hashCode();
+	}
+
+	@Override
+	public String toString() {
+		return "Order [orderId=" + orderId + ", userId=" + userId + ", orderNo=" + orderNo + ", orderDate=" + orderDate
+				+ ", status=" + status + ", lineItems=" + lineItems + ", shippingAddress=" + shippingAddress
+				+ ", payment=" + payment + ", moneytoryValue=" + moneytoryValue + "]";
 	}
 
 	public static enum Status {

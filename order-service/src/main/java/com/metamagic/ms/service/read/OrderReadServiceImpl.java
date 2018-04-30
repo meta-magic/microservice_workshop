@@ -1,15 +1,10 @@
 package com.metamagic.ms.service.read;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.metamagic.ms.dto.OrderDTO;
-import com.metamagic.ms.dto.OrderItemDTO;
-import com.metamagic.ms.entity.LineItem;
 import com.metamagic.ms.entity.Order;
 import com.metamagic.ms.entity.Order.Status;
 import com.metamagic.ms.exception.RepositoryException;
@@ -31,19 +26,9 @@ public class OrderReadServiceImpl implements OrderReadService {
 	}
 
 	// THIS METHOD RETURN ORDER DTO WHICH IS IN PREPAREING STATE
-	public OrderDTO getOrderDetails(String userId) throws RepositoryException {
+	public Order getOrderDetails(String userId) throws RepositoryException {
 		Order document = orderReadRepository.findByUserIdAndStatus(userId, Status.PREPARING);
-		OrderDTO orderDTO = new OrderDTO();
-		List<OrderItemDTO> itemDTOs = new ArrayList<>();
-		for (Iterator<LineItem> iterator = document.getItems().iterator(); iterator.hasNext();) {
-			LineItem itemDocument = (LineItem) iterator.next();
-			itemDTOs.add(
-					new OrderItemDTO(itemDocument.getItemName(), itemDocument.getPrice(), itemDocument.getQuantity()));
-		}
-		orderDTO.setItemDTOs(itemDTOs);
-		orderDTO.setOrderId(document.getOrderId());
-		orderDTO.setTotal(document.getTotal());
-		return orderDTO;
+		return document;
 	}
 
 	// THIS METHOD RETRUN ORDER BY ID
