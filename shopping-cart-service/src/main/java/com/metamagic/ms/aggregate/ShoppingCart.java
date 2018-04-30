@@ -1,6 +1,5 @@
 package com.metamagic.ms.aggregate;
 
-
 import static org.axonframework.commandhandling.model.AggregateLifecycle.apply;
 
 import java.util.HashSet;
@@ -21,6 +20,7 @@ import com.metamagic.ms.commands.RemoveItemCommand;
 import com.metamagic.ms.events.CartCreatedEvent;
 import com.metamagic.ms.events.ItemAddedEvent;
 import com.metamagic.ms.events.ItemRemovedEvent;
+import com.metamagic.ms.events.integration.EmptyCartEvent;
 import com.metamagic.ms.events.integration.OrderPlacedEvent;
 
 /**
@@ -33,114 +33,120 @@ public class ShoppingCart {
 
 	@AggregateIdentifier
 	private String cartId;
-	
+
 	private String customerId;
-	
+
 	private Set<Items> items;
-	
-	public ShoppingCart(){
+
+	public ShoppingCart() {
 	}
-	
+
 	@CommandHandler
-	public ShoppingCart(CreateCartCommand command){
-		System.out.println(this.getClass()+" CreateCartCommand Start "+command);
+	public ShoppingCart(CreateCartCommand command) {
+		System.out.println(this.getClass() + " CreateCartCommand Start " + command);
 		apply(new CartCreatedEvent(command.getCartId(), command.getCustomerId()));
-		System.out.println(this.getClass()+" CreateCartCommand End "+command);
+		System.out.println(this.getClass() + " CreateCartCommand End " + command);
 	}
-	
+
 	@EventSourcingHandler
-	public void handle(CartCreatedEvent event){
-		System.out.println(this.getClass()+" CartCreatedEvent Start "+event);
+	public void handle(CartCreatedEvent event) {
+		System.out.println(this.getClass() + " CartCreatedEvent Start " + event);
 		this.cartId = event.getCartId();
 		this.customerId = event.getCustomerId();
 		this.items = new HashSet<Items>();
-		System.out.println(this.getClass()+" CartCreatedEvent End "+event);
+		System.out.println(this.getClass() + " CartCreatedEvent End " + event);
 	}
-	
+
 	@CommandHandler
-	public void handleCommand(AddItemCommand command) throws Exception{
-		System.out.println(this.getClass()+" AddItemCommand Start "+command);
+	public void handleCommand(AddItemCommand command) throws Exception {
+		System.out.println(this.getClass() + " AddItemCommand Start " + command);
 		Items items = new Items(command.getItemId(), command.getName(), command.getQuantity(), command.getPrice());
 		ItemAddedEvent addedEvent = new ItemAddedEvent(this.cartId, this.customerId, items);
 		apply(addedEvent);
-		System.out.println(this.getClass()+" AddItemCommand End "+command);
+		System.out.println(this.getClass() + " AddItemCommand End " + command);
 	}
-	
+
 	@EventSourcingHandler
-	public void handle(ItemAddedEvent event){
-		System.out.println(this.getClass()+" ItemAddedEvent Start "+event);
+	public void handle(ItemAddedEvent event) {
+		System.out.println(this.getClass() + " ItemAddedEvent Start " + event);
 		this.cartId = event.getCartId();
 		this.customerId = event.getCustomerId();
-		
+
 		for (Iterator iterator = items.iterator(); iterator.hasNext();) {
 			Items items2 = (Items) iterator.next();
-			if(items2.getItemId().equals(event.getItems().getItemId())){
+			if (items2.getItemId().equals(event.getItems().getItemId())) {
 				iterator.remove();
 			}
 		}
-		
-		Items items = new Items(event.getItems().getItemId(), event.getItems().getName(), event.getItems().getQuantity(),event.getItems().getPrice());
+
+		Items items = new Items(event.getItems().getItemId(), event.getItems().getName(),
+				event.getItems().getQuantity(), event.getItems().getPrice());
 		this.items.add(items);
-		
-		this.printCurrentState();
-		System.out.println(this.getClass()+" ItemAddedEvent End "+event);
+		System.out.println(this.getClass() + " ItemAddedEvent End " + event);
 	}
-	
+
 	@CommandHandler
 	public void handleCommand(RemoveItemCommand command) {
-		System.out.println(this.getClass()+" RemoveItemCommand Start "+command);
-		Items items = new Items(command.getItemId(), command.getName(), command.getQuantity(),command.getPrice());
+		System.out.println(this.getClass() + " RemoveItemCommand Start " + command);
+		Items items = new Items(command.getItemId(), command.getName(), command.getQuantity(), command.getPrice());
 		ItemRemovedEvent event = new ItemRemovedEvent(this.cartId, this.customerId, items);
 		apply(event);
-		System.out.println(this.getClass()+" RemoveItemCommand End "+command);
+		System.out.println(this.getClass() + " RemoveItemCommand End " + command);
 	}
-	
+
 	@EventSourcingHandler
-	public void handle(ItemRemovedEvent event){
-		System.out.println(this.getClass()+" ItemRemovedEvent Start "+event);
+	public void handle(ItemRemovedEvent event) {
+		System.out.println(this.getClass() + " ItemRemovedEvent Start " + event);
 		this.cartId = event.getCartId();
 		this.customerId = event.getCustomerId();
-		
-		
+
 		for (Iterator iterator = items.iterator(); iterator.hasNext();) {
 			Items items2 = (Items) iterator.next();
-			if(items2.getItemId().equals(event.getItems().getItemId())){
+			if (items2.getItemId().equals(event.getItems().getItemId())) {
 				iterator.remove();
 			}
 		}
-		
-		this.printCurrentState();
-		System.out.println(this.getClass()+" ItemRemovedEvent End "+event);
+		System.out.println(this.getClass() + " ItemRemovedEvent End " + event);
 	}
-	
+
 	@CommandHandler
-	public void handle(PlaceOrderCommand command){
-		System.out.println(this.getClass()+" PlaceOrderCommand Start "+command);
+	public void handle(PlaceOrderCommand command) {
+		System.out.println(this.getClass() + " PlaceOrderCommand Start " + command);
 		this.cartId = command.getCartId();
 		this.customerId = command.getCustomerId();
 		OrderPlacedEvent orderPlacedEvent = new OrderPlacedEvent(cartId, customerId, items);
 		apply(orderPlacedEvent);
-		System.out.println(this.getClass()+" PlaceOrderCommand End "+command);
+		System.out.println(this.getClass() + " PlaceOrderCommand End " + command);
+	}
+
+	@EventSourcingHandler
+	public void handle(OrderPlacedEvent event) {
+		System.out.println(this.getClass() + " OrderPlacedEvent Start " + event);
+		this.cartId = event.getCartId();
+		this.customerId = event.getUserId();
+		// this.items = new HashSet<Items>();
+		System.out.println(this.getClass() + " OrderPlacedEvent End " + event);
+	}
+
+	@CommandHandler
+	public void handle(EmptyCartCommand command) {
+		System.out.println(this.getClass() + " EmptyCartCommand Start " + command);
+		this.cartId = command.getCartId();
+		this.customerId = command.getCustomerId();
+		apply(new EmptyCartEvent(command.getCustomerId()));
+		System.out.println(this.getClass() + " EmptyCartCommand End " + command);
 	}
 	
 	@EventSourcingHandler
-	public void handle(OrderPlacedEvent orderPlacedEvent) {
-		System.out.println(this.getClass()+" OrderPlacedEvent Start "+orderPlacedEvent);
-		this.cartId = orderPlacedEvent.getCartId();
-		this.customerId = orderPlacedEvent.getUserId();
-		this.items = new HashSet<Items>();
-		System.out.println(this.getClass()+" OrderPlacedEvent End "+orderPlacedEvent);
+	public void handle(EmptyCartEvent event) {
+		System.out.println(this.getClass() + " EmptyCartEvent Start " + event);
+		this.cartId = event.getUserId();
+		this.customerId = event.getUserId();
+		 this.items = new HashSet<Items>();
+		System.out.println(this.getClass() + " EmptyCartEvent End " + event);
 	}
-	
-	@CommandHandler
-	public void handle(EmptyCartCommand emptyCartCommand){
-		System.out.println(" +++++++++++++>  cart emptied ");
-//		markDeleted();
-	}
-	
-	
-	
-	private void printCurrentState(){
+
+	private void printCurrentState() {
 		System.out.println("\n\n");
 		System.out.println(this.toString());
 		System.out.println("\n\n");
@@ -150,6 +156,5 @@ public class ShoppingCart {
 	public String toString() {
 		return "ShoppingCart [cartId=" + cartId + ", customerId=" + customerId + ", items=" + items + "]";
 	}
-	
-	
+
 }

@@ -46,7 +46,6 @@ public class OrderWriteServiceImpl implements OrderWriteService {
 		Order order = orderReadRepository.findByOrderId(dto.getOrderId());
 		order.addShippingAddress(dto.getLabel(), dto.getAddress(), dto.getCountry(), dto.getProvince(),
 				dto.getPostalcode(), dto.getCity());
-		order.markPaymentExepected();
 		orderWriteRepository.save(order);
 	}
 
@@ -60,7 +59,6 @@ public class OrderWriteServiceImpl implements OrderWriteService {
 	public void addPaymentDetails(PaymentDTO dto) throws InvalidDataException, Exception {
 		Order order = orderReadRepository.findByOrderId(dto.getOrderId());
 		order.addPaymentDetails(dto.getMode());
-		order.markPaymentInitiated();
 		orderWriteRepository.save(order);
 		kafkaTemplate.send("order_payment", new PaymentInitiatedEvent(order.getUserId(), order.getOrderId(),
 				order.getPayment().getPaymentid(), order.getTotal(), dto.getMode()));

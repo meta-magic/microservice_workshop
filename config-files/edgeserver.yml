@@ -33,9 +33,9 @@ zuul:
     orderlobaservice:
       path: /od/**
       serviceId: ORDERLOBASERVICE
-    authlobaservice:
+    userauthlobaservice:
       path: /as/**
-      serviceId: AUTHLOBASERVICE
+      serviceId: USERAUTHLOBASERVICE
       
 management:
     endpoints:

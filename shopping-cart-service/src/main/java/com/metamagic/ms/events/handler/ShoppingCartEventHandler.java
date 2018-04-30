@@ -9,6 +9,7 @@ import com.metamagic.ms.entity.UserCart;
 import com.metamagic.ms.events.CartCreatedEvent;
 import com.metamagic.ms.events.ItemAddedEvent;
 import com.metamagic.ms.events.ItemRemovedEvent;
+import com.metamagic.ms.events.integration.EmptyCartEvent;
 import com.metamagic.ms.events.integration.OrderPlacedEvent;
 import com.metamagic.ms.exception.IllegalArgumentCustomException;
 import com.metamagic.ms.exception.RepositoryException;
@@ -58,7 +59,15 @@ public class ShoppingCartEventHandler {
 
 		System.out.println("--kafkaTemplate--");
 	}
-
+	
+	@EventHandler
+	public void handle(EmptyCartEvent emptyCartEvent) throws IllegalArgumentCustomException, RepositoryException {
+		System.out.println("**************Empty Card Event**********");
+		
+		UserCart userCart = cartReadRepository.findByUserIdAndActive(emptyCartEvent.getUserId(), null);
+		userCart.setStatus("COMPLETED");
+		cartWriteRepository.save(userCart);
+	}
 	private void updateUserCart(String userId, String itemId, String name, Integer quantity, Double price, boolean remove) throws RepositoryException, IllegalArgumentCustomException {
 		UserCart userCart = cartReadRepository.findByUserIdAndActive(userId, null);
 		if (userCart == null) {
