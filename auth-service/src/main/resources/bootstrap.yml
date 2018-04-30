@@ -1,6 +1,6 @@
 spring:
   application:
-    name: authservice
+    name: userauthservice
   cloud:
     config:
       uri: http://localhost:6061

@@ -34,7 +34,7 @@ public class AuthServiceImpl implements AuthService{
 		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		HttpEntity request = new HttpEntity(object, headers);
-		ResponseEntity response = this.restTemplate.exchange("http://authservice/auth/authenticate", HttpMethod.POST,request,ResponseBean.class);
+		ResponseEntity response = this.restTemplate.exchange("http://userauthservice/auth/authenticate", HttpMethod.POST,request,ResponseBean.class);
 		return response;
 	}
 	

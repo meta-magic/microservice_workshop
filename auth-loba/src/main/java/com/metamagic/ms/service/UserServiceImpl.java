@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
 		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		HttpEntity request = new HttpEntity(object, headers);
-		ResponseEntity response = this.restTemplate.exchange("http://authservice/user/create", HttpMethod.POST, request,
+		ResponseEntity response = this.restTemplate.exchange("http://userauthservice/user/create", HttpMethod.POST, request,
 				ResponseBean.class);
 		return response;
 	}

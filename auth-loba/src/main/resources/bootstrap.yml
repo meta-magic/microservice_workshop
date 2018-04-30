@@ -1,6 +1,6 @@
 spring:
   application:
-    name: authlobaservice
+    name: userauthlobaservice
   cloud:
     config:
       uri: http://localhost:6061

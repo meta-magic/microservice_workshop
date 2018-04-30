@@ -1,10 +1,16 @@
 
 server:
-  port: 9085 
+  port: 8585 
 
 spring:
   application:
-    name: authlobaservice  
+    name: userauthservice
+  kafka:
+    bootstrap-servers: localhost:9092
+    
+token:
+  key: abcd0987654321qwertyuio
+  validity: 86400000      
   
 eureka:
   instance:
@@ -23,9 +29,14 @@ productservice:
     # NFLoadBalancerRuleClassName: com.netflix.loadbalancer.WeightedResponseTimeRule
     # NFLoadBalancerRuleClassName: com.netflix.loadbalancer.AvailabilityFilteringRule
     ServerListRefreshInterval : 5000
-
+            
+logging:
+  file: /home/sagar/git/logs/userauthservice.log 
+  level:
+    com.metamagic.ms: INFO
+    
 management:
     endpoints:
         web:
          exposure:
-          include: info, health, metrics, hystrix.stream
+          include: info, health, metrics
