@@ -43,14 +43,26 @@ export class OrderComponent implements OnInit{
     setData(responsedata: any) {
         if (responsedata && responsedata.success) {
             this.showorders = true;
-            this.data = responsedata.response;
-
+            this.addDateFormate(responsedata.response);
         } else {
           this.msgData.push(responsedata.message);
           this.showErrorDialog=true;
         }
     }
 
+    addDateFormate(data:any):any{
+      let finalData=[];
+      data.forEach(element => {
+        let  obj=element;
+        if(element.date){
+         let date= new Date(element.date);
+         console.log(date);
+         obj.date=date.getDate()+'-'+new Number(date.getMonth()+1)+'-'+date.getFullYear();
+        }
+        finalData.push(obj);
+      });
+      this.data=finalData;
+    }
     close(){
       this.showErrorDialog=false;
       this.msgData=[];

@@ -25,7 +25,7 @@
                     <amexio-row *ngFor="let node of data">
                         <amexio-column [size]=3>
                             <amexio-label size="small">
-                                {{node.name}}
+                                {{node.itemName}}
                             </amexio-label>
 
                         </amexio-column>
@@ -78,16 +78,17 @@
                         </amexio-column>
                         <amexio-column size="6">
                             <amexio-dropdown [(ngModel)]="shippingAddress.country" [place-holder]="'Choose'" name="shippingAddress.country" [data-reader]="'data'" [field-label]="'Country'" [http-url]="'assets/data/country.json'" [http-method]="'get'" [display-field]="'countryName'"
-                                [value-field]="'countryName'">
+                                [search]="true" [value-field]="'countryName'">
                             </amexio-dropdown>
                         </amexio-column>
                         <amexio-column size="6">
                             <amexio-dropdown [(ngModel)]="shippingAddress.province" [place-holder]="'Choose'" name="shippingAddress.province" [data-reader]="'data'" [field-label]="'Province'" [http-url]="'assets/data/province.json'" [http-method]="'get'" [display-field]="'provinceName'"
-                                [value-field]="'province'">
+                                [search]="true" [value-field]="'province'">
                             </amexio-dropdown>
                         </amexio-column>
                         <amexio-column size="6">
-                            <amexio-dropdown [(ngModel)]="shippingAddress.city" [place-holder]="'Choose'" name="shippingAddress.city" [data-reader]="'data'" [field-label]="'City'" [http-url]="'assets/data/city.json'" [http-method]="'get'" [display-field]="'cityName'" [value-field]="'city'">
+                            <amexio-dropdown [(ngModel)]="shippingAddress.city" [search]="true" [place-holder]="'Choose'" name="shippingAddress.city" [data-reader]="'data'" [field-label]="'City'" [http-url]="'assets/data/city.json'" [http-method]="'get'" [display-field]="'cityName'"
+                                [value-field]="'city'">
                             </amexio-dropdown>
                         </amexio-column>
                         <amexio-column size="6">
@@ -140,6 +141,20 @@
     </amexio-body>
     <amexio-action>
         <amexio-button type="primary" (onClick)="close()" [label]="'Ok'">
+        </amexio-button>
+    </amexio-action>
+</amexio-dialogue>
+<amexio-dialogue [show-dialogue]="showOrdersDialogue" [custom]="true" [closable]="true" [title]="'Confirm'" [type]="'confirm'" (close)="showOrdersDialogue = !showOrdersDialogue">
+    <amexio-body>
+        <amexio-label size="small">
+            Your Order Placed Successfully!!
+        </amexio-label>
+    </amexio-body>
+    <amexio-action>
+        <amexio-button (onClick)="cancel()" [size]="'small'" [label]="'Cancel'">
+        </amexio-button>
+
+        <amexio-button type="primary" (onClick)="showOrders()" [type]="'yellow'" [size]="'small'" [label]="'Show Orders'">
         </amexio-button>
     </amexio-action>
 </amexio-dialogue>

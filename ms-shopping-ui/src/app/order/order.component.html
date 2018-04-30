@@ -19,7 +19,7 @@
         </amexio-row>
         <amexio-row *ngFor="let node of data">
             <amexio-column [size]=3>
-                {{node.id}}
+                {{node.orderNo}}
             </amexio-column>
             <amexio-column [size]=3>
                 {{node.date}}
@@ -28,13 +28,17 @@
                 {{node.total}}
             </amexio-column>
             <amexio-column [size]=3>
-                {{node.status}}
+                <ng-container *ngIf="node.status=='PAID'">
+                    <i class="fa fa-square green-color" aria-hidden="true" title="Your order successfully."></i> Successful
+                </ng-container>
+                <ng-container *ngIf="node.status=='PAYMENT_FAILURE'">
+                    <i class="fa fa-square red-color" aria-hidden="true" title="Your order is failed."></i> Payment failure
+                </ng-container>
             </amexio-column>
         </amexio-row>
+
     </amexio-body>
-    <amexio-action>
-        footer
-    </amexio-action>
+
 </amexio-card>
 <amexio-dialogue [show-dialogue]="showErrorDialog" (close)="close()" [custom]="true" [title]="'Error'" [type]="'error'">
     <amexio-body>
