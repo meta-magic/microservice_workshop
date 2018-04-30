@@ -54,10 +54,9 @@ export class OrderComponent implements OnInit{
       let finalData=[];
       data.forEach(element => {
         let  obj=element;
-        if(element.date){
-         let date= new Date(element.date);
-         console.log(date);
-         obj.date=date.getDate()+'-'+new Number(date.getMonth()+1)+'-'+date.getFullYear();
+        if(element.orderDate){
+         let date= new Date(element.orderDate);
+         obj.orderDate=date.getDate()+'-'+new Number(date.getMonth()+1)+'-'+date.getFullYear();
         }
         finalData.push(obj);
       });

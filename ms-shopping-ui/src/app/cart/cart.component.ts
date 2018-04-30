@@ -57,7 +57,7 @@ export class CartComponent implements OnInit {
     }
 
     setData(responsedata: any) {
-        if (responsedata && responsedata.success) {
+        if (responsedata && responsedata.response && responsedata.success) {
 
             if (responsedata.response.lineItems && responsedata.response.lineItems.length > 0) {
                 this.data = responsedata.response.lineItems;
@@ -116,9 +116,7 @@ export class CartComponent implements OnInit {
             }
             ,
             () => {
-
-                this.router.navigate(['home/order_summary']);
-                // this.showOrdersDialogue = true;
+              this.router.navigate(['home/order_summary']);
             }
         );
     }
@@ -128,9 +126,13 @@ export class CartComponent implements OnInit {
         this.router.navigate(['home/productcatlog']);
     }
 
+    checkoutClick(){
+      this.showOrdersDialogue=true;
+    }
+
     //Method that navigates to order screen
-    showOrders() {
-        this.router.navigate(['home/order_summary']);
+    checkoutConfirmWindow() {
+      this.checkout();
     }
 
     //Method to close the Dialogue box
