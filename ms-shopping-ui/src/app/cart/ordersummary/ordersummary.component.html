@@ -48,8 +48,31 @@
                         <amexio-column size="6">
 
                         </amexio-column>
-                        <amexio-column size="3">
-                            <amexio-label size="small-bold">{{total}}</amexio-label>
+                        <amexio-column size="2">
+                            <ng-container *ngIf="total">
+                                <amexio-label size="small">
+                                    <amexio-image [icon-class]="'fa fa-inr'" [tooltip]="'Rupee'">
+                                    </amexio-image>{{total}}</amexio-label>
+                            </ng-container>
+
+                        </amexio-column>
+
+                    </amexio-row>
+                    <amexio-row>
+                        <amexio-column size="6">
+
+                        </amexio-column>
+                        <amexio-column size="2">
+                            <ng-container *ngIf="afterDiscountAmount && discountApplied">
+                                <amexio-label size="small-bold">
+                                    <amexio-image [icon-class]="'fa fa-inr'" [tooltip]="'Rupee'">
+                                    </amexio-image>{{afterDiscountAmount}}</amexio-label>
+                            </ng-container>
+                        </amexio-column>
+                        <amexio-column [size]=3>
+                            <ng-container *ngIf="discountApplied">
+                                <label style="color:blue">10 % Discount applied</label>
+                            </ng-container>
                         </amexio-column>
                     </amexio-row>
                 </amexio-body>
@@ -116,7 +139,13 @@
                         <amexio-column size="12">
                             <amexio-label size="medium">Pay Amount (
                                 <amexio-image [icon-class]="'fa fa-inr'" [tooltip]="'Rupee'">
-                                </amexio-image>) : {{total}}
+                                </amexio-image>) :
+                                <ng-container *ngIf="discountApplied">
+                                    {{afterDiscountAmount}}
+                                </ng-container>
+                                <ng-container *ngIf="!discountApplied">
+                                    {{total}}
+                                </ng-container>
 
                             </amexio-label>
                         </amexio-column>

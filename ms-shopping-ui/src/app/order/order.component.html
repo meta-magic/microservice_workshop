@@ -16,6 +16,9 @@
             <amexio-column [size]=3>
                 Status
             </amexio-column>
+            <amexio-column [size]=3>
+                Discount
+            </amexio-column>
         </amexio-row>
         <amexio-row *ngFor="let node of data">
             <amexio-column [size]=3>
@@ -25,8 +28,14 @@
                 {{node.orderDate}}
             </amexio-column>
             <amexio-column [size]=3>
-                {{node.total}}
+                <ng-container *ngIf="!node.discountApplied">
+                    {{node.total}}
+                </ng-container>
+                <ng-container *ngIf="node.discountApplied">
+                    {{node.moneytoryValue.total}}
+                </ng-container>
             </amexio-column>
+
             <amexio-column [size]=3>
                 <ng-container *ngIf="node.status=='PAID'">
                     <i class="fa fa-square green-color" aria-hidden="true" title="Your order successfully."></i> Successful
