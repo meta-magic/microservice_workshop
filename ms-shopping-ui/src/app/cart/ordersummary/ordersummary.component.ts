@@ -21,6 +21,8 @@ export class OrderSummary implements OnInit{
   number: number;
   msg:any;
   showOrdersDialogue:boolean;
+  discountApplied:boolean;
+  afterDiscountAmount:number;
   constructor(private router:Router,private httpclient:HttpClient,private cookieService: CookieService){
     this.shippingAddress=new ShippingAddress();
     this.payment=new Payment();
@@ -129,9 +131,6 @@ export class OrderSummary implements OnInit{
         },
         ()=>{
           if(responseData.success){
-            this.orderSummary=true;
-            this.deliveryAddress=false;
-            this.paymentOptions=false;
             this.showOrdersDialogue=true;
           }
         }
@@ -187,7 +186,13 @@ fetchOrderDetails(){
          this.data = responseData.response.lineItems;
          this.number = responseData.response.lineItems.length;
          if(responseData.response.moneytoryValue){
-          this.total = responseData.response.moneytoryValue.total;
+          this.afterDiscountAmount = responseData.response.moneytoryValue.total;
+         }
+         if(responseData.response.total){
+          this.total=responseData.response.total;
+         }
+         if(responseData.response.discountApplied){
+           this.discountApplied=true;
          }
 
      }

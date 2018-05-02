@@ -21,7 +21,9 @@ export class OrderComponent implements OnInit{
     ngOnInit(){
         this.fetchData();
     }
+    onDiscountClick(){
 
+    }
     fetchData() {
         this.msg = "";
         const headers = new HttpHeaders().append('Content-Type', 'application/json;charset=UTF-8').append('tokenid',this.cookieService.get('tokenid'));
