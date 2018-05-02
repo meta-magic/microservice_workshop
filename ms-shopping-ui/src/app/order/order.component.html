@@ -31,6 +31,10 @@
                 <ng-container *ngIf="node.status=='PAID'">
                     <i class="fa fa-square green-color" aria-hidden="true" title="Your order successfully."></i> Successful
                 </ng-container>
+                <!-- <ng-container *ngIf="'node.status==PAYMENT_INITIATED'">
+                    <i class="fa fa-square yellow-color" aria-hidden="true" title="Order Initiated."></i> Order initiated
+
+                </ng-container> -->
                 <ng-container *ngIf="node.status=='PAYMENT_FAILURE'">
                     <i class="fa fa-square red-color" aria-hidden="true" title="Your order is failed."></i> Payment failure
                 </ng-container>

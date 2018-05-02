@@ -129,9 +129,6 @@ export class OrderSummary implements OnInit{
         },
         ()=>{
           if(responseData.success){
-            this.orderSummary=true;
-            this.deliveryAddress=false;
-            this.paymentOptions=false;
             this.showOrdersDialogue=true;
           }
         }
