@@ -40,7 +40,7 @@
                 <amexio-action>
                     <amexio-button [label]="'Continue Shopping'" [tooltip]="'Continue Shopping'" [icon]="'fa fa-chevron-left'" (onClick)="onContinueShopping()">
                     </amexio-button>
-                    <amexio-button [label]="'Checkout'" [type]="'yellow'" [tooltip]="'Checkout Order'" (onClick)="checkout()">
+                    <amexio-button [label]="'Checkout'" [type]="'yellow'" [tooltip]="'Checkout Order'" (onClick)="checkoutClick()">
                     </amexio-button>
                 </amexio-action>
             </amexio-card>
@@ -86,20 +86,20 @@
             </div>
         </amexio-column>
 
-        <!-- <amexio-dialogue [show-dialogue]="showOrdersDialogue" [custom]="true" [closable]="true" [title]="'Confirm'" [type]="'confirm'" (close)="showOrdersDialogue = !showOrdersDialogue">
+        <amexio-dialogue [show-dialogue]="showOrdersDialogue" [custom]="true" [closable]="true" [title]="'Confirm'" [type]="'confirm'" (close)="showOrdersDialogue = !showOrdersDialogue">
             <amexio-body>
                 <amexio-label size="small">
-                    Your Order Placed Successfully!!
+                    Are you sure you want to checkout?
                 </amexio-label>
             </amexio-body>
             <amexio-action>
-                <amexio-button (onClick)="cancel()" [size]="'small'" [label]="'Cancel'">
+                <amexio-button (onClick)="cancel()" [size]="'small'" [label]="'No'">
                 </amexio-button>
 
-                <amexio-button type="primary" (onClick)="showOrders()" [type]="'yellow'" [size]="'small'" [label]="'Show Orders'">
+                <amexio-button type="primary" (onClick)="checkoutConfirmWindow()" [type]="'yellow'" [size]="'small'" [label]="'Yes'">
                 </amexio-button>
             </amexio-action>
-        </amexio-dialogue> -->
+        </amexio-dialogue>
     </amexio-row>
 </ng-container>
 
@@ -124,7 +124,7 @@
                         </amexio-column>
                         <amexio-column [size]=4>
                             <amexio-label size="medium-bold">
-                                Your Shopping Cart is empty
+                                Your shopping cart is empty
                             </amexio-label>
                         </amexio-column>
                         <amexio-column [size]=3>

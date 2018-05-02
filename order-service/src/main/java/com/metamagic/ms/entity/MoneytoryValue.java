@@ -25,59 +25,66 @@ import javax.jdo.annotations.Persistent;
 
 /**
  * Embedded value object for {@link Order}
+ * 
  * @author ketangote
  *
  */
-@PersistenceCapable(detachable="true", embeddedOnly="true")
+@PersistenceCapable(detachable = "true", embeddedOnly = "true")
 public class MoneytoryValue implements Serializable {
 
-	@Persistent( column = "grandtotal")
+	@Persistent(column = "grandtotal")
 	private Double total;
-	
-	@Persistent( column = "unit")
+
+	@Persistent(column = "unit")
 	private String unit;
-	
+
 	/**
 	 * 
 	 * @param total
 	 * @param unit
 	 */
-	public MoneytoryValue(Double total, String unit){
+	public MoneytoryValue(Double total, String unit) {
 		this.total = total;
 		this.unit = unit;
 	}
-	
+
+	/**
+	 * Calculate Discount 10%
+	 */
+	public void applyDiscount() {
+		final double discountAmount = (this.total / 10);
+		this.total = this.total-discountAmount;
+	}
+
 	/**
 	 * 
 	 * @return total {@link Double}
 	 */
-	public Double getTotal(){
+	public Double getTotal() {
 		return this.total;
 	}
-	
+
 	/**
 	 * 
 	 * @return unit {@link String}
 	 */
-	public String getUnit(){
+	public String getUnit() {
 		return unit;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		// TODO Auto-generated method stub
-		if(obj instanceof MoneytoryValue){
-			MoneytoryValue moneytoryValue = (MoneytoryValue)obj;
+		if (obj instanceof MoneytoryValue) {
+			MoneytoryValue moneytoryValue = (MoneytoryValue) obj;
 			return (moneytoryValue.getTotal().equals(total) && moneytoryValue.getUnit().equals(unit));
 		}
 		return super.equals(obj);
 	}
-	
-	
+
 	@Override
 	public String toString() {
 		return "MoneytoryValue [total=" + total + ", unit=" + unit + "]";
 	}
-	
-	
+
 }

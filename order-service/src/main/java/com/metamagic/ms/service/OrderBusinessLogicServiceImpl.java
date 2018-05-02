@@ -9,10 +9,6 @@ import com.metamagic.ms.aggregate.Items;
 import com.metamagic.ms.entity.Order;
 import com.metamagic.ms.entity.Order.Status;
 import com.metamagic.ms.events.integration.OrderPlacedEvent;
-import com.metamagic.ms.exception.BussinessException;
-import com.metamagic.ms.exception.IllegalArgumentCustomException;
-import com.metamagic.ms.exception.InvalidDataException;
-import com.metamagic.ms.exception.RepositoryException;
 import com.metamagic.ms.repository.read.OrderReadRepository;
 import com.metamagic.ms.service.write.OrderWriteService;
 
@@ -32,11 +28,9 @@ public class OrderBusinessLogicServiceImpl implements OrderBusinessLogicService 
 	 * THIS PRIVATE METHOD IS USED FOR CHECK ORDER STATUS AND UPDATE ITEMS IF STATUS
 	 * IS PREPARING
 	 * 
-	 * @throws RepositoryException
-	 * @throws InvalidDataException
+	 * @throws Exception
 	 */
-	public void save(OrderPlacedEvent orderPlacedEvent)
-			throws BussinessException, IllegalArgumentCustomException, RepositoryException, InvalidDataException {
+	public void save(OrderPlacedEvent orderPlacedEvent) throws Exception {
 		Order doOrderDocument = orderReadRepository.findByUserIdAndStatus(orderPlacedEvent.getUserId(),
 				Status.PREPARING);
 

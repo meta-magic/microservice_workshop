@@ -7,11 +7,15 @@ import org.springframework.stereotype.Service;
 import com.metamagic.ms.dto.PaymentDTO;
 import com.metamagic.ms.dto.ShippingAddressDTO;
 import com.metamagic.ms.entity.Order;
+import com.metamagic.ms.entity.Order.Status;
 import com.metamagic.ms.events.integration.PaymentInitiatedEvent;
 import com.metamagic.ms.exception.InvalidDataException;
 import com.metamagic.ms.exception.RepositoryException;
 import com.metamagic.ms.repository.read.OrderReadRepository;
 import com.metamagic.ms.repository.write.OrderWriteRepository;
+import com.metamagic.ms.specification.OrderAmountSpecification;
+import com.metamagic.ms.specification.OrderStatusSpecification;
+import com.metamagic.ms.specification.core.Specification;
 
 /**
  * @author sagar THIS ORDER SERVICE USED FOR WRITE THE ORDER
@@ -30,11 +34,12 @@ public class OrderWriteServiceImpl implements OrderWriteService {
 
 	/**
 	 * THIS METHOD IS USED FOR SAVE THE ORDER
-	 * */
-	public Order save(Order order) throws RepositoryException {
+	 */
+	public Order save(Order order) throws RepositoryException, Exception {
 
 		Order order2 = orderWriteRepository.save(order);
 
+		this.applyDiscount(order2.getOrderId());
 		return order2;
 	}
 
@@ -67,4 +72,32 @@ public class OrderWriteServiceImpl implements OrderWriteService {
 				order.getPayment().getPaymentid(), order.getTotal(), dto.getMode()));
 	}
 
+	/**
+	 * APPLY THE DISCOUNT BASED ON SPECIFICATION SPECIFIED
+	 */
+	private void applyDiscount(String orderId) throws RepositoryException, Exception {
+
+		Order order = orderReadRepository.findByOrderId(orderId);
+		Specification spe = this.discountSpecification();
+
+		if (spe.isValid(order)) {
+			try {
+				order.applyDiscount();
+				orderWriteRepository.save(order);
+			} catch (RepositoryException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	/**
+	 * Return discount specification
+	 * 
+	 * @return {@link Specification}
+	 */
+	private Specification discountSpecification() {
+		return new OrderStatusSpecification(Status.PREPARING).or(new OrderStatusSpecification(Status.PAYMENT_EXPECTED))
+				.and(new OrderAmountSpecification(5000.00));
+	}
 }

@@ -60,6 +60,9 @@ public class Order {
 	@Persistent(defaultFetchGroup = "true")
 	private MoneytoryValue moneytoryValue;
 
+	@Persistent(column = "discountapplied")
+	private boolean discountApplied;
+
 	/**
 	 *
 	 * @param userId
@@ -72,10 +75,6 @@ public class Order {
 		this.initCart();
 		this.markPreparing();
 		this.moneytoryValue();
-	}
-
-	public Payment getPayment() {
-		return payment;
 	}
 
 	/**
@@ -119,19 +118,27 @@ public class Order {
 
 	/**
 	 * MAP CART STATUS PAYMENT FAILURE
-	 * */
+	 */
 	public void markPaymentFailure() throws InvalidDataException {
 		this.status = Status.PAYMENT_FAILURE;
 	}
 
 	/**
 	 * MAP CART STATUS INITIATED
-	 * */
+	 */
 	public void markPaymentInitiated() throws InvalidDataException {
 		if (this.shippingAddress == null) {
 			throw new InvalidDataException("Invalid state exception");
 		}
 		this.status = Status.PAYMENT_INITIATED;
+	}
+
+	/**
+	 * 
+	 * @return order status {@link String}
+	 */
+	public boolean isPaid() {
+		return this.status.equals(Status.PAID);
 	}
 
 	/**
@@ -213,12 +220,20 @@ public class Order {
 	}
 
 	/**
+	 * Calculate Discount 5%
+	 */
+	public void applyDiscount() {
+		moneytoryValue.applyDiscount();
+		this.discountApplied = true;
+	}
+
+	/**
 	 * 
 	 * @return total {@link Double}
 	 */
 	public Double getTotal() {
 		double total = 0.0;
-		for (Iterator iterator = lineItems.iterator(); iterator.hasNext();) {
+		for (Iterator<LineItem> iterator = lineItems.iterator(); iterator.hasNext();) {
 			LineItem lineItem = (LineItem) iterator.next();
 			System.out.println("---" + lineItem.getItemId() + "--" + lineItem.getItemName() + "--" + lineItem.getPrice()
 					+ "--" + lineItem.getQuantity());
@@ -274,14 +289,6 @@ public class Order {
 
 	/**
 	 * 
-	 * @return order status {@link String}
-	 */
-	public boolean isPaid() {
-		return this.status.equals(Status.PAID);
-	}
-
-	/**
-	 * 
 	 * @return Set<LineItem>
 	 */
 	public Set<LineItem> getLineItems() {
@@ -294,6 +301,14 @@ public class Order {
 
 	public MoneytoryValue getMoneytoryValue() {
 		return this.moneytoryValue;
+	}
+
+	public Payment getPayment() {
+		return payment;
+	}
+
+	public boolean isDiscountApplied() {
+		return discountApplied;
 	}
 
 	@Override
@@ -316,7 +331,7 @@ public class Order {
 				+ ", payment=" + payment + ", moneytoryValue=" + moneytoryValue + "]";
 	}
 
-	//ENUM IS USED FOR CART STATUS
+	// ENUM IS USED FOR CART STATUS
 	public static enum Status {
 
 		/**
