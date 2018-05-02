@@ -50,7 +50,7 @@ export class OrderSummary implements OnInit{
       "name":"Office",
       "id":"2"
     }];
-
+    this.fetchOrderDetails();
   }
 
   // THIS METHOD IS USED FOR Delivery Address AND REST CALL FOR SAVING DATA
@@ -183,10 +183,13 @@ fetchOrderDetails(){
        if(responseData){
         this.payment.orderId =responseData.response.orderId;
         this.shippingAddress.orderId =responseData.response.orderId;
-        if (responseData.response && responseData.response.itemDTOs && responseData.response.itemDTOs.length > 0) {
-         this.data = responseData.response.itemDTOs;
-         this.number = responseData.response.itemDTOs.length;
-         this.total = responseData.response.total;
+        if (responseData.response && responseData.response.lineItems && responseData.response.lineItems.length > 0) {
+         this.data = responseData.response.lineItems;
+         this.number = responseData.response.lineItems.length;
+         if(responseData.response.moneytoryValue){
+          this.total = responseData.response.moneytoryValue.total;
+         }
+
      }
      else {
          this.number = 0;
@@ -196,45 +199,8 @@ fetchOrderDetails(){
      }
    );
  }
-//THIS METHOD FETCH THE ITEM WHICH ADDED IN CART
-fetchData() {
-  let req = {
-    "status":"PREPARING"
-  };
-  let responsedata: any;
-  const headers = new HttpHeaders().append('Content-Type', 'application/json;charset=UTF-8').append('tokenid', this.cookieService.get('tokenid'));
 
-  this.httpclient.post("api/sc/shoppingcart/read/fecthcart", req, { headers }).subscribe(
-      response => {
-          responsedata = response;
-      },
-      error => {
-          this.msgData.push('Unable to connect to server.');
-          this.showErrorDialogue = true;
-      },
-      () => {
-          this.setData(responsedata);
-      }
-  );
-}
 
-setData(responsedata: any) {
-  if (responsedata && responsedata.success) {
-
-      if (responsedata.response && responsedata.response.lineItems && responsedata.response.lineItems.length > 0) {
-          this.data = responsedata.response.lineItems;
-          this.number = responsedata.response.lineItems.length;
-          this.total = responsedata.response.total;
-      }
-      else {
-          this.number = 0;
-      }
-
-  } else {
-
-      this.msg = responsedata.message;
-  }
-}
 //Method that navigates to order screen
 showOrders() {
   this.router.navigate(['home/order']);
@@ -244,8 +210,7 @@ showOrders() {
   this.showOrdersDialogue = false;
 }
 ngOnInit(){
-  // this.fetchData();
-  this.fetchOrderDetails();
+
 }
 }
 
