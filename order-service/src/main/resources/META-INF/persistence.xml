@@ -4,16 +4,16 @@
     xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd" version="1.0">
 
    <persistence-unit name="PersistenceUnit">
+		<exclude-unlisted-classes />
 		<properties>
-			<property name="datanucleus.ConnectionURL" value="mongodb:/ecommdb" />
-		<!--	<property name="javax.jdo.option.ConnectionUserName" value="dnadbuser" />
-			<property name="javax.jdo.option.ConnectionPassword" value="$dnadbuser@metamagic#2k.18" />
-			-->
+			<property name="javax.jdo.option.ConnectionURL" value="jdbc:postgresql:postgres" />
+			<property name="javax.jdo.option.Mapping" value="postgres"></property>
 			<property name="datanucleus.schema.autoCreateAll" value="true" />
-			<property name="datanucleus.schema.validateTables" value="false" />
-			<property name="datanucleus.schema.validateConstraints" value="false" />
-			<property name="datanucleus.RetainValues" value="true" />
-			<!-- <property name="datanucleus.DetachAllOnCommit" value="true" /> -->
+			<property name="javax.jdo.option.ConnectionDriverName"
+				value="org.postgresql.Driver" />
+			<property name="javax.jdo.option.ConnectionUserName" value="postgres" />
+			<property name="javax.jdo.option.ConnectionPassword" value="postgres" />
+			<property name="javax.jdo.option.DetachAllOnCommit" value="true"/>
 		</properties>
 	</persistence-unit>
 

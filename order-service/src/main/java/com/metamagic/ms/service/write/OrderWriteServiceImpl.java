@@ -28,6 +28,9 @@ public class OrderWriteServiceImpl implements OrderWriteService {
 	@Autowired
 	private KafkaTemplate<String, PaymentInitiatedEvent> kafkaTemplate;
 
+	/**
+	 * THIS METHOD IS USED FOR SAVE THE ORDER
+	 * */
 	public Order save(Order order) throws RepositoryException {
 
 		Order order2 = orderWriteRepository.save(order);

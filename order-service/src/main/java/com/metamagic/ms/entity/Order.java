@@ -99,7 +99,7 @@ public class Order {
 	public void markPreparing() {
 		this.status = Status.PREPARING;
 	}
-	
+
 	/**
 	 * Maps cart status as open
 	 */
@@ -117,10 +117,16 @@ public class Order {
 		this.status = Status.PAID;
 	}
 
+	/**
+	 * MAP CART STATUS PAYMENT FAILURE
+	 * */
 	public void markPaymentFailure() throws InvalidDataException {
 		this.status = Status.PAYMENT_FAILURE;
 	}
 
+	/**
+	 * MAP CART STATUS INITIATED
+	 * */
 	public void markPaymentInitiated() throws InvalidDataException {
 		if (this.shippingAddress == null) {
 			throw new InvalidDataException("Invalid state exception");
@@ -166,7 +172,7 @@ public class Order {
 		}
 
 	}
-	
+
 	public void removeLineItems() {
 		this.initCart();
 	}
@@ -203,7 +209,7 @@ public class Order {
 	public void addPaymentDetails(String paymentmode) throws InvalidDataException {
 		Payment payment = new Payment(paymentmode, getTotal(), this);
 		this.payment = payment;
-		this.markPaymentInitiated();
+		this.markPaid();
 	}
 
 	/**
@@ -310,6 +316,7 @@ public class Order {
 				+ ", payment=" + payment + ", moneytoryValue=" + moneytoryValue + "]";
 	}
 
+	//ENUM IS USED FOR CART STATUS
 	public static enum Status {
 
 		/**
