@@ -33,8 +33,8 @@ import com.metamagic.ms.exception.InvalidDataException;
 public class LineItem {
 
 	@PrimaryKey
-	@Persistent(column = "Itemid", customValueStrategy = "uuid")
-	private String Itemid;
+	@Persistent(column = "lineitemid", customValueStrategy = "uuid")
+	private String lineItemId;
 
 	@Persistent(column = "orderId")
 	private Order order;
@@ -135,10 +135,6 @@ public class LineItem {
 	 */
 	public String getItemId() {
 		return itemId;
-	}
-
-	public String getItemid() {
-		return Itemid;
 	}
 
 	/**

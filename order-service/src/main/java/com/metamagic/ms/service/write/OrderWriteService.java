@@ -12,9 +12,10 @@ import com.metamagic.ms.exception.RepositoryException;
  *         THIS ITERFACE IS USED FOR ORDER WRITE OPERATION
  */
 public interface OrderWriteService {
-	public Order save(Order order) throws RepositoryException;
+	public Order save(Order order) throws RepositoryException, Exception;
 
 	public void addShippingAddressDetails(ShippingAddressDTO dto) throws Exception;
 
 	public void addPaymentDetails(PaymentDTO dto) throws InvalidDataException, Exception;
+
 }

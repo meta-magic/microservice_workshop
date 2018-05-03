@@ -43,8 +43,11 @@ public class OrderEventListener {
 			BussinessException, RepositoryException, IllegalArgumentCustomException, InvalidDataException {
 		System.out.println(orderPlacedEvent);
 		latch.countDown();
-
-		businessLogicService.save(orderPlacedEvent);
+		try {
+			businessLogicService.save(orderPlacedEvent);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		kafkaTemplate.send("order_topic", new OrderCompletedEvent(orderPlacedEvent.getUserId()));
 	}
