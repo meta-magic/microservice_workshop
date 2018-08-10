@@ -15,7 +15,7 @@ Microservices Architecture Workshop focuses on helping the developers / architec
 
 ## Contact for Corporate Training
 
-<B>Ms. Amruta Abhyankar </B>: Eco System Evangelist. mailto:amruta.abhyankar@metamagic.in
+<B>MetaArivu </B>: Eco System Evangelist. mailto:arivu@metamagic.in
 
 ## Target Audience
 
@@ -199,7 +199,7 @@ All the source code and detailed course materials for the above mentioned Micros
 
 ## Contact for Corporate Training
 
-<B>Ms. Amruta Abhyankar </B>: Eco System Evangelist. mailto:amruta.abhyankar@metamagic.in
+<B>MetaArivu </B>: Eco System Evangelist. mailto:arivu@metamagic.in
 
  ## License
 
