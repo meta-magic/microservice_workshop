@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.metamagic.ms.aop.LoginInfoHelperBean;
+import com.metamagic.ms.aspect.LoginInfoHelperBean;
 import com.metamagic.ms.bean.ResponseBean;
 import com.metamagic.ms.dto.CartDTO;
 import com.metamagic.ms.dto.CartStatus;

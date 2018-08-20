@@ -1,4 +1,4 @@
-package com.metamagic.ms.aop;
+package com.metamagic.ms.aspect;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;

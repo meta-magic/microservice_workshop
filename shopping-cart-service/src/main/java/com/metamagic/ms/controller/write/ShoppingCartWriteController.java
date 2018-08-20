@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.metamagic.ms.aop.LoginInfoHelperBean;
+import com.metamagic.ms.aspect.LoginInfoHelperBean;
 import com.metamagic.ms.bean.ResponseBean;
 import com.metamagic.ms.dto.CartDTO;
 import com.metamagic.ms.exception.IllegalArgumentCustomException;
@@ -26,8 +26,6 @@ import ch.qos.logback.classic.Logger;
 @RequestMapping("/shoppingcart/write")
 @Scope("request")
 public class ShoppingCartWriteController {
-
-	private static final Logger LOGGER = (Logger) LoggerFactory.getLogger(ShoppingCartWriteController.class);
 
 	@Autowired
 	private LoginInfoHelperBean loginInfoHelperBean;
@@ -74,7 +72,6 @@ public class ShoppingCartWriteController {
 
 	@PostMapping("/placeorder")
 	public @ResponseBody ResponseEntity<ResponseBean> placeOrder(@RequestBody CartDTO cart) {
-		LOGGER.info("Orde place started.");
 		try {
 			cart.setCartId(loginInfoHelperBean.getUserId());
 			cart.setCustomerId(loginInfoHelperBean.getUserId());

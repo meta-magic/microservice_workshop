@@ -25,12 +25,11 @@ public class OrderCompletedEventListener {
 	@Autowired
 	private UserCartReadRepository cartReadRepository;
 	
-	@KafkaListener(topics = "order_topic")
+	@KafkaListener(topics = "order_completed")
 	public void handle(OrderCompletedEvent orderCompletedEvent) throws RepositoryException, IllegalArgumentCustomException {
 		UserCart userCart = cartReadRepository.findByUserIdAndActive(orderCompletedEvent.getUserId(), null);
 
 		if (userCart != null) {
-//			userCart.setStatus("PREPARING");
 			cartWriteRepository.save(userCart);
 		}
 
