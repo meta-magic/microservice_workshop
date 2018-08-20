@@ -19,15 +19,15 @@ import ch.qos.logback.classic.Logger;
 @Aspect
 public class RepositoryAspect {
 
-	private static final Logger LOGGER = (Logger) LoggerFactory.getLogger(RepositoryAspect.class);
+	private static final Logger log = (Logger) LoggerFactory.getLogger(RepositoryAspect.class);
 
 	@Around("execution(* com.metamagic.ms.repository..*.*(..))")
 	public Object logMethod(ProceedingJoinPoint joinPoint) throws Throwable {
 		MethodSignature signature = (MethodSignature) joinPoint.getSignature();
 		String msg = joinPoint.getTarget().getClass() + " " + signature.getName();
-		LOGGER.info(new Date() + " Executing [ " + msg + "  ] starts");
+		log.debug(" Executing [ " + msg + "  ] starts");
 		Object response = joinPoint.proceed();
-		LOGGER.info(new Date() + " Executing [ " + msg + "  ] ends");
+		log.debug(" Executing [ " + msg + "  ] ends");
 		return response;
 	}
 
