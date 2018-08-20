@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: turbinedemo
+  cloud:
+    config:
+      uri: http://localhost:7001
+      username: config
+      password: config
