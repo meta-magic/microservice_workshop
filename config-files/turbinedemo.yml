@@ -1,0 +1,25 @@
+server:
+  port: 3030   
+
+spring:
+  application:
+    name: turbinedemo
+
+spring:
+  datasource:
+    username: dbuser
+    password: '{cipher}FKSAJDFGYOS8F7GLHAKERGFHLSAJ'
+        
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:7010/eureka/
+    healthcheck:
+      enabled: true
+    lease:
+      duration: 5
+
+turbine:
+  clusterNameExpression: new String("default")
+  appConfig: userauthlobaservice, productlobaservice, orderlobaservice, shoppingcartlobaservice
+  combineHostPort: true

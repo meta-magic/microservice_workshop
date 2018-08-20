@@ -1,8 +1,15 @@
+# DEV Profile
+
 server:
-    port: 7070
+    port: 7010 # Tomcat Port
+
 spring:
+    profiles: dev_env 
     application:
-        name: eurekaserver
+        name: eurekaserver # Application name
+
+# Eureka Server Settings - http://cloud.spring.io/spring-cloud-static/spring-cloud.html#_peer_awareness
+        
 eureka:
     instance:
         prefer-ip-address: true
@@ -10,9 +17,42 @@ eureka:
         registerWithEureka: false
         fetchRegistry: false
         service-url:
-            defaultZone: 'http://localhost:7070/eureka'
+            defaultZone: http://localhost:7010/eureka
+
+# Actuator Information             
 management:
     endpoints:
         web:
          exposure:
           include: info, health, metrics
+          
+          
+---
+
+# QA Profile
+
+server:
+    port: 7011 # Tomcat Port
+    
+spring:
+    profiles: qa_env
+    application:
+        name: eurekaserver # Application name
+        
+# Eureka Server Settings - http://cloud.spring.io/spring-cloud-static/spring-cloud.html#_peer_awareness
+        
+eureka:
+    instance:
+        prefer-ip-address: true
+    client:
+        registerWithEureka: false
+        fetchRegistry: false
+        service-url:
+            defaultZone: 'http://localhost:7011/eureka'
+            
+# Actuator Information      
+management:
+    endpoints:
+        web:
+         exposure:
+          include: info, health, metrics          

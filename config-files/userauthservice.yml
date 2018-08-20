@@ -1,12 +1,19 @@
 
 server:
-  port: 8585 
+  port: 7065 
 
 spring:
+  profiles: dev_env
   application:
     name: userauthservice
+  zipkin:
+    baseUrl: localhost:9411 
+  sleuth:
+    sampler:
+       percentage:50.0      
+    
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: localhost:9095
     
 token:
   key: abcd0987654321qwertyuio
@@ -20,23 +27,62 @@ eureka:
       instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${server.port}}}
   client:
     serviceUrl:
-      defaultZone: http://localhost:7070/eureka/  
+      defaultZone: http://localhost:7010/eureka/  
       
-      
-productservice:
-  ribbon: 
-    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RoundRobinRule
-    # NFLoadBalancerRuleClassName: com.netflix.loadbalancer.WeightedResponseTimeRule
-    # NFLoadBalancerRuleClassName: com.netflix.loadbalancer.AvailabilityFilteringRule
-    ServerListRefreshInterval : 5000
-            
+                  
 logging:
-  file: /home/sagar/git/logs/userauthservice.log 
+  file: /tmp/mslogs/userauthservice.log 
   level:
-    com.metamagic.ms: INFO
+    com.metamagic.ms: DEBUG
     
 management:
     endpoints:
         web:
          exposure:
           include: info, health, metrics
+          
+          
+---
+
+
+server:
+  port: 7066 
+
+spring:
+  profiles: qa_env
+  application:
+    name: userauthservice
+  zipkin:
+    baseUrl: localhost:9411 
+  sleuth:
+    sampler:
+       percentage:50.0      
+    
+  kafka:
+    bootstrap-servers: localhost:9095
+    
+token:
+  key: abcd0987654321qwertyuio
+  validity: 86400000      
+  
+eureka:
+  instance:
+    ip-address: false
+    lease-renewal-interval-in-seconds: 5
+    metadata-map:
+      instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${server.port}}}
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:7011/eureka/  
+      
+                  
+logging:
+  file: /tmp/mslogs/userauthservice.log 
+  level:
+    com.metamagic.ms: DEBUG
+    
+management:
+    endpoints:
+        web:
+         exposure:
+          include: info, health, metrics          

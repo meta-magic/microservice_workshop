@@ -1,10 +1,19 @@
 
 server:
-  port: 9581   
+  port: 7020   
 
 spring:
+  profiles: dev_env
   application:
     name: edgeserver  
+  zipkin:
+    baseUrl: localhost:9411 
+  sleuth:
+    enabled: true
+          
+
+maintence:
+  servers: UP
 
 token:
   key: abcd0987654321qwertyuio
@@ -18,7 +27,12 @@ eureka:
       instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${server.port}}}
   client:
     serviceUrl:
-      defaultZone: http://localhost:7070/eureka/  
+      defaultZone: http://localhost:7010/eureka/  
+      
+logging:
+  file: /tmp/mslogs/edgeserver.log 
+  level:
+    com.metamagic.ms: DEBUG
       
 zuul:
   prefix: /api
@@ -41,4 +55,62 @@ management:
     endpoints:
         web:
          exposure:
-          include: info, health, metrics
+          include: info, health, metrics, refresh
+          
+          
+---
+
+server:
+  port: 7021   
+
+spring:
+  profiles: qa_env
+  application:
+    name: edgeserver  
+  zipkin:
+    baseUrl: localhost:9411 
+  sleuth:
+    enabled: true
+          
+
+token:
+  key: abcd0987654321qwertyuio
+  validity: 86400000
+  
+eureka:
+  instance:
+    ip-address: false
+    lease-renewal-interval-in-seconds: 5
+    metadata-map:
+      instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${server.port}}}
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:7011/eureka/  
+      
+logging:
+  file: /tmp/mslogs/edgeserver.log 
+  level:
+    com.metamagic.ms: DEBUG
+      
+zuul:
+  prefix: /api
+  ignored-services: '*'
+  routes:
+    productlobaservice:
+      path: /pd/**
+      serviceId: PRODUCTLOBASERVICE
+    shoppingcartlobaservice:
+      path: /sc/**
+      serviceId: SHOPPINGCARTLOBASERVICE
+    orderlobaservice:
+      path: /od/**
+      serviceId: ORDERLOBASERVICE
+    userauthlobaservice:
+      path: /as/**
+      serviceId: USERAUTHLOBASERVICE
+      
+management:
+    endpoints:
+        web:
+         exposure:
+          include: info, health, metrics          

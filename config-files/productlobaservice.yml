@@ -1,10 +1,15 @@
 
 server:
-  port: 9081   
+  port: 7040   
 
 spring:
+  profiles: dev_env
   application:
     name: productlobaservice  
+  zipkin:
+    baseUrl: localhost:9411 
+  sleuth:
+    enabled: true
   
 eureka:
   instance:
@@ -14,8 +19,12 @@ eureka:
       instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${server.port}}}
   client:
     serviceUrl:
-      defaultZone: http://localhost:7070/eureka/  
+      defaultZone: http://localhost:7010/eureka/  
       
+logging:
+  file: /tmp/mslogs/productlobaservice.log 
+  level:
+    com.metamagic.ms: DEBUG
       
 productservice:
   ribbon: 
@@ -29,3 +38,47 @@ management:
         web:
          exposure:
           include: info, health, metrics, hystrix.stream
+          
+          
+---
+
+
+server:
+  port: 7041   
+
+spring:
+  profiles: qa_env
+  application:
+    name: productlobaservice  
+  zipkin:
+    baseUrl: localhost:9411 
+  sleuth:
+    enabled: true
+  
+eureka:
+  instance:
+    ip-address: false
+    lease-renewal-interval-in-seconds: 5
+    metadata-map:
+      instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${server.port}}}
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:7011/eureka/  
+      
+logging:
+  file: /tmp/mslogs/productlobaservice.log 
+  level:
+    com.metamagic.ms: DEBUG
+      
+productservice:
+  ribbon: 
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RoundRobinRule
+    # NFLoadBalancerRuleClassName: com.netflix.loadbalancer.WeightedResponseTimeRule
+    # NFLoadBalancerRuleClassName: com.netflix.loadbalancer.AvailabilityFilteringRule
+    ServerListRefreshInterval : 5000
+
+management:
+    endpoints:
+        web:
+         exposure:
+          include: info, health, metrics, hystrix.stream          
