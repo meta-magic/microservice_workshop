@@ -2,6 +2,7 @@ package com.metamagic.ms.service;
 
 import java.util.Arrays;
 
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -15,6 +16,8 @@ import org.springframework.web.client.RestTemplate;
 import com.metamagic.ms.bean.ResponseBean;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
+import ch.qos.logback.classic.Logger;
+
 /**
  * @author sagar
  * 
@@ -24,6 +27,8 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
  */
 @Service
 public class UserServiceImpl implements UserService {
+
+	private static final Logger log = (Logger) LoggerFactory.getLogger(UserServiceImpl.class);
 
 	@Autowired
 	private RestTemplate restTemplate;
@@ -40,6 +45,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public ResponseEntity<ResponseBean> createFallBack(Object object, Throwable t) {
+		log.error("Unable to connect to requested Auth Service, please try after some time");
 		ResponseBean response = new ResponseBean(false,
 				"Unable to connect to requested Auth Service, please try after some time", "error", t.getMessage());
 		return new ResponseEntity<ResponseBean>(response, HttpStatus.OK);
