@@ -2,6 +2,7 @@ package com.metamagic.ms.service.read;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -14,6 +15,8 @@ import com.metamagic.ms.bean.ResponseBean;
 import com.metamagic.ms.controller.BaseComponent;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
+import ch.qos.logback.classic.Logger;
+
 /**
  * @author sagar THIS SERVICE HANDLE REQUEST FROM CONTROLLER 1.HANDLE REQUEST
  *         AND SEND TO SERVICE 2.FALLBACK MECHANISM
@@ -22,6 +25,8 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 @Service
 public class OrderReadServiceImpl extends BaseComponent implements OrderReadService {
 
+	private static final Logger log = (Logger) LoggerFactory.getLogger(OrderReadServiceImpl.class);
+	
 	@Autowired
 	private RestTemplate restTemplate;
 
@@ -44,12 +49,14 @@ public class OrderReadServiceImpl extends BaseComponent implements OrderReadServ
 	}
 
 	public ResponseEntity<ResponseBean> findAllFallBack(HttpServletRequest request, Throwable t) {
+		log.error("Enable to connect to requested Order Service, please try after some time");
 		ResponseBean response = new ResponseBean(false,
 				"Enable to connect to requested Order Service, please try after some time", "error", t.getMessage());
 		return new ResponseEntity<ResponseBean>(response, HttpStatus.OK);
 	}
 
 	public ResponseEntity<ResponseBean> getOrderDetailsFallBack(HttpServletRequest request, Throwable t) {
+		log.error("Enable to connect to requested Order Service, please try after some time");
 		ResponseBean response = new ResponseBean(false,
 				"Enable to connect to requested Order Service, please try after some time", "error", t.getMessage());
 		return new ResponseEntity<ResponseBean>(response, HttpStatus.OK);

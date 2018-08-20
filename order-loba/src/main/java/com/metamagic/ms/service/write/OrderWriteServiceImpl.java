@@ -2,6 +2,7 @@ package com.metamagic.ms.service.write;
 
 import java.util.Arrays;
 
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -15,6 +16,8 @@ import org.springframework.web.client.RestTemplate;
 import com.metamagic.ms.bean.ResponseBean;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
+import ch.qos.logback.classic.Logger;
+
 /**
  * @author sagar
  * 
@@ -23,6 +26,9 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
  */
 @Service
 public class OrderWriteServiceImpl implements OrderWriteService {
+	
+	private static final Logger log = (Logger) LoggerFactory.getLogger(OrderWriteServiceImpl.class);
+
 	@Autowired
 	private RestTemplate restTemplate;
 
@@ -49,6 +55,7 @@ public class OrderWriteServiceImpl implements OrderWriteService {
 	}
 
 	public ResponseEntity<ResponseBean> addshippingaddressFallBack(Object object, Throwable t) {
+		log.error("Unable to connect to requested Order Service, please try after some time");
 		ResponseBean response = new ResponseBean(false,
 				"Unable to connect to requested Order Service, please try after some time", "error", t.getMessage());
 		return new ResponseEntity<ResponseBean>(response, HttpStatus.OK);
