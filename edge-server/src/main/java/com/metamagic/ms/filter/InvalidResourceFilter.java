@@ -2,13 +2,23 @@ package com.metamagic.ms.filter;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
+
 import com.metamagic.ms.bean.ResponseBean;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
 
-public class RequestValidateFilter extends ZuulFilter
-{
+import ch.qos.logback.classic.Logger;
+
+public class InvalidResourceFilter extends ZuulFilter{
+
+	@Value("${maintence.servers}")
+	private String maintenceservers = null;
+
+	private static final Logger log = (Logger) LoggerFactory.getLogger(InvalidResourceFilter.class);
 
 	@Override
 	public Object run() throws ZuulException {
@@ -24,12 +34,13 @@ public class RequestValidateFilter extends ZuulFilter
 	@Override
 	public boolean shouldFilter() {
 		String requestUri = RequestContext.getCurrentContext().getRequest().getRequestURI();
-		System.out.println(this.getClass() +" "+requestUri);
-		
-//		if(requestUri.equalsIgnoreCase("/api/pd/product/query/findall"))
-//			return true;
-		
-		return false;
+		String servers = maintenceservers.trim();
+		if(requestUri.startsWith(servers)){
+			log.debug("Requested URI "+requestUri+" is down");
+			return true;
+		}
+		else 
+			return false;
 	}
 
 	@Override
@@ -41,7 +52,4 @@ public class RequestValidateFilter extends ZuulFilter
 	public String filterType() {
 		return "pre";
 	}
-	
-	
-
 }
