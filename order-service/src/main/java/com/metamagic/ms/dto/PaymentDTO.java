@@ -30,6 +30,9 @@ public class PaymentDTO {
 
 	private String mode;
 
+	public PaymentDTO(){
+		
+	}
 	/**
 	 * 
 	 * @param orderId

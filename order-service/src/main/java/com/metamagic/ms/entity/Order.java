@@ -235,8 +235,6 @@ public class Order {
 		double total = 0.0;
 		for (Iterator<LineItem> iterator = lineItems.iterator(); iterator.hasNext();) {
 			LineItem lineItem = (LineItem) iterator.next();
-			System.out.println("---" + lineItem.getItemId() + "--" + lineItem.getItemName() + "--" + lineItem.getPrice()
-					+ "--" + lineItem.getQuantity());
 			total = total + lineItem.getSubTotal();
 		}
 		return total;

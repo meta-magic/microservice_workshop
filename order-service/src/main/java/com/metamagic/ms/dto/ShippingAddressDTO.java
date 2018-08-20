@@ -24,6 +24,10 @@ public class ShippingAddressDTO {
 	
 	private String postalcode;
 
+	public ShippingAddressDTO(){
+		
+	}
+	
 	/**
 	 * 
 	 * @param orderId

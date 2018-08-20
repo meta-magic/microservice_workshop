@@ -1,11 +1,12 @@
 package com.metamagic.ms.listener;
 
 import java.io.IOException;
-import java.util.concurrent.CountDownLatch;
 
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.core.JsonParseException;
@@ -18,6 +19,8 @@ import com.metamagic.ms.exception.InvalidDataException;
 import com.metamagic.ms.exception.RepositoryException;
 import com.metamagic.ms.service.OrderBusinessLogicService;
 
+import ch.qos.logback.classic.Logger;
+
 /**
  * @author sagar
  * 
@@ -26,29 +29,26 @@ import com.metamagic.ms.service.OrderBusinessLogicService;
 @Component
 public class OrderEventListener {
 
+	private static final Logger log = (Logger) LoggerFactory.getLogger(OrderEventListener.class);
+	
 	@Autowired
 	private OrderBusinessLogicService businessLogicService;
 
 	@Autowired
 	private KafkaTemplate<String, OrderCompletedEvent> kafkaTemplate;
 
-	private CountDownLatch latch = new CountDownLatch(1);
 
-	public CountDownLatch getLatch() {
-		return latch;
-	}
-
-	@KafkaListener(topics = "test_topic")
-	public void receive(OrderPlacedEvent orderPlacedEvent) throws JsonParseException, JsonMappingException, IOException,
+	@KafkaListener(topics = "order_placed")
+	public void receive(OrderPlacedEvent orderPlacedEvent, @Header(name="custom-header") String userid) throws JsonParseException, JsonMappingException, IOException,
 			BussinessException, RepositoryException, IllegalArgumentCustomException, InvalidDataException {
-		System.out.println(orderPlacedEvent);
-		latch.countDown();
+		log.debug("OrderPlacedEvent "+userid);
 		try {
 			businessLogicService.save(orderPlacedEvent);
 		} catch (Exception e) {
+			log.error("OrderPlacedEvent "+userid);
 			e.printStackTrace();
 		}
 
-		kafkaTemplate.send("order_topic", new OrderCompletedEvent(orderPlacedEvent.getUserId()));
+		kafkaTemplate.send("order_completed", new OrderCompletedEvent(orderPlacedEvent.getUserId()));
 	}
 }
