@@ -1,9 +1,11 @@
 spring:
+  profiles:
+    active: dev_env
   application:
     name: shoppingcartlobaservice
   cloud:
     config:
-      uri: http://localhost:6061
+      uri: http://localhost:7001
       username: config
       password: config
       
