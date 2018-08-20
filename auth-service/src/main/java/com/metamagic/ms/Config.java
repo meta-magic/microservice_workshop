@@ -51,4 +51,6 @@ public class Config {
     public KafkaTemplate<String, UserCreatedEvent> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
+    
+    
 }

@@ -43,9 +43,9 @@ public class AuthController {
 			LoginResponse loginResponse = authService.authenticate(loginDTO);
 			ResponseBean response = new ResponseBean(true, "User authenticated successfully.", "success",
 					loginResponse);
-			LOGGER.info("User authenticated successfully. USERID: " + loginDTO.getUserId());
 			return new ResponseEntity<ResponseBean>(response, HttpStatus.OK);
 		} catch (RepositoryException e) {
+			LOGGER.error("User not found USERID: " + loginDTO.getUserId());
 			ResponseBean response = new ResponseBean(false, e.getMessage(), "failure", null);
 			return new ResponseEntity<ResponseBean>(response, HttpStatus.OK);
 		} catch (BussinessException e) {

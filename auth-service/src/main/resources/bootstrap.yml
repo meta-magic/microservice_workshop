@@ -1,8 +1,9 @@
 spring:
+  profiles:
+    active: dev_env
   application:
     name: userauthservice
   cloud:
     config:
-      uri: http://localhost:6061
-      username: config
-      password: config
+      uri: http://config:config@localhost:7001
+      

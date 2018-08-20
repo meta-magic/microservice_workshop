@@ -64,7 +64,7 @@ public class UserWriteServiceImpl implements UserWriteService {
 	 */
 	private void onUserCreateEvent(UserCreatedEvent createdEvent) {
 		Message<UserCreatedEvent> message = MessageBuilder.withPayload(createdEvent)
-				.setHeader(KafkaHeaders.TOPIC, "user_topic").setHeader("custom-header", "My custom header.").build();
+				.setHeader(KafkaHeaders.TOPIC, "user_created").setHeader("custom-header", createdEvent.getUserId()).build();
 		kafkaTemplate.send(message);
 	}
 }

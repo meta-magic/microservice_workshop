@@ -30,13 +30,11 @@ public class AuthServiceImpl implements AuthService {
 	 */
 	@Override
 	public LoginResponse authenticate(LoginDTO loginDTO) throws RepositoryException, BussinessException {
-//		if (loginDTO.getUserId() != null && loginDTO.getPassword() != null) {
 			User login = loginRepository.findByUserId(loginDTO.getUserId());
 			if (login != null && loginDTO.getPassword().equals(login.getPassword())) {
 				LoginResponse loginResponse = new LoginResponse(tokenService.generateToken(login.getId()));
 				return loginResponse;
 			}
-//		}
 		throw new BussinessException("User not found.");
 	}
 
